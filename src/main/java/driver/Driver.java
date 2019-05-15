@@ -19,7 +19,14 @@ import config.AbstractClientConfig;
 import config.AsterixClientConfig;
 import config.Constants;
 
+
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
+import java.util.stream.IntStream;
+
 public class Driver {
+
     public static void main(String[] args) {
         if (args.length != 1) {
             System.out.println("Correct Usage:\n");
@@ -27,32 +34,50 @@ public class Driver {
             return;
         }
 
-        String bigFunHome = args[0];
-        bigFunHome = bigFunHome.replaceAll("/$", "");
-        String clientConfigFile = bigFunHome + "/conf/bigfun-conf.json";
+        final String bigFunHome = args[0].replaceAll("/$", "");
+         String clientConfigFile = bigFunHome + "/conf/bigfun-conf.json";
         AbstractClientConfig clientConfig = new AsterixClientConfig(clientConfigFile);
         clientConfig.parseConfigFile();
-        if (!clientConfig.isParamSet(Constants.CLIENT_TYPE)) {
-            System.err.println("The Client Type is not set to a valid value in the config file.");
-            return;
-        }
-        String clientTypeTag = (String) clientConfig.getParamValue(Constants.CLIENT_TYPE);
-        AbstractClient client = null;
-        switch (clientTypeTag) {
-            case Constants.ASTX_RANDOM_CLIENT_TAG:
-                client = clientConfig.readReadOnlyClientConfig(bigFunHome);
-                break;
-            case Constants.ASTX_UPDATE_CLIENT_TAG:
-                client = clientConfig.readUpdateClientConfig(bigFunHome);
-                break;
+        ExecutorService executorService = Executors.newFixedThreadPool(clientConfig.getParams().size());
+            IntStream.range(0,clientConfig.getParams().size()).forEach(c ->
+            executorService.submit(()-> {
+                Thread.currentThread().setName("Client"+c);
+                if (!clientConfig.isParamSet(Constants.CLIENT_TYPE, c)) {
+                    System.err.println("The Client Type is not set to a valid value in the config file.");
+                    return;
+                }
+                String clientTypeTag = (String) clientConfig.getParamValue(Constants.CLIENT_TYPE, c);
+                AbstractClient client = null;
+                switch (clientTypeTag) {
+                    case Constants.ASTX_RANDOM_CLIENT_TAG:
+                        client = clientConfig.readReadOnlyClientConfig(bigFunHome, c);
+                        break;
+                    case Constants.ASTX_UPDATE_CLIENT_TAG:
+                        client = clientConfig.readUpdateClientConfig(bigFunHome, c);
+                        break;
 
-            default:
-                System.err.println("Unknown/Invalid client type:\t" + clientTypeTag);
+                    default:
+                        System.err.println("Unknown/Invalid client type:\t" + clientTypeTag);
+                }
+                client.bigFunHome = bigFunHome;
+                client.execute();
+                client.generateReport();
+            }));
+        try {
+            executorService.shutdown();
+            executorService.awaitTermination(Integer.MAX_VALUE, TimeUnit.SECONDS); // TODO: Is this necessary?
+
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        finally {
+            if (!executorService.isTerminated()) {
+                System.out.println("canceling all pending tasks");
+            }
+            System.out.println("Finished at: " + System.currentTimeMillis());
+            executorService.shutdownNow();
         }
 
-        client.execute();
-        client.generateReport();
         System.out.println("\nBigFUN Benchmark is done.\n");
     }
-
 }

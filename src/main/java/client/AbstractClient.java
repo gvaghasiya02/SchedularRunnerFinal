@@ -15,7 +15,7 @@
 package client;
 
 public abstract class AbstractClient {
-
+    public static String bigFunHome="";
     public abstract void execute();
 
     public abstract void generateReport();

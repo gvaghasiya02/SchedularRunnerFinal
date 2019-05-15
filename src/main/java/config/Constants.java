@@ -24,11 +24,13 @@ public class Constants {
     public static final String ARG_DATETIME_DUMP_DELIM = "-";
     public static final String COMMENT_TAG = "#";
     public static final String SEED = "seed";
-    public static final String MAX_GBOOK_USR_ID = "max_gleambookUser_id";
+    public static final String MAX_ID = "max_id";
+    public static final String MIN_ID = "min_id";
     public static final String CLIENT_TYPE = "clientType";
     public static final String ITERATIONS = "iterations";
     public static final String IGNORE = "ignore_rounds";
     public static final String EXECUTE_QUERY = "execute";
+    public static final String WORKLOAD = "workload";
     public static final String UPDATE_OPR_TYPE_TAG = "operation";
     public static final String INSERT_OPR_TYPE = "insert";
     public static final String DELETE_OPR_TYPE = "delete";
@@ -42,6 +44,7 @@ public class Constants {
     public static final String CC_URL = "cc";
     public static final String ASTX_DV_NAME = "dataverse";
     public static final String ASTX_RANDOM_CLIENT_TAG = "AsterixdbReadOnly";
+    public static final String NUM_CONCURRENT_READERS = "num-concurrent-readers";
     public static final String ASTX_DUMP_RESULTS = "dumpResults";
     public static final String ASTX_UPDATE_CLIENT_TAG = "AsterixdbUpdate";
     public static final String ASTX_DS_NAME = "dataset";
@@ -61,7 +64,8 @@ public class Constants {
     public static final DoubleArgument LARGE_RADIUS = new DoubleArgument(1.0);
     public static final String DEFAULT_START_DATE = "2005-01-01-00-00-00";
     public static final String DEFAULT_END_DATE = "2014-05-29-23-59-59";
-    public static final long DEFAULT_MAX_GBOOK_USR_ID = 10000L;
+    public static final long DEFAULT_MAX_ID = 10000L;
+    public static final long DEFAULT_MIN_ID = 1L;
     public static final long DEFAULT_SEED = 10L;
     public static final String BIGFUN_CONFIG_FILE_NAME = "bigfun-conf.json";
     public static final String Q_IX_FILE_NAME = "query-index.json";

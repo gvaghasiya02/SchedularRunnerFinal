@@ -1,0 +1,4 @@
+use fixedintersize;
+DROP DATASET wisconsin_write if exists;
+create dataset wisconsin_write(wisconsin_fixed) primary key unique2;
+LOAD DATASET wisconsin_write USING localfs (("path"="127.0.0.1:///home/shivaj/wisconsin_1K_limitedp_0.adm"),("format"="adm"));

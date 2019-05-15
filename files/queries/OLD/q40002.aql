@@ -1,0 +1,73 @@
+set `compiler.joinmemory`
+@PARAM
+;
+USE fixedintersize;
+Select * from
+(select q2.unique1, q2.unique2, q2.onePercent, q2.tenPercent, q2.twentyFivePercent, q2.fiftyPercent, q2.stringu1,q2.stringu2
+FROM wisconsin_fixed4 ds4 , (select q1.unique1, q1.unique2, q1.onePercent, q1.tenPercent, q1.twentyFivePercent, q1.fiftyPercent, q1.stringu1,q1.stringu2
+FROM wisconsin_fixed3 ds3,
+(select ds1.unique1, ds1.unique2, ds1.onePercent, ds1.tenPercent, ds1.twentyFivePercent, ds1.fiftyPercent, ds1.stringu1,ds1.stringu2
+FROM wisconsin_fixed1 ds1, wisconsin_fixed2 ds2
+WHERE
+ds1.unique2 >
+@PARAM
+and ds1.unique2 <
+@PARAM
+and ds2.unique2 >
+@PARAM
+and ds2.unique2 <
+@PARAM
+and ds1.unique1 = ds2.unique1 and ds1.unique2 = ds2.unique2 and ds1.onePercent = ds2.onePercent and ds1.tenPercent = ds2.tenPercent
+and ds1.twentyFivePercent = ds2.twentyFivePercent and ds1.fiftyPercent = ds2.fiftyPercent and ds1.stringu1 = ds2.stringu1 and ds1.stringu2 = ds2.stringu2) q1
+
+WHERE
+ds3.unique2 >
+@PARAM
+and ds3.unique2 <
+@PARAM
+and ds3.unique1 = q1.unique1 and ds3.unique2 = q1.unique2 and ds3.onePercent = q1.onePercent and ds3.tenPercent = q1.tenPercent
+and ds3.twentyFivePercent = q1.twentyFivePercent and ds3.fiftyPercent = q1.fiftyPercent and ds3.stringu1 = q1.stringu1 and ds3.stringu2 = q1.stringu2) q2
+
+WHERE
+ds4.unique2 >
+@PARAM
+and ds4.unique2 <
+@PARAM
+and ds4.unique1 = q2.unique1 and ds4.unique2 = q2.unique2 and ds4.onePercent = q2.onePercent and ds4.tenPercent = q2.tenPercent
+and ds4.twentyFivePercent = q2.twentyFivePercent and ds4.fiftyPercent = q2.fiftyPercent and ds4.stringu1 = q2.stringu1 and ds4.stringu2 = q2.stringu2
+) r1
+UNION ALL
+(select q2.unique1, q2.unique2, q2.onePercent, q2.tenPercent, q2.twentyFivePercent, q2.fiftyPercent, q2.stringu1,q2.stringu2
+FROM wisconsin_fixed4 ds4 , (select q1.unique1, q1.unique2, q1.onePercent, q1.tenPercent, q1.twentyFivePercent, q1.fiftyPercent, q1.stringu1,q1.stringu2
+FROM wisconsin_fixed3 ds3,
+(select ds1.unique1, ds1.unique2, ds1.onePercent, ds1.tenPercent, ds1.twentyFivePercent, ds1.fiftyPercent, ds1.stringu1,ds1.stringu2
+FROM wisconsin_fixed1 ds1, wisconsin_fixed2 ds2
+WHERE
+ds1.unique2 >
+@PARAM
+and ds1.unique2 <
+@PARAM
+and ds2.unique2 >
+@PARAM
+and ds2.unique2 <
+@PARAM
+and ds1.unique1 = ds2.unique1 and ds1.unique2 = ds2.unique2 and ds1.onePercent = ds2.onePercent and ds1.tenPercent = ds2.tenPercent
+and ds1.twentyFivePercent = ds2.twentyFivePercent and ds1.fiftyPercent = ds2.fiftyPercent and ds1.stringu1 = ds2.stringu1 and ds1.stringu2 = ds2.stringu2) q1
+
+WHERE
+ds3.unique2 >
+@PARAM
+and ds3.unique2 <
+@PARAM
+and ds3.unique1 = q1.unique1 and ds3.unique2 = q1.unique2 and ds3.onePercent = q1.onePercent and ds3.tenPercent = q1.tenPercent
+and ds3.twentyFivePercent = q1.twentyFivePercent and ds3.fiftyPercent = q1.fiftyPercent and ds3.stringu1 = q1.stringu1 and ds3.stringu2 = q1.stringu2) q2
+
+WHERE
+ds4.unique2 >
+@PARAM
+and ds4.unique2 <
+@PARAM
+and ds4.unique1 = q2.unique1 and ds4.unique2 = q2.unique2 and ds4.onePercent = q2.onePercent and ds4.tenPercent = q2.tenPercent
+and ds4.twentyFivePercent = q2.twentyFivePercent and ds4.fiftyPercent = q2.fiftyPercent and ds4.stringu1 = q2.stringu1 and ds4.stringu2 = q2.stringu2
+)
+limit 1;

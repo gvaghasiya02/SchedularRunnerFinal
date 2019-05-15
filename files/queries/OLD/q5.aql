@@ -1,0 +1,6 @@
+use fixedintersize;
+select * FROM wisconsin_fixed1 ds1, wisconsin_fixed2 ds2 where ds1.unique2 /*+ build-size 10100 */= ds2.unique2 and ds1.unique2 <
+ @PARAM
+ and ds2.unique2 <
+ @PARAM
+ limit 1;

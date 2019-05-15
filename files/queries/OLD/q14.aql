@@ -1,0 +1,2 @@
+use fixedintersize;
+select count(*) from wisconsin_10GB1 ds1;

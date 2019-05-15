@@ -18,6 +18,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.DoubleSummaryStatistics;
 import java.util.StringTokenizer;
 
 import queryGenerator.QueryParamSetting;
@@ -47,9 +48,15 @@ public class RandomQueryGeneratorConfig {
             StringTokenizer st = new StringTokenizer(str, Constants.QPARAM_FILE_DELIM);
             int qid = Integer.parseInt(st.nextToken());
             int vid = Integer.parseInt(st.nextToken());
-            ArrayList<Integer> pList = new ArrayList<Integer>();
+            ArrayList<Number> pList = new ArrayList<Number>();
             while (st.hasMoreTokens()) {
-                pList.add(Integer.parseInt(st.nextToken()));
+                String next = st.nextToken();
+                if(next.contains(".")){
+                    pList.add(Double.parseDouble(next));
+                }
+                else {
+                    pList.add(Integer.parseInt(next));
+                }
             }
             qps.addParamSetting(qid, vid, pList);
         }

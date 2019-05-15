@@ -1,0 +1,11 @@
+use fixedintersize;
+select  first.unique1, first.unique2,  first.onePercent, first.tenPercent, first.twentyFivePercent,
+ first.fiftyPercent, first.stringu1, first.stringu2 from
+   wisconsin_1GB1 first, wisconsin_1GB2 second where
+    first.unique1 /*+ join-mem
+    @PARAM
+   , build-partition
+    @PARAM
+    */= second.unique1  and first.unique2 = second.unique2 and
+     first.onePercent = second.onePercent and first.tenPercent = second.tenPercent and
+      first.twentyFivePercent = second.twentyFivePercent and first.fiftyPercent = second.fiftyPercent  limit 1;

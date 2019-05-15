@@ -1,0 +1,2 @@
+use fixedintersize;
+select count(*) from wisconsin_empty;

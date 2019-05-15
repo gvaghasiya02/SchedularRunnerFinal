@@ -62,6 +62,29 @@ public class QueryStat {
         }
         return sb.toString();
     }
+    public String getTimesForChart(){
+        StringBuffer sb = new StringBuffer();
+        int index=0;
+        for (long t : times) {
+            if(index>0)
+                sb.append(",");
+            sb.append(t);
+            index++;
+        }
+        return sb.toString();
+    }
+
+    public String getIterations() {
+        int i=1;
+        String result="";
+        for(long t:times) {
+            if(i > 1)
+                result = result+",";
+            result = result+i;
+            i++;
+        }
+        return result;
+    }
 
     public int getTotalSize() {
         return times.size();
@@ -83,5 +106,20 @@ public class QueryStat {
             }
         }
         return sum / count;
+    }
+
+    public double getSTD(int ignore, double avg){
+        double standardDeviation = 0;
+        double count = 0;
+        int skip = 0;
+        Iterator<Long> it = times.iterator();
+        while (it.hasNext()) {
+            double d = it.next();
+            if ((++skip) > ignore) {
+                standardDeviation += Math.pow(d - avg, 2);
+                count++;
+            }
+        }
+        return Math.sqrt(standardDeviation/count);
     }
 }

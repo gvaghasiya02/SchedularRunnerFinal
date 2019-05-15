@@ -1,12 +1,16 @@
 #!/bin/bash
-
+configFile=$1
+workloadFile=$2
 if [ -z $BIGFUN_HOME ]
 then 
 	echo "ERROR: BIGFUN_HOME is not defined."
 	exit 1
 fi
 
-CONFIGFILE=${BIGFUN_HOME}/conf/bigfun-conf.json
+echo $BIGFUN_HOME
+
+CONFIGFILE=${BIGFUN_HOME}/conf/${configFile}
+echo $CONFIGFILE
 if [ ! -f ${CONFIGFILE} ]; then
 	echo -e "ERROR: The configuration file for BigFUN (with the name bigfun-conf.json ) can not be found under ${BIGFUN_HOME}/conf directory."
 	exit 1
@@ -18,7 +22,8 @@ if [ ! -f ${QGENCONFIGFILE} ]; then
         exit 1
 fi
 
-WORKLOADFILE=${BIGFUN_HOME}/files/workload.txt
+WORKLOADFILE=${BIGFUN_HOME}/files/workloads/${workloadFile}
+echo $WORKLOADFILE
 if [ ! -f ${WORKLOADFILE} ]; then
 	echo -e "ERROR: The workload file (with the name workload.txt ) can not be found under ${BIGFUN_HOME}/files directory."
 	exit 1
@@ -31,6 +36,7 @@ if [ ! -f ${QUERYINDEXFILE} ]; then
 fi
 
 mkdir -p ${BIGFUN_HOME}/files/output
+mkdir -p ${BIGFUN_HOME}/files/output/avg
 
 java -cp ${BIGFUN_HOME}/target/bigfun-driver-jar-with-dependencies.jar driver.Driver ${BIGFUN_HOME}
 

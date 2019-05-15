@@ -1,0 +1,4 @@
+use fixedintersize;
+set `compiler.joinmemory` "16MB";
+
+select count(*) from wisconsin_1GB1 ds1, wisconsin_1GB2 ds2  where ds1.unique1 = ds2.unique1 and ds1.unique2=ds2.unique2 and ds1.onePercent=ds2.onePercent and ds1.tenPercent=ds2.tenPercent and ds1.twentyFivePercent=ds2.twentyFivePercent and ds1.fiftyPercent=ds2.fiftyPercent and ds1.stringu1=ds2.stringu1 and ds1.stringu2=ds2.stringu2;

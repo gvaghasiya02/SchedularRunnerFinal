@@ -16,12 +16,20 @@ package asterixReadOnlyClient;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.sql.Timestamp;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 
+import org.apache.http.NameValuePair;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpPost;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
-import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.utils.URIBuilder;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 
 import client.AbstractReadOnlyClientUtility;
@@ -30,22 +38,30 @@ import config.Constants;
 public class AsterixReadOnlyClientUtility extends AbstractReadOnlyClientUtility {
 
     String ccUrl;
+    String apiPort;
+    String apiPath;
     DefaultHttpClient httpclient;
-    HttpGet httpGet;
+    ArrayList<NameValuePair> httpPostParams;
+    HttpPost httpPost;
     URIBuilder roBuilder;
+    String content;
 
     public AsterixReadOnlyClientUtility(String cc, String qIxFile, String qGenConfigFile, String statsFile, int ignore,
             String qSeqFile, String resultsFile) {
         super(qIxFile, qGenConfigFile, statsFile, ignore, qSeqFile, resultsFile);
         this.ccUrl = cc;
+        this.apiPort="19002";
+        this.apiPath="/query/service";
     }
 
     @Override
     public void init() {
         httpclient = new DefaultHttpClient();
-        httpGet = new HttpGet();
+        httpPost = new HttpPost();
+        httpPostParams = new ArrayList<>();
         try {
-            roBuilder = new URIBuilder("http://" + ccUrl + ":" + Constants.ASTX_AQL_REST_API_PORT + "/query");
+            roBuilder = new URIBuilder("http://" + ccUrl + ":" + apiPort + apiPath);
+            System.out.println(roBuilder.toString());
         } catch (URISyntaxException e) {
             System.err.println("Problem in initializing Read-Only URI Builder");
             e.printStackTrace();
@@ -62,38 +78,45 @@ public class AsterixReadOnlyClientUtility extends AbstractReadOnlyClientUtility 
 
     @Override
     public void executeQuery(int qid, int vid, String qBody) {
-        String content = null;
-        long rspTime = Constants.INVALID_TIME;
+
+        content = null;
+        long rspTime = -1;
         try {
-            roBuilder.setParameter("query", qBody);
             URI uri = roBuilder.build();
-            httpGet.setURI(uri);
+            httpPost.setURI(uri);
+            httpPostParams.clear();
+            httpPostParams.add(new BasicNameValuePair("statement", qBody));
+            httpPostParams.add(new BasicNameValuePair("mode", "immediate"));
+            httpPost.setEntity(new UrlEncodedFormEntity(httpPostParams));
 
             long s = System.currentTimeMillis();
-            HttpResponse response = httpclient.execute(httpGet);
+            Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+           // System.out.print(timestamp +"\t");
+            HttpResponse response = httpclient.execute(httpPost);
+            long e = System.currentTimeMillis();
             HttpEntity entity = response.getEntity();
             content = EntityUtils.toString(entity);
-            EntityUtils.consume(entity);
-            long e = System.currentTimeMillis();
-
+            Timestamp timestamp2 = new Timestamp(System.currentTimeMillis());
             rspTime = (e - s);
-
-        } catch (Exception ex) {
-            System.err.println("Problem in read-only query execution against Asterix");
-            ex.printStackTrace();
-            updateStat(qid, vid, Constants.INVALID_TIME);
-            return;
-        }
-        updateStat(qid, vid, rspTime);
-        if (resPw != null) {
-            resPw.println(qid);
-            resPw.println("Ver " + vid);
-            resPw.println(qBody + "\n");
-            if (dumpResults) {
-                resPw.println(content + "\n");
-            }
-        }
-        System.out.println("Q" + qid + " version " + vid + "\t" + rspTime); //trace the progress
+            System.out.print(" Q" + qid + "-" + vid + "\t"+rspTime); //trace the progress
+            System.out.print("\t" +timestamp +"\t");
+            System.out.println("\t"+timestamp2);
+        }  catch (Exception ex) {
+                    System.err.println("Problem in read-only query execution against Asterix");
+                    ex.printStackTrace();
+                    updateStat(qid, vid, Constants.INVALID_TIME);
+                    return;
+                }
+                updateStat(qid, vid, rspTime);
+                if (resPw != null) {
+                    resPw.println(qid);
+                    resPw.println("Ver " + vid);
+                    resPw.println(qBody + "\n");
+                    resPw.println("responseTime : "+rspTime +" Msec");
+                    if (dumpResults) {
+                        resPw.println(content + "\n");
+                    }
+                }
 
     }
 }

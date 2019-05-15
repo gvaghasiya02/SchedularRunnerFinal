@@ -1,0 +1,40 @@
+select * from w1 ds1 INNER JOIN (select * from w2 ds2
+ INNER JOIN (select * from w3 ds3
+              INNER JOIN w4 ds4 ON ds3.unique2 /*+ build-size
+              @PARAM
+              join-mem
+              @PARAM
+              */ =ds4.unique2 where ds4.unique2 >
+                                                                  @PARAM
+                                                                   and
+                                                                   ds4.unique2<
+                                                                   @PARAM
+                                                                   and
+                                                                    ds3.unique2 >
+                                                                   @PARAM
+                                                                   and
+                                                                    ds3.unique2 <
+                                                                   @PARAM
+                                                                   ) AL
+ ON ds2.unique2 /*+ build-size
+                              @PARAM
+                              join-mem
+                              @PARAM
+                              */ = AL.ds3.unique2 where ds2.unique2 >
+                                   @PARAM
+                           and
+                                 ds2.unique2 <
+                                   @PARAM
+                                   ) AL2
+ ON ds1.unique2 /*+ build-size
+                  @PARAM
+                  join-mem
+                  @PARAM
+                */ = AL2.ds2.unique2 where ds1.unique2 >
+                                    @PARAM
+                           and
+                           ds1.unique2 <
+                               @PARAM
+                           limit 1;
+
+

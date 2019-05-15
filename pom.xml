@@ -10,6 +10,11 @@
     <artifactId>httpclient</artifactId>
     <version>4.2.5</version>
    </dependency>
+      <dependency>
+          <groupId>org.json</groupId>
+          <artifactId>json</artifactId>
+          <version>20070829</version>
+      </dependency>
    <dependency>
     <groupId>com.fasterxml.jackson.core</groupId>
     <artifactId>jackson-databind</artifactId>

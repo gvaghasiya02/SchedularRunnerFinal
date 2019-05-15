@@ -1,0 +1,67 @@
+set `compiler.parallelism`
+@PARAM
+;
+Select * from wisconsinStd0WithoutBigObject10 ds10 ,
+(Select * from wisconsinStd0WithoutBigObject9 ds9 ,
+(Select * from wisconsinStd0WithoutBigObject8 ds8 ,
+(Select * from wisconsinStd0WithoutBigObject7 ds7 ,
+(Select * from wisconsinStd0WithoutBigObject6 ds6 ,
+(Select * from wisconsinStd0WithoutBigObject5 ds5 ,
+(Select * from wisconsinStd0WithoutBigObject4 ds4,
+                   (select * from  wisconsinStd0WithoutBigObject3 ds3,
+                        (select * from  wisconsinStd0WithoutBigObject2 ds2, wisconsinStd0WithoutBigObject1 ds1
+                         where ds1.unique2 <
+                          @PARAM
+                          and ds2.unique2 <
+                          @PARAM
+                          and ds1.unique2 /*+ build-size
+                          @PARAM
+                          ,join-mem
+                          @PARAM
+                          */= ds2.unique2) q1
+                      where ds3.unique2 <
+                      @PARAM
+                      and ds3.unique2 /*+ build-size
+                       @PARAM
+                       ,join-mem
+                      @PARAM
+                       */= q1.ds2.unique2) q2
+where ds4.unique2 <
+@PARAM
+ and ds4.unique2 /*+ build-size
+                    @PARAM
+                    ,join-mem
+                       @PARAM
+                    */= q2.ds3.unique2) q3
+where ds5.unique2 <
+@PARAM
+ and ds5.unique2 /*+ build-size
+                    @PARAM
+                    ,join-mem
+                       @PARAM
+                    */= q3.ds4.unique2) q4
+where ds6.unique2 <
+@PARAM
+ and ds6.unique2 /*+ build-size
+                    @PARAM
+                    */= q4.ds5.unique2) q5
+where ds7.unique2 <
+@PARAM
+ and ds7.unique2 /*+ build-size
+                    @PARAM
+                    */= q5.ds6.unique2) q6
+where ds8.unique2 <
+@PARAM
+ and ds8.unique2 /*+ build-size
+                    @PARAM
+                    */= q6.ds7.unique2) q7
+where ds9.unique2 <
+@PARAM
+ and ds9.unique2 /*+ build-size
+                    @PARAM
+                    */= q7.ds8.unique2)q8
+where ds10.unique2 <
+@PARAM
+ and ds10.unique2 /*+ build-size
+                    @PARAM
+                    */= q8.ds9.unique2

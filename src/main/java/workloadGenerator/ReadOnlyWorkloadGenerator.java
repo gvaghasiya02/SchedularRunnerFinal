@@ -26,7 +26,7 @@ public class ReadOnlyWorkloadGenerator extends AbstractReadOnlyWorkloadGenerator
 
     final RandomQueryGenerator rqGen;
 
-    public ReadOnlyWorkloadGenerator(String qIndexFile, String qGenConfigFile, long seed, long maxUsrId) {
+    public ReadOnlyWorkloadGenerator(String qIndexFile, String qGenConfigFile, long seed,long minUserId ,long maxUsrId) {
         super();
         try {
             loadQueryTemplate(qIndexFile);
@@ -34,7 +34,7 @@ public class ReadOnlyWorkloadGenerator extends AbstractReadOnlyWorkloadGenerator
             System.err.println("Error in loading qIndexFile in RandomWorkloadGenerator");
             e.printStackTrace();
         }
-        rqGen = new RandomQueryGenerator(seed, maxUsrId);
+        rqGen = new RandomQueryGenerator(seed, minUserId,maxUsrId);
         try {
             RandomQueryGeneratorConfig.configure(rqGen, qGenConfigFile);
         } catch (IOException e) {

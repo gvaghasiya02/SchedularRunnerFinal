@@ -21,26 +21,27 @@ import workloadGenerator.ReadOnlyWorkloadGenerator;
 
 public class AsterixClientReadOnlyWorkload extends AbstractReadOnlyClient {
 
-    final String ccUrl;
-    final String dvName;
-    final int iterations;
+    String ccUrl;
+    String dvName;
+    int iterations;
     ReadOnlyWorkloadGenerator rwg;
+    public AsterixClientReadOnlyWorkload() {};
 
     public AsterixClientReadOnlyWorkload(String cc, String dvName, int iter, String qGenConfigFile, String qIxFile,
-            String statsFile, int ignore, String qSeqFile, String resDumpFile, long seed, long maxUsrId) {
+            String statsFile, int ignore, String qSeqFile, String resDumpFile, long seed, long minUserId,long maxUsrId) {
         super();
         this.ccUrl = cc;
         this.dvName = dvName;
         this.iterations = iter;
         setClientUtil(qIxFile, qGenConfigFile, statsFile, ignore, qSeqFile, resDumpFile);
         clUtil.init();
-        initReadOnlyWorkloadGen(seed, maxUsrId);
+        initReadOnlyWorkloadGen(seed,minUserId, maxUsrId);
         execQuery = true;
     }
 
     @Override
-    protected void initReadOnlyWorkloadGen(long seed, long maxUsrId) {
-        this.rwg = new ReadOnlyWorkloadGenerator(clUtil.getQIxFile(), clUtil.getQGenConfigFile(), seed, maxUsrId);
+    protected void initReadOnlyWorkloadGen(long seed, long minUserId,long maxUsrId) {
+        this.rwg = new ReadOnlyWorkloadGenerator(clUtil.getQIxFile(), clUtil.getQGenConfigFile(), seed, minUserId,maxUsrId);
     }
 
     @Override

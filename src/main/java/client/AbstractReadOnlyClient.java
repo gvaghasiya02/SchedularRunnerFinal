@@ -25,7 +25,7 @@ public abstract class AbstractReadOnlyClient extends AbstractClient {
     protected abstract void setClientUtil(String qIxFile, String qGenConfigFile, String statsFile, int ignore,
             String qSeqFile, String resultsFile);
 
-    protected abstract void initReadOnlyWorkloadGen(long seed, long maxUsrId);
+    protected abstract void initReadOnlyWorkloadGen(long seed, long minUserId,long maxUsrId);
 
     public void generateReport() {
         clUtil.generateReport();

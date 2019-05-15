@@ -1,0 +1,24 @@
+set `compiler.parallelism`
+@PARAM
+;
+
+set `compiler.joinmemory`
+@PARAM
+;
+SELECT *
+FROM wisconsinStd0WithoutBigObject2 ds2, wisconsinStd0WithoutBigObject1 ds1, wisconsinStd0WithoutBigObject3 ds3, wisconsinStd0WithoutBigObject4 ds4
+WHERE ds1.unique2 <
+@PARAM
+and ds2.unique2 <
+ @PARAM
+ and ds3.unique2 <
+ @PARAM
+  and ds4.unique2 <
+  @PARAM
+  and ds1.unique2 /*+ build-size
+  @PARAM
+   */= ds2.unique2 AND ds2.unique2 /*+ build-size
+   @PARAM
+   */= ds3.unique2 AND ds3.unique2 /*+ build-size
+   @PARAM
+   */= ds4.unique2 limit 1;

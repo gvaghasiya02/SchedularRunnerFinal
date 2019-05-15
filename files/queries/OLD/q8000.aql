@@ -1,0 +1,47 @@
+
+SELECT * FROM wisconsinStd0WithoutBigObject4 ds4, (SELECT *
+FROM wisconsinStd0WithoutBigObject2 ds2, wisconsinStd0WithoutBigObject1 ds1, wisconsinStd0WithoutBigObject3 ds3
+WHERE ds1.unique2 <
+@PARAM
+and ds2.unique2 <
+ @PARAM
+ and ds3.unique2 <
+ @PARAM
+  and ds1.unique2 /*+ build-size 62 , join-mem 64
+   */= ds2.unique2 AND ds2.unique2 /*+ build-size 62 , join-mem 64
+   */= ds3.unique2)q1,
+   wisconsinStd0WithoutBigObject5 ds5,wisconsinStd0WithoutBigObject6 ds6,wisconsinStd0WithoutBigObject7 ds7,wisconsinStd0WithoutBigObject8 ds8,wisconsinStd0WithoutBigObject9 ds9,wisconsinStd0WithoutBigObject10 ds10,wisconsinStd0WithoutBigObject11 ds11
+   where
+   ds4.unique2 <
+   @PARAM
+   and ds5.unique2 <
+   @PARAM
+   and ds6.unique2 <
+   @PARAM
+   and ds7.unique2 <
+   @PARAM
+   and ds8.unique2 <
+   @PARAM
+   and ds9.unique2 <
+   @PARAM
+   and ds10.unique2 <
+   @PARAM
+   and ds11.unique2 <
+   @PARAM
+   AND ds4.unique2 /*+ build-size 320 ,join-mem 350
+                           */= q1.ds3.unique2
+   AND ds4.unique2 /*+ build-size 62 , join-mem 64
+                    */= ds5.unique2
+   AND ds5.unique2 /*+ build-size 62 , join-mem 64 ,temp
+                    */= ds6.unique2
+   AND ds6.unique2 /*+ build-size 62 , join-mem 64
+                    */= ds7.unique2
+   AND ds7.unique2 /*+ build-size 62 , join-mem 64
+                 */= ds8.unique2
+   AND ds8.unique2 /*+ build-size 62 , join-mem 64
+               */= ds9.unique2
+   AND ds9.unique2 /*+ build-size 62 , join-mem 64
+                 */= ds10.unique2
+   AND ds10.unique2 /*+ build-size 62 , join-mem 64
+                 */= ds11.unique2
+   limit 1;

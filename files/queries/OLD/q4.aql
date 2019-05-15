@@ -1,0 +1,3 @@
+use fixedintersize;
+
+SELECT COUNT(*) FROM wisconsin_10M;

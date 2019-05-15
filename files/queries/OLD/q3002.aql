@@ -1,0 +1,49 @@
+set `compiler.joinmemory`
+@PARAM
+;
+
+select ds2,ds3,ds4,ds5,ds6,ds7,ds8,ds9 from w1 ds1,w2 ds2, w3 ds3, w4 ds4, w5 ds5 , w6 ds6, w7 ds7, w8 ds8, w9 ds9
+ where ds1.unique1 >
+ @PARAM
+  and ds1.unique1 <
+  @PARAM
+  and ds2.unique1 >
+  @PARAM
+  and ds2.unique1 <
+  @PARAM
+  and ds3.unique1 >
+    @PARAM
+    and ds3.unique1 <
+    @PARAM
+    and ds4.unique1 >
+      @PARAM
+      and ds4.unique1 <
+      @PARAM
+      and ds5.unique1 >
+        @PARAM
+        and ds5.unique1 <
+        @PARAM
+        and ds6.unique1 >
+          @PARAM
+          and ds6.unique1 <
+          @PARAM
+          and ds7.unique1 >
+            @PARAM
+            and ds7.unique1 <
+            @PARAM
+            and ds8.unique1 >
+              @PARAM
+              and ds8.unique1 <
+              @PARAM
+              and ds9.unique1 >
+                @PARAM
+                and ds9.unique1 <
+                @PARAM
+  and ds1.unique1 /*+ build-size 328 */ =ds2.unique1
+   and ds2.unique1 /*+ build-size 328 */ =ds3.unique1
+    and ds3.unique1 /*+ build-size 328 */ =ds4.unique1
+     and ds4.unique1 /*+ build-size 328 */ =ds5.unique1
+      and ds5.unique1 /*+ build-size 328 */ =ds6.unique1
+       and ds6.unique1 /*+ build-size 328 */ =ds7.unique1
+        and ds7.unique1 /*+ build-size 328 */ =ds8.unique1
+         and ds8.unique1 /*+ build-size 328 */ =ds9.unique1 limit 10;

@@ -1,0 +1,64 @@
+
+set `compiler.joinmemory`
+@PARAM
+;
+
+SELECT *
+FROM wisconsinStd0WithoutBigObject2 ds2, wisconsinStd0WithoutBigObject1 ds1, wisconsinStd0WithoutBigObject3 ds3, wisconsinStd0WithoutBigObject4 ds4, wisconsinStd0WithoutBigObject5 ds5,wisconsinStd0WithoutBigObject6 ds6,wisconsinStd0WithoutBigObject7 ds7,wisconsinStd0WithoutBigObject8 ds8,wisconsinStd0WithoutBigObject9 ds9,wisconsinStd0WithoutBigObject10 ds10,wisconsinStd0WithoutBigObject11 ds11
+WHERE ds1.unique2 <
+45150
+AND
+ds1.unique2 >
+15050
+and ds2.unique2 <
+@PARAM
+and ds3.unique2 <
+@PARAM
+and ds4.unique2 <
+@PARAM
+and ds5.unique2 <
+@PARAM
+and ds6.unique2 <
+@PARAM
+and ds7.unique2 <
+@PARAM
+and ds8.unique2 <
+@PARAM
+and ds9.unique2 <
+@PARAM
+and ds10.unique2 <
+@PARAM
+and ds11.unique2 <
+@PARAM
+and ds1.unique2 /*+ build-size
+ @PARAM
+ */= ds2.unique2
+AND ds2.unique2 /*+ build-size
+                 @PARAM
+                 */= ds3.unique2
+AND ds3.unique2 /*+ build-size
+                 @PARAM
+                 */= ds4.unique2
+AND ds4.unique2 /*+ build-size
+                 @PARAM
+                 */= ds5.unique2
+AND ds5.unique2 /*+ build-size
+                 @PARAM
+                 */= ds6.unique2
+AND ds6.unique2 /*+ build-size
+                 @PARAM
+                 */= ds7.unique2
+AND ds7.unique2 /*+ build-size
+              @PARAM
+               , temp
+              */= ds8.unique2
+AND ds8.unique2 /*+ build-size
+            @PARAM
+            */= ds9.unique2
+AND ds9.unique2 /*+ build-size
+              @PARAM
+              */= ds10.unique2
+AND ds10.unique2 /*+ build-size
+              @PARAM
+              */= ds11.unique2
+limit 1;

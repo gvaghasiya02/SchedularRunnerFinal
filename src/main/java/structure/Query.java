@@ -40,11 +40,12 @@ public class Query {
         Iterator<String> segIt = segments.iterator();
         Iterator<IArgument> argIt = args.iterator();
 
-        StringBuilder st = new StringBuilder("use dataverse " + dataverse + ";\n");
+        //StringBuilder st = new StringBuilder("use dataverse " + dataverse + ";\n");
+        StringBuilder st = new StringBuilder("use " + dataverse + ";\n");//SQL++
         while (segIt.hasNext()) {
-            st.append(segIt.next()).append(" ");
+            st.append(segIt.next().trim()).append(" ");
             if (argIt.hasNext()) {
-                st.append(argIt.next().admPrint()).append(" ");
+                st.append(argIt.next().admPrint().trim()).append(" ");
             }
         }
         if (argIt.hasNext()) {

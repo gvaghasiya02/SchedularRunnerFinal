@@ -15,10 +15,14 @@
 package config;
 
 import asterixReadOnlyClient.AsterixClientReadOnlyWorkload;
+import asterixReadOnlyClient.AsterixConcurrentReadOnlyWorkload;
 import asterixUpdateClient.AsterixClientUpdateWorkload;
 import client.AbstractReadOnlyClient;
 import client.AbstractUpdateClient;
 import structure.UpdateTag;
+
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 public class AsterixClientConfig extends AbstractClientConfig {
 
@@ -26,23 +30,23 @@ public class AsterixClientConfig extends AbstractClientConfig {
         super(clientConfigFile);
     }
 
-    public AbstractReadOnlyClient readReadOnlyClientConfig(String bigFunHomePath) {
-        String cc = (String) getParamValue(Constants.CC_URL);
-        String dvName = (String) getParamValue(Constants.ASTX_DV_NAME);
-        int iter = (int) getParamValue(Constants.ITERATIONS);
+    public AbstractReadOnlyClient readReadOnlyClientConfig(String bigFunHomePath,int cid) {
+        String cc = (String) getParamValue(Constants.CC_URL,cid);
+        String dvName = (String) getParamValue(Constants.ASTX_DV_NAME,cid);
+        int iter = (int) getParamValue(Constants.ITERATIONS,cid);
 
         String qIxFile = bigFunHomePath + "/files/" + Constants.Q_IX_FILE_NAME;
         String qGenConfigFile = bigFunHomePath + "/files/" + Constants.Q_GEN_CONFIG_FILE_NAME;
-        String workloadFile = bigFunHomePath + "/files/" + Constants.WORKLOAD_FILE_NAME;
+        String workloadFile = bigFunHomePath + "/files/workloads/" + Constants.WORKLOAD_FILE_NAME;
 
         String statsFile = bigFunHomePath + "/files/output/" + Constants.STATS_FILE_NAME;
-        if (isParamSet(Constants.STATS_FILE)) {
-            statsFile = (String) getParamValue(Constants.STATS_FILE);
+        if (isParamSet(Constants.STATS_FILE,cid)) {
+            statsFile = (String) getParamValue(Constants.STATS_FILE,cid);
         }
 
         long seed = Constants.DEFAULT_SEED;
-        if (isParamSet(Constants.SEED)) {
-            Object value = getParamValue(Constants.SEED);
+        if (isParamSet(Constants.SEED,cid)) {
+            Object value = getParamValue(Constants.SEED,cid);
             if (value instanceof Long) {
                 seed = (long) value;
             } else if (value instanceof Integer) {
@@ -54,68 +58,100 @@ public class AsterixClientConfig extends AbstractClientConfig {
 
         }
 
-        long maxUserId = Constants.DEFAULT_MAX_GBOOK_USR_ID;
-        if (isParamSet(Constants.MAX_GBOOK_USR_ID)) {
-            Object value = getParamValue(Constants.MAX_GBOOK_USR_ID);
+        long maxId = Constants.DEFAULT_MAX_ID;
+        if (isParamSet(Constants.MAX_ID,cid)) {
+            Object value = getParamValue(Constants.MAX_ID,cid);
             if (value instanceof Long) {
-                maxUserId = (long) value;
+                maxId = (long) value;
             } else if (value instanceof Integer) {
-                maxUserId = ((Integer) value).longValue();
+                maxId = ((Integer) value).longValue();
             } else {
-                System.err.println("WARNING: Invalid " + Constants.MAX_GBOOK_USR_ID + " value in "
+                System.err.println("WARNING: Invalid " + Constants.MAX_ID + " value in "
+                        + Constants.BIGFUN_CONFIG_FILE_NAME + " . Using the default value for the generator.");
+            }
+        }
+
+        long minId = Constants.DEFAULT_MIN_ID;
+        if (isParamSet(Constants.MIN_ID,cid)) {
+            Object value = getParamValue(Constants.MIN_ID,cid);
+            if (value instanceof Long) {
+                minId = (long) value;
+            } else if (value instanceof Integer) {
+                minId = ((Integer) value).longValue();
+            } else {
+                System.err.println("WARNING: Invalid " + Constants.MIN_ID + " value in "
                         + Constants.BIGFUN_CONFIG_FILE_NAME + " . Using the default value for the generator.");
             }
         }
 
         int ignore = -1;
-        if (isParamSet(Constants.IGNORE)) {
-            ignore = (int) getParamValue(Constants.IGNORE);
+        if (isParamSet(Constants.IGNORE,cid)) {
+            ignore = (int) getParamValue(Constants.IGNORE,cid);
+        }
+        //String workloadFile="";
+        if(isParamSet(Constants.WORKLOAD, cid)) {
+            final Path wlPath=Paths.get(System.getProperty("user.dir"), "/files/workloads/", getParamValue(Constants.WORKLOAD,cid).toString());
+            workloadFile = wlPath.toString();
         }
 
         boolean qExec = true;
-        if (isParamSet(Constants.EXECUTE_QUERY)) {
-            qExec = (boolean) getParamValue(Constants.EXECUTE_QUERY);
+        if (isParamSet(Constants.EXECUTE_QUERY,cid)) {
+            qExec = (boolean) getParamValue(Constants.EXECUTE_QUERY,cid);
         }
 
         boolean dumpResults = false;
         String resultsFile = null;
-        if (isParamSet(Constants.ASTX_DUMP_RESULTS)) {
-            dumpResults = (boolean) getParamValue(Constants.ASTX_DUMP_RESULTS);
-            resultsFile = (String) getParamValue(Constants.RESULTS_DUMP_FILE);
+        if (isParamSet(Constants.ASTX_DUMP_RESULTS,cid)) {
+            dumpResults = (boolean) getParamValue(Constants.ASTX_DUMP_RESULTS,cid);
+            resultsFile = (String) getParamValue(Constants.RESULTS_DUMP_FILE,cid);
         }
-
-        AsterixClientReadOnlyWorkload rClient = new AsterixClientReadOnlyWorkload(cc, dvName, iter, qGenConfigFile,
-                qIxFile, statsFile, ignore, workloadFile, /*dumpDirFile,*/ resultsFile, seed, maxUserId);
+        int numReaders = 1;
+        if (isParamSet(Constants.NUM_CONCURRENT_READERS,cid)) {
+            numReaders = (int) getParamValue(Constants.NUM_CONCURRENT_READERS,cid);
+        }
+        AsterixClientReadOnlyWorkload rClient;
+        if (numReaders == 1) {
+            rClient = getAsterixClientReadOnlyWorkload(cc, dvName, iter, qIxFile, qGenConfigFile, workloadFile, statsFile, seed, maxId, ignore, resultsFile);
+        }
+        else {
+           rClient = new AsterixConcurrentReadOnlyWorkload(cc, dvName, iter, qGenConfigFile,
+                qIxFile, statsFile, ignore, workloadFile, /*dumpDirFile,*/ resultsFile, seed,minId, maxId, numReaders);
+              }
+//    rClient = new AsterixClientReadOnlyWorkload(cc, dvName, iter, qGenConfigFile,
+//                qIxFile, statsFile, ignore, workloadFile, /*dumpDirFile,*/ resultsFile, seed, maxUserId);
 
         rClient.setExecQuery(qExec);
-        rClient.setDumpResults(dumpResults);
+       // rClient.setDumpResults(dumpResults);
         return rClient;
     }
-
+    private AsterixClientReadOnlyWorkload getAsterixClientReadOnlyWorkload(String cc, String dvName, int iter, String qIxFile, String qGenConfigFile, String workloadFile, String statsFile, long seed, long maxUserId, int ignore, String resultsFile) {
+        return new AsterixClientReadOnlyWorkload(cc, dvName, iter, qGenConfigFile,
+                qIxFile, statsFile, ignore, workloadFile, /*dumpDirFile,*/ resultsFile, seed, maxUserId,maxUserId);
+    }
     @Override
-    public AbstractUpdateClient readUpdateClientConfig(String bigFunHomePath) {
-        String cc = (String) getParamValue(Constants.CC_URL);
-        String oprType = (String) getParamValue(Constants.UPDATE_OPR_TYPE_TAG);
+    public AbstractUpdateClient readUpdateClientConfig(String bigFunHomePath,int cid) {
+        String cc = (String) getParamValue(Constants.CC_URL,cid);
+        String oprType = (String) getParamValue(Constants.UPDATE_OPR_TYPE_TAG,cid);
 
-        String updatesFile = (String) getParamValue(Constants.UPDATES_FILE);
+        String updatesFile = (String) getParamValue(Constants.UPDATES_FILE,cid);
         String statsFile = bigFunHomePath + "/files/output/" + Constants.STATS_FILE_NAME;
-        if (isParamSet(Constants.STATS_FILE)) {
-            statsFile = (String) getParamValue(Constants.STATS_FILE);
+        if (isParamSet(Constants.STATS_FILE,cid)) {
+            statsFile = (String) getParamValue(Constants.STATS_FILE,cid);
         }
 
-        String dvName = (String) getParamValue(Constants.ASTX_DV_NAME);
-        String dsName = (String) getParamValue(Constants.ASTX_DS_NAME);
-        String keyName = (String) getParamValue(Constants.ASTX_KEY_NAME);
-        int batchSize = (int) getParamValue(Constants.UPDATE_BATCH_SIZE);
+        String dvName = (String) getParamValue(Constants.ASTX_DV_NAME,cid);
+        String dsName = (String) getParamValue(Constants.ASTX_DS_NAME,cid);
+        String keyName = (String) getParamValue(Constants.ASTX_KEY_NAME,cid);
+        int batchSize = (int) getParamValue(Constants.UPDATE_BATCH_SIZE,cid);
 
         int limit = -1;
-        if (isParamSet(Constants.UPDATE_LIMIT)) {
-            limit = (int) getParamValue(Constants.UPDATE_LIMIT);
+        if (isParamSet(Constants.UPDATE_LIMIT,cid)) {
+            limit = (int) getParamValue(Constants.UPDATE_LIMIT,cid);
         }
 
         int ignore = -1;
-        if (isParamSet(Constants.IGNORE)) {
-            ignore = (int) getParamValue(Constants.IGNORE);
+        if (isParamSet(Constants.IGNORE,cid)) {
+            ignore = (int) getParamValue(Constants.IGNORE,cid);
         }
 
         UpdateTag upTag = null;
@@ -124,7 +160,7 @@ public class AsterixClientConfig extends AbstractClientConfig {
         } else if (oprType.equals(Constants.DELETE_OPR_TYPE)) {
             upTag = UpdateTag.DELETE;
         } else {
-            System.err.println("Unknow Data Manipulation Operation for AsterixDB - " + oprType);
+            System.err.println("Unknown Data Manipulation Operation for AsterixDB - " + oprType);
             System.err.println("You can only run " + Constants.INSERT_OPR_TYPE + " and " + Constants.DELETE_OPR_TYPE
                     + " against AsterixDB");
             return null;

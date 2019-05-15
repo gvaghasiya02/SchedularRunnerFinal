@@ -1,0 +1,2 @@
+use fixedintersize;
+select * FROM wisconsin_fixed3 ds1,  wisconsin_fixed4 ds2 where ds1.unique1 = ds2.unique1 and ds1.unique2 < 5000000 and ds2.unique2 < 5000000limit 1;

@@ -15,8 +15,11 @@
 package config;
 
 import java.io.File;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import client.AbstractReadOnlyClient;
@@ -24,32 +27,35 @@ import client.AbstractUpdateClient;
 
 public abstract class AbstractClientConfig {
     private String clientConfigFile;
-    private Map<String, Object> params;
+
+    private List<Map<String, Object>> params;
 
     public AbstractClientConfig(String clientConfigFile) {
         this.clientConfigFile = clientConfigFile;
+        this.params = new LinkedList<>();
     }
 
-    public abstract AbstractReadOnlyClient readReadOnlyClientConfig(String bigFunHomePath);
+    public abstract AbstractReadOnlyClient readReadOnlyClientConfig(String bigFunHomePath,int cid);
 
-    public abstract AbstractUpdateClient readUpdateClientConfig(String bigFunHomePath);
+    public abstract AbstractUpdateClient readUpdateClientConfig(String bigFunHomePath,int cid);
 
     public void parseConfigFile() {
         ObjectMapper mapper = new ObjectMapper();
         try {
-            params = mapper.readValue(new File(clientConfigFile), Map.class);
+            params = mapper.readValue(new File(clientConfigFile), new TypeReference<List<Map<String,Object>>>(){});
         } catch (Exception e) {
             System.err.println("Problem in parsing the JSON config file.");
             e.printStackTrace();
         }
+
     }
 
-    public boolean isParamSet(String paramName) {
-        return params.containsKey(paramName);
+    public boolean isParamSet(String paramName, int userId) {
+        return params.get(userId).containsKey(paramName);
     }
 
-    public Object getParamValue(String paramName) {
-        return params.get(paramName);
+    public Object getParamValue(String paramName,int userId) {
+        return params.get(userId).get(paramName);
     }
 
     /**
@@ -59,9 +65,16 @@ public abstract class AbstractClientConfig {
      */
     public String printConfig() {
         StringBuilder sb = new StringBuilder();
-        for (String s : params.keySet()) {
-            sb.append(s).append(":\t").append(getParamValue(s).toString()).append("\n");
+        int i=0;
+        for(Map<String,Object> map: params) {
+            for (String s : map.keySet()) {
+                sb.append(s).append(":\t").append(getParamValue(s,i).toString()).append("\n");
+            }
+            i++;
         }
         return sb.toString();
+    }
+    public List<Map<String, Object>> getParams() {
+        return params;
     }
 }
