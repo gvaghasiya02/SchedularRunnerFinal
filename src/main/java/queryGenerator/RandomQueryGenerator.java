@@ -50,9 +50,6 @@ public class RandomQueryGenerator {
     public ArrayList<IArgument> nextQuery(int qIx, int vIx) {
         args.clear();
         switch (qIx) {
-            case 5:
-                nextQ5(qIx, vIx);
-                break;
             case 101: //PK lookup
                 nextQ101();
                 break;
@@ -123,11 +120,32 @@ public class RandomQueryGenerator {
                 nextQ3006(qIx,vIx);
                 break;
             case 3007:
+            case 0:
+                nextQ0(qIx, vIx);
+                break;
             case 1:
-                nextQ1(qIx,vIx);
+                nextUnlimitedRDT(qIx,vIx,1);
                 break;
             case 2:
-                nextQ2(qIx,vIx);
+                nextUnlimitedRDT(qIx,vIx,2);
+                break;
+            case 3:
+                nextUnlimitedRDT(qIx,vIx,3);
+                break;
+            case 4:
+                nextUnlimitedRDT(qIx,vIx,4);
+                break;
+            case 5:
+                nextUnlimitedRDT(qIx,vIx,5);
+                break;
+            case 6:
+                nextUnlimitedRDT(qIx,vIx,6);
+                break;
+            case 7:
+                nextUnlimitedRDT(qIx,vIx,7);
+                break;
+            case 8:
+                nextUnlimitedRDT(qIx,vIx,8);
                 break;
             case 15:
                 nextQ15(qIx, vIx);
@@ -357,26 +375,23 @@ public class RandomQueryGenerator {
         }
     }
 
-    private void nextQ1(int qid, int vid) {
-        int minMem = (Integer)qps.getParam(qid, vid).get(0);
-        IntArgument joinMem = new IntArgument(minMem);
-        int numPartitions = (Integer) qps.getParam(qid, vid).get(1);
-        IntArgument bs = new IntArgument(numPartitions);
-        args.add(joinMem);
-        args.add(bs);
-    }
-
-    private void nextQ2(int qid, int vid) {
-        int minMem = (Integer)qps.getParam(qid, vid).get(0);
-        IntArgument joinMem = new IntArgument(minMem);
+    private void nextUnlimitedRDT(int qid, int vid, int countOfArguments) {
         int numPartitions = (Integer) qps.getParam(qid, vid).get(1);
         IntArgument np = new IntArgument(numPartitions);
         int buildSize = (Integer) qps.getParam(qid, vid).get(2);
         IntArgument bs = new IntArgument(buildSize);
-        args.add(joinMem);
-        args.add(np);
-        args.add(bs);
+        //double buildTomemRatio  = qps.getParam(qid, vid).get(0).doubleValue();
+        // int joinMem = (int)Math.round(buildSize / buildTomemRatio);
+        int joinMem = (Integer) qps.getParam(qid, vid).get(0);
+        IntArgument jm = new IntArgument(joinMem);
+        //first = second
+        for (int i =0; i < countOfArguments; i++) {
+            args.add(jm);
+            args.add(np);
+            args.add(bs);
+        }
     }
+
 
     private void nextQ101() {
         LongArgument k = randomLongArg(1,MAX_ID);
@@ -1725,13 +1740,6 @@ public class RandomQueryGenerator {
         IntArgument ds6mem = new IntArgument((int) Math.ceil(minMem * 9));
         args.add(ds6mem);
     }
-    private void nextQ5(int qid, int vid) {
-        int len = (Integer) qps.getParam(qid, vid).get(0);
-        LongArgument s = randomLongArg(1, MAX_ID - len);
-        LongArgument e = new LongArgument(s.getValue() + len);
-        args.add(s);
-        args.add(e);
-    }
 
     private void nextQ5810(int qid, int vid) {
         int core = (Integer) qps.getParam(qid, vid).get(0);
@@ -2287,7 +2295,7 @@ public class RandomQueryGenerator {
     }
 
 
-    private void nextQ3007(int qid, int vid){
+    private void nextQ0(int qid, int vid){
 
     }
     //Utility Methods

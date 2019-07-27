@@ -14,6 +14,9 @@
  */
 package asterixReadOnlyClient;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.sql.Timestamp;
@@ -47,7 +50,7 @@ public class AsterixReadOnlyClientUtility extends AbstractReadOnlyClientUtility 
     String content;
 
     public AsterixReadOnlyClientUtility(String cc, String qIxFile, String qGenConfigFile, String statsFile, int ignore,
-            String qSeqFile, String resultsFile) {
+            String qSeqFile, String resultsFile) throws IOException {
         super(qIxFile, qGenConfigFile, statsFile, ignore, qSeqFile, resultsFile);
         this.ccUrl = cc;
         this.apiPort="19002";

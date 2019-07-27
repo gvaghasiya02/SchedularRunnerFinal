@@ -7,10 +7,7 @@ then
 	exit 1
 fi
 
-echo $BIGFUN_HOME
-
 CONFIGFILE=${BIGFUN_HOME}/conf/${configFile}
-echo $CONFIGFILE
 if [ ! -f ${CONFIGFILE} ]; then
 	echo -e "ERROR: The configuration file for BigFUN (with the name bigfun-conf.json ) can not be found under ${BIGFUN_HOME}/conf directory."
 	exit 1
@@ -23,7 +20,6 @@ if [ ! -f ${QGENCONFIGFILE} ]; then
 fi
 
 WORKLOADFILE=${BIGFUN_HOME}/files/workloads/${workloadFile}
-echo $WORKLOADFILE
 if [ ! -f ${WORKLOADFILE} ]; then
 	echo -e "ERROR: The workload file (with the name workload.txt ) can not be found under ${BIGFUN_HOME}/files directory."
 	exit 1

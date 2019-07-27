@@ -19,6 +19,8 @@ import structure.Pair;
 import structure.Query;
 import workloadGenerator.ReadOnlyWorkloadGenerator;
 
+import java.io.IOException;
+
 public class AsterixClientReadOnlyWorkload extends AbstractReadOnlyClient {
 
     String ccUrl;
@@ -72,7 +74,11 @@ public class AsterixClientReadOnlyWorkload extends AbstractReadOnlyClient {
     @Override
     public void setClientUtil(String qIxFile, String qGenConfigFile, String statsFile, int ignore, String qSeqFile,
             String resultsFile) {
-        clUtil = new AsterixReadOnlyClientUtility(ccUrl, qIxFile, qGenConfigFile, statsFile, ignore, qSeqFile,
-                resultsFile);
+        try {
+            clUtil = new AsterixReadOnlyClientUtility(ccUrl, qIxFile, qGenConfigFile, statsFile, ignore, qSeqFile,
+                    resultsFile);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

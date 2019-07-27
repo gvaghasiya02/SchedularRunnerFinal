@@ -67,7 +67,7 @@ public class StatsCollector {
     public void report() {
 //        partialReport(0, counter, statsFile);
 //        increasePartitionChartReport(0,statsFile);
-        LRreport(0,statsFile);
+        LRreport(0,statsFile); //--commented this one out to get Stats in server
     }
     public void increasePartitionChartReport(int startRound, String fileName){
         try {
@@ -191,9 +191,10 @@ public class StatsCollector {
 //                    double partialAvg = qs.getAverageRT(ignore);
 //                    avgsb.append("Q-").append(p.getQId()).append("\t").append(memory).append("\t").append(partialAvg).append("\n");
 //                }
-                if (p.qid != 6){
+                if (p.qid != 3){
                     QueryStat qs = qvToStat.get(p);
-                    tsb.append("Q-").append(p.getQId()).append("\t").append("\t").append(qs.getIterations()).append("\t").append(qs.getTimesForChart()).append("\n");
+                    tsb.append("Q-").append(p.getQId()).append(p.getVId()).append("\t").append("\t").append(qs.getIterations()).append(
+                            "\t").append(qs.getTimesForChart()).append("\n");
                     double partialAvg = qs.getAverageRT(ignore);
                     double partialSTD = qs.getSTD(ignore,partialAvg);
                     avgsb.append("Q").append(p.toString()).append("\t").append("avgRT: ").append(partialAvg).append(" STD:" ).append(partialSTD).append("\n");

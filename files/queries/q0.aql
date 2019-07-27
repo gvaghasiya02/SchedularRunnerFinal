@@ -1,0 +1,2 @@
+use unlimitedMemory;
+select count(*) from wisconsin_clearcache_40gb;

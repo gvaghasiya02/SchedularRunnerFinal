@@ -1,0 +1,1 @@
+select count(*) FROM clear_cache;

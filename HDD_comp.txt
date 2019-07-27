@@ -1,0 +1,12 @@
+objc[55370]: Class JavaLaunchHelper is implemented in both /Library/Java/JavaVirtualMachines/jdk1.8.0_121.jdk/Contents/Home/bin/java (0x1056ed4c0) and /Library/Java/JavaVirtualMachines/jdk1.8.0_121.jdk/Contents/Home/jre/lib/libinstrument.dylib (0x10576d4e0). One of the two will be used. Which one is undefined.
+http://128.195.52.214:19002/query/service
+
+AsterixDB Client - Read-Only Workload - Starting Iteration 0
+ Q0-1	69300	2019-07-27 15:39:09.918		2019-07-27 15:40:19.219
+ Q1-1	20344	2019-07-27 15:40:19.221		2019-07-27 15:40:39.565
+ Q0-1	68005	2019-07-27 15:40:39.566		2019-07-27 15:41:47.572
+ Q2-1	30995	2019-07-27 15:41:47.573		2019-07-27 15:42:18.569
+ Q0-1	68224	2019-07-27 15:42:18.569		2019-07-27 15:43:26.793
+ Q3-1	44919	2019-07-27 15:43:26.794		2019-07-27 15:44:11.958
+ Q0-1	68394	2019-07-27 15:44:11.959		2019-07-27 15:45:20.354
+ Q4-1	55397	2019-07-27 15:45:20.355		2019-07-27 15:46:15.752

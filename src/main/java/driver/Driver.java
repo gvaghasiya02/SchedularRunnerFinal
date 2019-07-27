@@ -26,7 +26,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.stream.IntStream;
 
 public class Driver {
-
+public static String bigFunHome = "";
     public static void main(String[] args) {
         if (args.length != 1) {
             System.out.println("Correct Usage:\n");
@@ -34,7 +34,7 @@ public class Driver {
             return;
         }
 
-        final String bigFunHome = args[0].replaceAll("/$", "");
+        bigFunHome = args[0].replaceAll("/$", "");
          String clientConfigFile = bigFunHome + "/conf/bigfun-conf.json";
         AbstractClientConfig clientConfig = new AsterixClientConfig(clientConfigFile);
         clientConfig.parseConfigFile();

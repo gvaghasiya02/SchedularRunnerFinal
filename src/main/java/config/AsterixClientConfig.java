@@ -89,10 +89,10 @@ public class AsterixClientConfig extends AbstractClientConfig {
             ignore = (int) getParamValue(Constants.IGNORE,cid);
         }
         //String workloadFile="";
-        if(isParamSet(Constants.WORKLOAD, cid)) {
-            final Path wlPath=Paths.get(System.getProperty("user.dir"), "/files/workloads/", getParamValue(Constants.WORKLOAD,cid).toString());
-            workloadFile = wlPath.toString();
-        }
+//        if(isParamSet(Constants.WORKLOAD, cid)) {
+//            final Path wlPath=Paths.get(System.getProperty("user.dir"), "/files/workloads/", getParamValue(Constants.WORKLOAD,cid).toString());
+//            workloadFile = wlPath.toString();
+//        }
 
         boolean qExec = true;
         if (isParamSet(Constants.EXECUTE_QUERY,cid)) {
