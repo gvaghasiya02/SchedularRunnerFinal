@@ -1,5 +1,9 @@
-Q(0, 1)	avgRT: 67993.66666666667 STD:122.13198689214151
+Q(0, 1)	avgRT: 68076.42857142857 STD:333.58993524679244
 Q(1, 1)	avgRT: -1.0 STD:NaN
-Q(2, 1)	avgRT: -1.0 STD:NaN
+Q(1, 2)	avgRT: -1.0 STD:NaN
 Q(4, 1)	avgRT: -1.0 STD:NaN
+Q(5, 1)	avgRT: -1.0 STD:NaN
+Q(6, 1)	avgRT: -1.0 STD:NaN
+Q(7, 1)	avgRT: -1.0 STD:NaN
+Q(8, 1)	avgRT: -1.0 STD:NaN
 

@@ -1,12 +1,12 @@
-objc[55370]: Class JavaLaunchHelper is implemented in both /Library/Java/JavaVirtualMachines/jdk1.8.0_121.jdk/Contents/Home/bin/java (0x1056ed4c0) and /Library/Java/JavaVirtualMachines/jdk1.8.0_121.jdk/Contents/Home/jre/lib/libinstrument.dylib (0x10576d4e0). One of the two will be used. Which one is undefined.
-http://128.195.52.214:19002/query/service
+objc[69663]: Class JavaLaunchHelper is implemented in both /Library/Java/JavaVirtualMachines/jdk1.8.0_121.jdk/Contents/Home/bin/java (0x1092b94c0) and /Library/Java/JavaVirtualMachines/jdk1.8.0_121.jdk/Contents/Home/jre/lib/libinstrument.dylib (0x10a2db4e0). One of the two will be used. Which one is undefined.
+http://128.195.52.217:19002/query/service
 
 AsterixDB Client - Read-Only Workload - Starting Iteration 0
- Q0-1	69300	2019-07-27 15:39:09.918		2019-07-27 15:40:19.219
- Q1-1	20344	2019-07-27 15:40:19.221		2019-07-27 15:40:39.565
- Q0-1	68005	2019-07-27 15:40:39.566		2019-07-27 15:41:47.572
- Q2-1	30995	2019-07-27 15:41:47.573		2019-07-27 15:42:18.569
- Q0-1	68224	2019-07-27 15:42:18.569		2019-07-27 15:43:26.793
- Q3-1	44919	2019-07-27 15:43:26.794		2019-07-27 15:44:11.958
- Q0-1	68394	2019-07-27 15:44:11.959		2019-07-27 15:45:20.354
- Q4-1	55397	2019-07-27 15:45:20.355		2019-07-27 15:46:15.752
+ Q0-1	72609	2019-07-29 13:09:12.144		2019-07-29 13:10:24.753
+ Q1-1	12341	2019-07-29 13:10:24.756		2019-07-29 13:10:37.098
+ Q0-1	72040	2019-07-29 13:10:37.099		2019-07-29 13:11:49.14
+ Q1-2	19410	2019-07-29 13:11:49.141		2019-07-29 13:12:08.552
+ Q0-1	69766	2019-07-29 13:12:08.552		2019-07-29 13:13:18.319
+ Q3-1	23639	2019-07-29 13:13:18.32		2019-07-29 13:13:41.959
+ Q0-1	70271	2019-07-29 13:13:41.959		2019-07-29 13:14:52.23
+ Q4-1	29992	2019-07-29 13:14:52.232		2019-07-29 13:15:22.225

@@ -124,35 +124,38 @@ public class RandomQueryGenerator {
                 nextQ0(qIx, vIx);
                 break;
             case 1:
-                nextUnlimitedRDT(qIx,vIx,1);
+            case 11:
+                nextUnlimited(qIx,vIx,1);
                 break;
             case 2:
-                nextUnlimitedRDT(qIx,vIx,2);
+            case 12:
+                nextUnlimited(qIx,vIx,2);
                 break;
             case 3:
-                nextUnlimitedRDT(qIx,vIx,3);
+            case 13:
+                nextUnlimited(qIx,vIx,3);
                 break;
             case 4:
-                nextUnlimitedRDT(qIx,vIx,4);
+            case 14:
+                nextUnlimited(qIx,vIx,4);
                 break;
             case 5:
-                nextUnlimitedRDT(qIx,vIx,5);
+            case 15:
+                nextUnlimited(qIx,vIx,5);
                 break;
             case 6:
-                nextUnlimitedRDT(qIx,vIx,6);
+            case 16:
+                nextUnlimited(qIx,vIx,6);
                 break;
             case 7:
-                nextUnlimitedRDT(qIx,vIx,7);
+            case 17:
+                nextUnlimited(qIx,vIx,7);
                 break;
             case 8:
-                nextUnlimitedRDT(qIx,vIx,8);
+            case 18:
+                nextUnlimited(qIx,vIx,8);
                 break;
-            case 15:
-                nextQ15(qIx, vIx);
-                break;
-            case 16:
-                nextQ16(qIx,vIx);
-                break;
+
             case 50:
             case 51:
             case 52:
@@ -375,7 +378,7 @@ public class RandomQueryGenerator {
         }
     }
 
-    private void nextUnlimitedRDT(int qid, int vid, int countOfArguments) {
+    private void nextUnlimited(int qid, int vid, int countOfArguments) {
         int numPartitions = (Integer) qps.getParam(qid, vid).get(1);
         IntArgument np = new IntArgument(numPartitions);
         int buildSize = (Integer) qps.getParam(qid, vid).get(2);

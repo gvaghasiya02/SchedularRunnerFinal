@@ -1,7 +1,7 @@
 [
   {
     "clientType" : "AsterixdbReadOnly",
-    "cc" : "128.195.52.214",
+    "cc" : "128.195.52.217",
     "num-concurrent-readers" : 1,
     "dataverse" : "unlimitedMemory;",
     "iterations" :1,

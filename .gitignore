@@ -8,7 +8,9 @@ tmp/
 local.properties
 .settings/
 .loadpath
-
+.idea/workspace.xml
+HDD_comp.txt
+files/output/
 # Eclipse Core
 .project
 
