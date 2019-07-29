@@ -1,9 +1,9 @@
 SELECT ds6.unique1 ,ds6.unique2 ,ds6.two ,ds6.four ,ds6.ten ,ds6.twenty ,ds6.onePercent ,ds6.tenPercent ,ds6.twentyPercent ,ds6.fiftyPercent ,ds6.unique3 ,ds6.evenOnePercent ,ds6.oddOnePercent ,ds6.stringu1 ,ds6.stringu2 ,ds6.string4
-FROM wisconsin_unlimited_500MB_ds6 ds6, ( SELECT ds5.unique1 ,ds5.unique2 ,ds5.two ,ds5.four ,ds5.ten ,ds5.twenty ,ds5.onePercent ,ds5.tenPercent ,ds5.twentyPercent ,ds5.fiftyPercent ,ds5.unique3 ,ds5.evenOnePercent ,ds5.oddOnePercent ,ds5.stringu1 ,ds5.stringu2 ,ds5.string4
-FROM wisconsin_unlimited_500MB_ds5 ds5, ( SELECT ds4.unique1 ,ds4.unique2 ,ds4.two ,ds4.four ,ds4.ten ,ds4.twenty ,ds4.onePercent ,ds4.tenPercent ,ds4.twentyPercent ,ds4.fiftyPercent ,ds4.unique3 ,ds4.evenOnePercent ,ds4.oddOnePercent ,ds4.stringu1 ,ds4.stringu2 ,ds4.string4
-FROM wisconsin_unlimited_500MB_ds4 ds4, ( SELECT ds3.unique1 ,ds3.unique2 ,ds3.two ,ds3.four ,ds3.ten ,ds3.twenty ,ds3.onePercent ,ds3.tenPercent ,ds3.twentyPercent ,ds3.fiftyPercent ,ds3.unique3 ,ds3.evenOnePercent ,ds3.oddOnePercent ,ds3.stringu1 ,ds3.stringu2 ,ds3.string4
-FROM wisconsin_unlimited_500MB_ds3 ds3, ( SELECT ds1.unique1 ,ds1.unique2 ,ds1.two ,ds1.four ,ds1.ten ,ds1.twenty ,ds1.onePercent ,ds1.tenPercent ,ds1.twentyPercent ,ds1.fiftyPercent ,ds1.unique3 ,ds1.evenOnePercent ,ds1.oddOnePercent ,ds1.stringu1 ,ds1.stringu2 ,ds1.string4
- FROM wisconsin_unlimited_500MB_ds1 ds1 ,wisconsin_unlimited_500MB_ds2 ds2
+FROM wisconsin_unlimited_ds6 ds6, ( SELECT ds5.unique1 ,ds5.unique2 ,ds5.two ,ds5.four ,ds5.ten ,ds5.twenty ,ds5.onePercent ,ds5.tenPercent ,ds5.twentyPercent ,ds5.fiftyPercent ,ds5.unique3 ,ds5.evenOnePercent ,ds5.oddOnePercent ,ds5.stringu1 ,ds5.stringu2 ,ds5.string4
+FROM wisconsin_unlimited_ds5 ds5, ( SELECT ds4.unique1 ,ds4.unique2 ,ds4.two ,ds4.four ,ds4.ten ,ds4.twenty ,ds4.onePercent ,ds4.tenPercent ,ds4.twentyPercent ,ds4.fiftyPercent ,ds4.unique3 ,ds4.evenOnePercent ,ds4.oddOnePercent ,ds4.stringu1 ,ds4.stringu2 ,ds4.string4
+FROM wisconsin_unlimited_ds4 ds4, ( SELECT ds3.unique1 ,ds3.unique2 ,ds3.two ,ds3.four ,ds3.ten ,ds3.twenty ,ds3.onePercent ,ds3.tenPercent ,ds3.twentyPercent ,ds3.fiftyPercent ,ds3.unique3 ,ds3.evenOnePercent ,ds3.oddOnePercent ,ds3.stringu1 ,ds3.stringu2 ,ds3.string4
+FROM wisconsin_unlimited_ds3 ds3, ( SELECT ds1.unique1 ,ds1.unique2 ,ds1.two ,ds1.four ,ds1.ten ,ds1.twenty ,ds1.onePercent ,ds1.tenPercent ,ds1.twentyPercent ,ds1.fiftyPercent ,ds1.unique3 ,ds1.evenOnePercent ,ds1.oddOnePercent ,ds1.stringu1 ,ds1.stringu2 ,ds1.string4
+ FROM wisconsin_unlimited_ds1 ds1 ,wisconsin_unlimited_ds2 ds2
  WHERE ds1.unique1 /*+ join-mem
  @PARAM
  , build-partition
