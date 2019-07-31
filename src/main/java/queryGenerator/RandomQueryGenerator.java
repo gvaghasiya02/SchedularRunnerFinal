@@ -55,6 +55,11 @@ public class RandomQueryGenerator {
                 break;
             case 1:
             case 11:
+            case 1000:
+            case 1025:
+            case 1005:
+            case 1075:
+            case 1100:
                 nextAllJoinsParam(qIx,vIx,1);
                 break;
             case 2:
