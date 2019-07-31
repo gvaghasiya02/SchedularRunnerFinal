@@ -4,7 +4,7 @@
     "cc" : "128.195.52.217",
     "num-concurrent-readers" : 1,
     "dataverse" : "unlimitedMemory;",
-    "iterations" :1,
+    "iterations" :10,
     "ignore_rounds" : 1,
     "seed" : 5,
     "max_id" : 1000000,

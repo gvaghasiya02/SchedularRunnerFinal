@@ -50,320 +50,46 @@ public class RandomQueryGenerator {
     public ArrayList<IArgument> nextQuery(int qIx, int vIx) {
         args.clear();
         switch (qIx) {
-            case 101: //PK lookup
-                nextQ101();
-                break;
-            case 102: //PK range scan
-                nextQ102(qIx, vIx);
-                break;
-            case 103: //non-unique temporal attribute range scan
-                nextQ103(qIx, vIx);
-                break;
-            case 104: //e-quantification
-                nextQ104(qIx, vIx);
-                break;
-            case 105: //u-quantification 
-                nextQ105(qIx, vIx);
-                break;
-            case 106: //global aggregation
-                nextQ106(qIx, vIx);
-                break;
-            case 107: //grp and aggregation
-                nextQ107(qIx, vIx);
-                break;
-            case 108: //top-k
-                nextQ108(qIx, vIx);
-                break;
-            case 109: //spatial selection
-                nextQ109(vIx);
-                break;
-            case 1010: //exact text search
-                nextQ1010(vIx);
-                break;
-            case 1011: //text similarity search
-                nextQ1011(vIx);
-                break;
-            case 1012: //equi-join
-            case 2012: //equi-IX-join
-                nextQ1012(qIx, vIx);
-                break;
-            case 1013: //left-Outer-Join
-            case 2013: //left-Outer-IX-Join
-                nextQ1013(qIx, vIx);
-                break;
-            case 1014: //join and grp
-            case 2014: //IX-join and grp
-                nextQ1014(qIx, vIx);
-                break;
-            case 1015: //join and top-k
-            case 2015: //IX-join and top-k
-                nextQ1015(qIx, vIx);
-                break;
-            case 1016: //spatial Join
-                nextQ1016(qIx, vIx);
-                break;
-            case 3000:
-            case 3002:
-            case 3003:
-                nextQ3000(qIx,vIx);
-                break;
-            case 3001:
-                nextQ3001(qIx,vIx);
-                break;
-            case 3004:
-                nextQ3004(qIx,vIx);
-                break;
-            case 3005:
-                nextQ3005(qIx,vIx);
-                break;
-            case 3006:
-                nextQ3006(qIx,vIx);
-                break;
-            case 3007:
             case 0:
                 nextQ0(qIx, vIx);
                 break;
             case 1:
             case 11:
-                nextUnlimited(qIx,vIx,1);
+                nextAllJoinsParam(qIx,vIx,1);
                 break;
             case 2:
             case 12:
-                nextUnlimited(qIx,vIx,2);
+                nextAllJoinsParam(qIx,vIx,2);
                 break;
             case 3:
             case 13:
-                nextUnlimited(qIx,vIx,3);
+                nextAllJoinsParam(qIx,vIx,3);
                 break;
             case 4:
             case 14:
-                nextUnlimited(qIx,vIx,4);
+            case 24:
+            case 314:
+            case 324:
+            case 334:
+                nextAllJoinsParam(qIx,vIx,4);
                 break;
             case 5:
             case 15:
-                nextUnlimited(qIx,vIx,5);
+                nextAllJoinsParam(qIx,vIx,5);
                 break;
             case 6:
             case 16:
-                nextUnlimited(qIx,vIx,6);
+                nextAllJoinsParam(qIx,vIx,6);
                 break;
             case 7:
             case 17:
-                nextUnlimited(qIx,vIx,7);
+                nextAllJoinsParam(qIx,vIx,7);
                 break;
             case 8:
             case 18:
-                nextUnlimited(qIx,vIx,8);
+                nextAllJoinsParam(qIx,vIx,8);
                 break;
 
-            case 50:
-            case 51:
-            case 52:
-            case 53:
-                nextQ50(qIx,vIx);
-                break;
-            case 54:
-                nextQ54(qIx,vIx);
-                break;
-            case 61:
-                nextQ61(qIx, vIx);
-                break;
-            case 62:
-                nextQ62(qIx, vIx);
-                break;
-            case 63:
-                nextQ63(qIx, vIx);
-                break;
-            case 64:
-                nextQ64(qIx, vIx);
-                break;
-            case 65:
-                nextQ65(qIx, vIx);
-                break;
-            case 66:
-                nextQ66(qIx, vIx);
-                break;
-            case 80:
-                nextQ80(qIx, vIx);
-                break;
-            case 3008:
-            case 3018:
-                nextQ3008(qIx,vIx);
-                break;
-            case 3009:
-            case 3013:
-                nextQ3009(qIx,vIx);
-                break;
-            case 3010:
-                nextQ3010(qIx,vIx);
-                break;
-            case 3011:
-                nextQ3011(qIx,vIx);
-                break;
-            case 3019:
-                nextQ3019(qIx,vIx);
-                break;
-            case 3020:
-                nextQ3020(qIx,vIx);
-                break;
-            case 4000:
-                nextQ4000(qIx,vIx);
-                break;
-            case 4100:
-                nextQ4100(qIx,vIx);
-                break;
-            case 4200:
-                nextQ4200(qIx,vIx);
-                break;
-            case 4300:
-                nextQ4300(qIx,vIx);
-                break;
-            case 5201:
-                nextQ5201(qIx,vIx);
-                break;
-            case 5401:
-                nextQ5401(qIx,vIx);
-                break;
-            case 5601:
-                nextQ5601(qIx,vIx);
-                break;
-            case 5801:
-                nextQ5801(qIx,vIx);
-                break;
-            case 5210:
-                nextQ5210(qIx,vIx);
-                break;
-            case 5410:
-                nextQ5410(qIx,vIx);
-                break;
-            case 5610:
-                nextQ5610(qIx,vIx);
-                break;
-            case 5810:
-                nextQ5810(qIx,vIx);
-                break;
-            case 6100:
-            case 6200:
-            case 6201:
-            case 6202:
-            case 6203:
-                nextQ6100(qIx,vIx);
-                break;
-            case 6400:
-                nextQ6400(qIx,vIx);
-                break;
-            case 7000:
-            case 7001:
-            case 7002:
-            case 7003:
-            case 7004:
-            case 7005:
-            case 7006:
-            case 7007:
-            case 7008:
-            case 7009:
-                nextQ7000(qIx,vIx);
-                break;
-            case 8000:
-            case 8001:
-                nextQ8000(qIx,vIx);
-                break;
-            case 8401:
-                nextQ8401(qIx,vIx);
-                break;
-            case 8410:
-                nextQ8410(qIx, vIx);
-                break;
-            case 8411:
-                nextQ8411(qIx, vIx);
-                break;
-            case 9000:
-            case 9001:
-            case 9002:
-            case 9003:
-            case 9004:
-            case 9005:
-            case 9006:
-            case 9007:
-            case 9008:
-            case 9009:
-                nextQ9000(qIx,vIx);
-                break;
-            case 20000:
-                nextQ20000(qIx, vIx);
-                break;
-            case 20001:
-                nextQ20002(qIx, vIx,1);
-                break;
-            case 20002:
-                nextQ20002(qIx, vIx,2);
-                break;
-            case 20003:
-                nextQ20002(qIx, vIx,3);
-                break;
-            case 20004:
-                nextQ20002(qIx, vIx,4);
-                break;
-            case 20005:
-                nextQ20002(qIx, vIx,5);
-                break;
-            case 20006:
-                nextQ20002(qIx, vIx,6);
-                break;
-            case 20007:
-                nextQ20002(qIx, vIx,7);
-                break;
-            case 20008:
-                nextQ20002(qIx, vIx,8);
-                break;
-            case 30001:
-                nextQ30001(qIx, vIx,1);
-                break;
-            case 30002:
-                nextQ30001(qIx, vIx,2);
-                break;
-            case 30003:
-                nextQ30001(qIx, vIx,3);
-                break;
-            case 30004:
-                nextQ30001(qIx, vIx,4);
-                break;
-            case 30005:
-                nextQ30001(qIx, vIx,5);
-                break;
-            case 30006:
-                nextQ30001(qIx, vIx,6);
-                break;
-            case 30007:
-                nextQ30001(qIx, vIx,7);
-                break;
-            case 30008:
-                nextQ30001(qIx, vIx,8);
-                break;
-            case 40001:
-                nextQ40001(qIx, vIx,1);
-                break;
-            case 40002:
-                nextQ40001(qIx, vIx,2);
-                break;
-            case 40003:
-                nextQ40001(qIx, vIx,3);
-                break;
-            case 40004:
-                nextQ40001(qIx, vIx,4);
-                break;
-            case 40005:
-                nextQ40001(qIx, vIx,5);
-                break;
-            case 40006:
-                nextQ40001(qIx, vIx,6);
-                break;
-            case 40007:
-                nextQ40001(qIx, vIx,7);
-                break;
-            case 40008:
-                nextQ40001(qIx, vIx,8);
-                break;
             default:
                 next(qIx,vIx);
                 break;
@@ -378,7 +104,7 @@ public class RandomQueryGenerator {
         }
     }
 
-    private void nextUnlimited(int qid, int vid, int countOfArguments) {
+    private void nextAllJoinsParam(int qid, int vid, int countOfArguments) {
         int numPartitions = (Integer) qps.getParam(qid, vid).get(1);
         IntArgument np = new IntArgument(numPartitions);
         int buildSize = (Integer) qps.getParam(qid, vid).get(2);
