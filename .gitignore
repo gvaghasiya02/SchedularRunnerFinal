@@ -13,7 +13,7 @@ HDD_comp.txt
 files/output/
 # Eclipse Core
 .project
-
+.idea/workspace.xml
 # External tool builders
 .externalToolBuilders/
 

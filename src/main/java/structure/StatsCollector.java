@@ -184,22 +184,13 @@ public class StatsCollector {
             Pair[] qvs = keys.toArray(new Pair[keys.size()]);
             Arrays.sort(qvs);
             for (Pair p : qvs) {
-//                if (p.qid != 3007) {
-//                    int memory = (int) RandomQueryGenerator.qps.getParam(p.qid, p.vid).get(0);
-//                    QueryStat qs = qvToStat.get(p);
-//                    tsb.append("Q-").append(p.getQId()).append("\t").append(memory).append("\t").append(qs.getIterations()).append("\t").append(qs.getTimesForChart()).append("\n");
-//                    double partialAvg = qs.getAverageRT(ignore);
-//                    avgsb.append("Q-").append(p.getQId()).append("\t").append(memory).append("\t").append(partialAvg).append("\n");
-//                }
-                if (p.qid != 3){
                     QueryStat qs = qvToStat.get(p);
-                    tsb.append("Q-").append(p.getQId()).append(p.getVId()).append("\t").append("\t").append(qs.getIterations()).append(
+                    tsb.append("Q-").append(p.getQId()).append("-").append(p.getVId()).append("\t").append("\t").append(qs.getIterations()).append(
                             "\t").append(qs.getTimesForChart()).append("\n");
                     double partialAvg = qs.getAverageRT(ignore);
                     double partialSTD = qs.getSTD(ignore,partialAvg);
-                    avgsb.append("Q").append(p.toString()).append("\t").append("avgRT: ").append(partialAvg).append(" STD:" ).append(partialSTD).append("\n");
-                    //avgsb.append("Q-").append(p.getQId()).append("\t").append("\t").append(partialAvg).append("\n");
-                }
+                    avgsb.append("Q").append(p.toString()).append("\t").append("avgRT: ").append(partialAvg).append(
+                            " STD:" ).append(partialSTD).append("\n");
             }
             if (avgsb != null) {
                 avgpw.println(avgsb.toString());

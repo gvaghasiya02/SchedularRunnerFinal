@@ -1,5 +1,5 @@
 SELECT ds1.unique1 ,ds1.unique2 ,ds1.onePercent ,ds1.tenPercent ,ds1.twentyFivePercent ,ds1.fiftyPercent ,ds1.stringu1 ,ds1.stringu2
- FROM wisconsin_0p1_ds1 ds1 ,wisconsin_0p1_ds2 ds2
+ FROM wisconsin_1p0_ds1 ds1 ,wisconsin_1p0_ds2 ds2
  WHERE ds1.unique1 /*+ join-mem
  @PARAM
  , build-partition
