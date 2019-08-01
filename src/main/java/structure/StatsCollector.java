@@ -14,15 +14,10 @@
  */
 package structure;
 
-import queryGenerator.RandomQueryGenerator;
-
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.*;
-import java.util.function.DoubleBinaryOperator;
 
 /**
  * @author pouria
@@ -36,8 +31,8 @@ public class StatsCollector {
     HashMap<Pair,Double> qvToAvgtimeX;
 
     public StatsCollector(String statsFile, int ignore) {
-        this.qvToStat = new HashMap<Pair, QueryStat>();
-        this.qvToAvgtimeX = new HashMap<Pair, Double>();
+        this.qvToStat = new HashMap<>();
+        this.qvToAvgtimeX = new HashMap<>();
         this.statsFile = statsFile;
         this.ignore = ignore;
         this.counter = 0;
@@ -52,9 +47,6 @@ public class StatsCollector {
            i++;
        }
     }
-    public void reset() {
-        qvToStat.clear();
-    }
 
     public void updateStat(int qid, int vid, long time) {
         Pair p = new Pair(qid, vid);
@@ -65,78 +57,10 @@ public class StatsCollector {
     }
 
     public void report() {
-//        partialReport(0, counter, statsFile);
-//        increasePartitionChartReport(0,statsFile);
-        LRreport(0,statsFile); //--commented this one out to get Stats in server
+        generateReport(0,statsFile);
     }
-    public void increasePartitionChartReport(int startRound, String fileName){
-        try {
-            setqvToAvgTimeX();
-            PrintWriter pw = new PrintWriter(new File("./files/output/user_"+fileName));
-            PrintWriter avgpw = new PrintWriter(new File("./files/output/avg/avg_"+fileName));
-            if (startRound != 0) {
-                ignore = -1;
-            }
-            StringBuffer tsb = new StringBuffer();
-            StringBuffer avgsb = new StringBuffer();
-            Set<Pair> keys = qvToStat.keySet();
-            Pair[] qvs = keys.toArray(new Pair[keys.size()]);
-            Arrays.sort(qvs);
-            for (Pair p : qvs) {
-                int partition = (Integer)RandomQueryGenerator.qps.getParam(p.qid,p.vid).get(2);
-                QueryStat qs = qvToStat.get(p);
-                tsb.append(partition).append("\t").append(qs.getIterations()).append("\t").append(qs.getTimesForChart()).append("\n");
-                double partialAvg = qs.getAverageRT(ignore);
-                double partialSTD = qs.getSTD(ignore,partialAvg);
-                avgsb.append("Q").append(p.toString()).append("\t").append("avgRT: ").append(partialAvg).append(" STD:" ).append(partialSTD).append("\n");
-                //avgsb.append(partition).append("\t").append(partialAvg).append("\n");
-            }
-            if (avgsb != null) {
-                avgpw.println(avgsb.toString());
-            }
-            pw.println(tsb.toString());
-            pw.close();
-            avgpw.close();
 
-        } catch (IOException e) {
-            System.err.println("Problem in creating report in StatsCollector !");
-            e.printStackTrace();
-        }
-    }
-    public void chartReport(int startRound, String fileName){
-        try {
-            setqvToAvgTimeX();
-            PrintWriter pw = new PrintWriter(new File("./files/output/user_"+fileName+Thread.currentThread().getName()));
-            PrintWriter avgpw = new PrintWriter(new File("./files/output/avg/avg_"+fileName+Thread.currentThread().getName()));
-            if (startRound != 0) {
-                ignore = -1;
-            }
-            StringBuffer tsb = new StringBuffer();
-            StringBuffer avgsb = new StringBuffer();
-            Set<Pair> keys = qvToStat.keySet();
-            Pair[] qvs = keys.toArray(new Pair[keys.size()]);
-            Arrays.sort(qvs);
-            for (Pair p : qvs) {
-                QueryStat qs = qvToStat.get(p);
-                tsb.append("Q").append(p.toString()).append("\t").append(qs.getIterations()).append("\t").append(qs.getTimesForChart()).append("\n");
-                double partialAvg = qs.getAverageRT(ignore);
-                double partialSTD = qs.getSTD(ignore,partialAvg);
-                avgsb.append("Q").append(p.toString()).append("\t").append("avgRT: ").append(partialAvg).append(" STD:" ).append(partialSTD).append("\n");
-                //avgsb.append("Q").append(p.toString()).append("\t").append(partialAvg).append("\n");
-            }
-            if (avgsb != null) {
-                avgpw.println(avgsb.toString());
-            }
-            pw.println(tsb.toString());
-            pw.close();
-            avgpw.close();
-
-        } catch (IOException e) {
-            System.err.println("Problem in creating report in StatsCollector !");
-            e.printStackTrace();
-        }
-    }
-    public void increaseMemoryChartReport(int startRound, String fileName){
+    private void generateReport(int startRound, String fileName) {
         try {
             setqvToAvgTimeX();
             PrintWriter pw = new PrintWriter(new File("./files/output/user_"+Thread.currentThread().getName()+fileName));
@@ -149,95 +73,31 @@ public class StatsCollector {
             Set<Pair> keys = qvToStat.keySet();
             Pair[] qvs = keys.toArray(new Pair[keys.size()]);
             Arrays.sort(qvs);
+            avgsb.append("[");
+            tsb.append("[");
+            int resCount = 0;
             for (Pair p : qvs) {
-                double memory = (Double)RandomQueryGenerator.qps.getParam(p.qid,p.vid).get(0);
-                QueryStat qs = qvToStat.get(p);
-                tsb.append(memory).append("\t").append(qs.getIterations()).append("\t").append(qs.getTimesForChart()).append("\n");
-                double partialAvg = qs.getAverageRT(ignore);
-                avgsb.append(memory).append("\t").append(partialAvg).append("\n");
-            }
-            if (avgsb != null) {
-                avgpw.println(avgsb.toString());
-            }
-            pw.println(tsb.toString());
-            pw.close();
-            avgpw.close();
-
-        } catch (IOException e) {
-            System.err.println("Problem in creating report in StatsCollector !");
-            e.printStackTrace();
-        }
-    }
-
-
-    private void LRreport(int startRound, String fileName) {
-        try {
-            setqvToAvgTimeX();
-            PrintWriter pw = new PrintWriter(new File("./files/output/user_"+Thread.currentThread().getName()+fileName));
-            PrintWriter avgpw = new PrintWriter(new File("./files/output/avg/avg_"+Thread.currentThread().getName()+fileName));
-            if (startRound != 0) {
-                ignore = -1;
-            }
-            StringBuffer tsb = new StringBuffer();
-            StringBuffer avgsb = new StringBuffer();
-            Set<Pair> keys = qvToStat.keySet();
-            Pair[] qvs = keys.toArray(new Pair[keys.size()]);
-            Arrays.sort(qvs);
-            for (Pair p : qvs) {
+                if (resCount > 0){
+                    tsb.append(",");
+                    avgsb.append(",");
+                }
                     QueryStat qs = qvToStat.get(p);
-                    tsb.append("Q-").append(p.getQId()).append("-").append(p.getVId()).append("\t").append("\t").append(qs.getIterations()).append(
-                            "\t").append(qs.getTimesForChart()).append("\n");
+                    tsb.append("{\n \"qidvid\":\""+ p.toString()).append("\", \n")
+                            .append("\"iterations\":[").append(qs.getIterations()).append("],\n")
+                            .append("\"RT\":[").append(qs.getTimesForChart()).append("]\n}\n");
                     double partialAvg = qs.getAverageRT(ignore);
                     double partialSTD = qs.getSTD(ignore,partialAvg);
-                    avgsb.append("Q").append(p.toString()).append("\t").append("avgRT: ").append(partialAvg).append(
-                            " STD:" ).append(partialSTD).append("\n");
+                    avgsb.append("\n{\n \"qidvid\":\""+ p.toString()).append("\", \n").
+                            append("\"avgRT\":").append(partialAvg).append(",\n")
+                            .append("\"STD\":" ).append(partialSTD).append("\n}\n");
+                    resCount++;
             }
-            if (avgsb != null) {
-                avgpw.println(avgsb.toString());
-            }
+            tsb.append("]");
+            avgsb.append("]");
+            avgpw.println(avgsb.toString());
             pw.println(tsb.toString());
             pw.close();
             avgpw.close();
-
-        } catch (IOException e) {
-            System.err.println("Problem in creating report in StatsCollector !");
-            e.printStackTrace();
-        }
-    }
-
-
-    private void partialReport(int startRound, int endRound, String fileName) {
-        try {
-            PrintWriter pw = new PrintWriter(new File("./files/output/reg_"+fileName));
-            if (startRound != 0) {
-                ignore = -1;
-            }
-
-            DateFormat df = new SimpleDateFormat("EEE, d MMM yyyy HH:mm:ss");
-            Date dateobj = new Date();
-            String currentTime = df.format(dateobj);
-            StringBuffer tsb = new StringBuffer();
-            tsb.append("#Response Times (in ms per iteration)\n");
-            StringBuffer avgsb = new StringBuffer(currentTime);
-            avgsb.append("\n\n#Avg Times (first " + ignore + " round(s) excluded)\n");
-            Set<Pair> keys = qvToStat.keySet();
-            Pair[] qvs = keys.toArray(new Pair[keys.size()]);
-            Arrays.sort(qvs);
-            for (Pair p : qvs) {
-                QueryStat qs = qvToStat.get(p);
-                tsb.append("Q").append(p.toString()).append("\t").append(qs.getTimes()).append("\n");
-                double partialAvg = -1;
-                if (avgsb != null) {
-                    partialAvg = qs.getAverageRT(ignore);
-                    avgsb.append("Q").append(p.toString()).append("\t").append(partialAvg).append("\n");
-                }
-            }
-            if (avgsb != null) {
-                pw.println(avgsb.toString());
-                pw.println("\n");
-            }
-            pw.println(tsb.toString());
-            pw.close();
 
         } catch (IOException e) {
             System.err.println("Problem in creating report in StatsCollector !");

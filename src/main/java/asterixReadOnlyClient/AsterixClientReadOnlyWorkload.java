@@ -48,13 +48,23 @@ public class AsterixClientReadOnlyWorkload extends AbstractReadOnlyClient {
 
     @Override
     public void execute() {
-        long iteration_start = 0l;
-        long iteration_end = 0l;
-
+        long iteration_start;
+        long iteration_end;
+        int iterationCount = 0;
+        System.out.print("[");
         for (int i = 0; i < iterations; i++) {
-            System.out.println("\nAsterixDB Client - Read-Only Workload - Starting Iteration " + i);
+            if (iterationCount > 0) {
+                System.out.println(",");
+            }
+            System.out.println("\n{ \"Iterstion\":" + i+
+                    ",");
             iteration_start = System.currentTimeMillis();
+            System.out.println("\"queries\":[");
+            int loopCount = 0;
             for (Pair qvPair : clUtil.qvids) {
+                if (loopCount > 0) {
+                    System.out.print(",");
+                }
                 int qid = qvPair.getQId();
                 int vid = qvPair.getVId();
                 Query q = rwg.nextQuery(qid, vid);
@@ -64,10 +74,13 @@ public class AsterixClientReadOnlyWorkload extends AbstractReadOnlyClient {
                 if (execQuery) {
                     clUtil.executeQuery(qid, vid, q.aqlPrint(dvName));
                 }
+                loopCount++;
             }
             iteration_end = System.currentTimeMillis();
-            System.out.println("Total time for iteration " + i + " :\t" + (iteration_end - iteration_start) + " ms\n");
+            System.out.print("],\n\"TotalTime " + i + "\" :" + (iteration_end - iteration_start) + "\n}");
+            iterationCount++;
         }
+        System.out.print("]");
         clUtil.terminate();
     }
 

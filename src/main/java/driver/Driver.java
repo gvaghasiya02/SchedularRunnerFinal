@@ -74,10 +74,10 @@ public static String bigFunHome = "";
             if (!executorService.isTerminated()) {
                 System.out.println("canceling all pending tasks");
             }
-            System.out.println("Finished at: " + System.currentTimeMillis());
+            //System.out.println("Finished at: " + System.currentTimeMillis());
             executorService.shutdownNow();
         }
 
-        System.out.println("\nBigFUN Benchmark is done.\n");
+        //System.out.println("\nBigFUN Benchmark is done.\n");
     }
 }

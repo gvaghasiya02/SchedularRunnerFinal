@@ -93,17 +93,17 @@ public class AsterixReadOnlyClientUtility extends AbstractReadOnlyClientUtility 
             httpPost.setEntity(new UrlEncodedFormEntity(httpPostParams));
 
             long s = System.currentTimeMillis();
-            Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-           // System.out.print(timestamp +"\t");
+            Timestamp startTimeStamp = new Timestamp(System.currentTimeMillis());
             HttpResponse response = httpclient.execute(httpPost);
             long e = System.currentTimeMillis();
             HttpEntity entity = response.getEntity();
             content = EntityUtils.toString(entity);
-            Timestamp timestamp2 = new Timestamp(System.currentTimeMillis());
+            Timestamp endTimeStamp = new Timestamp(System.currentTimeMillis());
             rspTime = (e - s);
-            System.out.print(" Q" + qid + "-" + vid + "\t"+rspTime); //trace the progress
-            System.out.print("\t" +timestamp +"\t");
-            System.out.println("\t"+timestamp2);
+            System.out.println("{\"qidvid\": \"Q("+qid+","+vid+")\", \n" + "\"rt\":"+rspTime+","); //trace the
+            // progress
+            System.out.println("\"start\":\"" +startTimeStamp +"\",");
+            System.out.println("\"end\":\""+endTimeStamp+"\"\n}");
         }  catch (Exception ex) {
                     System.err.println("Problem in read-only query execution against Asterix");
                     ex.printStackTrace();
