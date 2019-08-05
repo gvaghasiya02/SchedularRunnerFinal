@@ -27,14 +27,17 @@ import java.util.stream.IntStream;
 
 public class Driver {
 public static String bigFunHome = "";
+public static String workload = "";
     public static void main(String[] args) {
-        if (args.length != 1) {
+        if (args.length != 2) {
             System.out.println("Correct Usage:\n");
             System.out.println("\t[0]: BigFUN home has to be set to a valid path.");
             return;
         }
 
         bigFunHome = args[0].replaceAll("/$", "");
+        workload = args[1].replaceAll("/$", "");
+
          String clientConfigFile = bigFunHome + "/conf/bigfun-conf.json";
         AbstractClientConfig clientConfig = new AsterixClientConfig(clientConfigFile);
         clientConfig.parseConfigFile();

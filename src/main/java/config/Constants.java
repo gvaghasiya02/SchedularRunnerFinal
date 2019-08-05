@@ -70,6 +70,6 @@ public class Constants {
     public static final String BIGFUN_CONFIG_FILE_NAME = "bigfun-conf.json";
     public static final String Q_IX_FILE_NAME = "query-index.json";
     public static final String WORKLOAD_FILE_NAME = "workload.txt";
-    public static final String STATS_FILE_NAME = "stats.txt";
+    public static final String STATS_FILE_NAME = "stats.json";
     public static final String Q_GEN_CONFIG_FILE_NAME = "query-params.txt";
 }

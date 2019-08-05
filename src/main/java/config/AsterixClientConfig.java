@@ -19,6 +19,7 @@ import asterixReadOnlyClient.AsterixConcurrentReadOnlyWorkload;
 import asterixUpdateClient.AsterixClientUpdateWorkload;
 import client.AbstractReadOnlyClient;
 import client.AbstractUpdateClient;
+import driver.Driver;
 import structure.UpdateTag;
 
 import java.nio.file.Path;
@@ -37,7 +38,7 @@ public class AsterixClientConfig extends AbstractClientConfig {
 
         String qIxFile = bigFunHomePath + "/files/" + Constants.Q_IX_FILE_NAME;
         String qGenConfigFile = bigFunHomePath + "/files/" + Constants.Q_GEN_CONFIG_FILE_NAME;
-        String workloadFile = bigFunHomePath + "/files/workloads/" + Constants.WORKLOAD_FILE_NAME;
+//        String workloadFile = bigFunHomePath + "/files/workloads/" + Constants.WORKLOAD_FILE_NAME;
 
         String statsFile = bigFunHomePath + "/files/output/" + Constants.STATS_FILE_NAME;
         if (isParamSet(Constants.STATS_FILE,cid)) {
@@ -88,9 +89,10 @@ public class AsterixClientConfig extends AbstractClientConfig {
         if (isParamSet(Constants.IGNORE,cid)) {
             ignore = (int) getParamValue(Constants.IGNORE,cid);
         }
-        //String workloadFile="";
+        String workloadFile= Driver.workload;
 //        if(isParamSet(Constants.WORKLOAD, cid)) {
-//            final Path wlPath=Paths.get(System.getProperty("user.dir"), "/files/workloads/", getParamValue(Constants.WORKLOAD,cid).toString());
+//            final Path wlPath=Paths.get(bigFunHomePath , "/files/workloads/",
+//                    getParamValue(Constants.WORKLOAD,cid).toString());
 //            workloadFile = wlPath.toString();
 //        }
 
@@ -100,11 +102,13 @@ public class AsterixClientConfig extends AbstractClientConfig {
         }
 
         boolean dumpResults = false;
-        String resultsFile = null;
-        if (isParamSet(Constants.ASTX_DUMP_RESULTS,cid)) {
-            dumpResults = (boolean) getParamValue(Constants.ASTX_DUMP_RESULTS,cid);
-            resultsFile = (String) getParamValue(Constants.RESULTS_DUMP_FILE,cid);
-        }
+        String[] splits = Driver.workload.split("/");
+        String wl = splits[splits.length -1];
+        String resultsFile = "/tmp/resdump_"+wl;
+//        if (isParamSet(Constants.ASTX_DUMP_RESULTS,cid)) {
+//            dumpResults = (boolean) getParamValue(Constants.ASTX_DUMP_RESULTS,cid);
+//            resultsFile = (String) getParamValue(Constants.RESULTS_DUMP_FILE,cid);
+//        }
         int numReaders = 1;
         if (isParamSet(Constants.NUM_CONCURRENT_READERS,cid)) {
             numReaders = (int) getParamValue(Constants.NUM_CONCURRENT_READERS,cid);

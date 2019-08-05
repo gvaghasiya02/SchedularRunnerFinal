@@ -7,10 +7,6 @@
     "iterations" :10,
     "ignore_rounds" : 1,
     "seed" : 5,
-    "max_id" : 1000000,
-    "stats_file" : "stats.txt",
-    "dumpResults" : true,
-    "res_dump_file" : "/tmp/res_dump.txt",
-    "workload" : "workload.txt"
+    "max_id" : 1000000
   }
 ]

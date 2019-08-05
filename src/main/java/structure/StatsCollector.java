@@ -14,6 +14,8 @@
  */
 package structure;
 
+import driver.Driver;
+
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -57,14 +59,17 @@ public class StatsCollector {
     }
 
     public void report() {
-        generateReport(0,statsFile);
+        generateReport(0);
     }
 
-    private void generateReport(int startRound, String fileName) {
+    private void generateReport(int startRound) {
         try {
             setqvToAvgTimeX();
-            PrintWriter pw = new PrintWriter(new File("./files/output/user_"+Thread.currentThread().getName()+fileName));
-            PrintWriter avgpw = new PrintWriter(new File("./files/output/avg/avg_"+Thread.currentThread().getName()+fileName));
+            String[] splits = Driver.workload.split("/");
+            String wl = splits[splits.length -1].split(".txt")[0];
+            PrintWriter pw =
+                    new PrintWriter(new File("./files/output/user_"+ wl +".json"));
+            PrintWriter avgpw = new PrintWriter(new File("./files/output/avg/avg_"+ wl +".json"));
             if (startRound != 0) {
                 ignore = -1;
             }

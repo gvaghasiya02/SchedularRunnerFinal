@@ -34,7 +34,7 @@ fi
 mkdir -p ${BIGFUN_HOME}/files/output
 mkdir -p ${BIGFUN_HOME}/files/output/avg
 
-java -cp ${BIGFUN_HOME}/target/bigfun-driver-jar-with-dependencies.jar driver.Driver ${BIGFUN_HOME}
+java -cp ${BIGFUN_HOME}/target/bigfun-driver-jar-with-dependencies.jar driver.Driver ${BIGFUN_HOME} ${WORKLOADFILE}
 
 
 
