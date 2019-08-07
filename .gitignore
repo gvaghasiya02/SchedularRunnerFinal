@@ -16,7 +16,7 @@ files/output/
 .idea/workspace.xml
 # External tool builders
 .externalToolBuilders/
-
+files/output_SSD/
 # Locally stored "Eclipse launch configurations"
 *.launch
 
