@@ -1,0 +1,79 @@
+select first.unique1, first.unique2, first.two, first.four, first.ten, first.twenty, first.onePercent, first.tenPercent, first.twentyPercent, first.fiftyPercent, first.unique3, first.stringu1, first.stringu2, first.string4 from
+   wisconsin_unlimited_ds1 first, wisconsin_unlimited_ds2 second , wisconsin_unlimited_ds3 third , wisconsin_unlimited_ds4 fourth, wisconsin_unlimited_ds5 fifth , wisconsin_unlimited_ds6 sixth , wisconsin_unlimited_ds7 seventh, wisconsin_unlimited_ds8 eighth, wisconsin_unlimited_ds9 nineth where
+    first.unique1 /*+ temp,
+    join-mem
+    @PARAM
+   , build-partition
+    @PARAM
+    , build-size
+    @PARAM
+    */= second.unique1 and first.unique2 = second.unique2 and first.two = second.two and first.four = second.four and first.ten = second.ten and first.twenty = second.twenty and first.onePercent = second.onePercent and first.tenPercent = second.tenPercent and
+     first.twentyPercent = second.twentyPercent and first.fiftyPercent = second.fiftyPercent and first.unique3 = second.unique3 and first.stringu1 = second.stringu1 and first.stringu2=second.stringu2 and first.string4 = second.string4
+     and
+     second.unique1 /*+ temp,
+        join-mem
+         @PARAM
+        , build-partition
+         @PARAM
+         , build-size
+         @PARAM
+         */= third.unique1 and second.unique2 = third.unique2 and second.two = third.two and second.four = third.four and second.ten = third.ten and second.twenty = third.twenty and second.onePercent = third.onePercent and second.tenPercent = third.tenPercent and
+          second.twentyPercent = third.twentyPercent and second.fiftyPercent = third.fiftyPercent and second.unique3 = third.unique3 and second.stringu1 = third.stringu1 and second.stringu2=third.stringu2 and second.string4 = third.string4
+
+     and
+     third.unique1 /*+ temp,
+              join-mem
+              @PARAM
+             , build-partition
+              @PARAM
+              , build-size
+              @PARAM
+              */= fourth.unique1 and third.unique2 = fourth.unique2 and third.two = fourth.two and third.four = fourth.four and third.ten = fourth.ten and third.twenty = fourth.twenty and third.onePercent = fourth.onePercent and third.tenPercent = fourth.tenPercent and
+               third.twentyPercent = fourth.twentyPercent and third.fiftyPercent = fourth.fiftyPercent and third.unique3 = fourth.unique3 and third.stringu1 = fourth.stringu1 and third.stringu2=fourth.stringu2 and third.string4 = fourth.string4
+    and
+    fourth.unique1 /*+ temp,
+              join-mem
+              @PARAM
+             , build-partition
+              @PARAM
+              , build-size
+              @PARAM
+              */= fifth.unique1 and fourth.unique2 = fifth.unique2 and fourth.two = fifth.two and fourth.four = fifth.four and fourth.ten = fifth.ten and fourth.twenty = fifth.twenty and fourth.onePercent = fifth.onePercent and fourth.tenPercent = fifth.tenPercent and fourth.twentyPercent = fifth.twentyPercent and fourth.fiftyPercent = fifth.fiftyPercent and fourth.unique3 = fifth.unique3 and fourth.stringu1 = fifth.stringu1 and fourth.stringu2=fifth.stringu2 and fourth.string4 = fifth.string4
+  and
+   fifth.unique1 /*+ temp,
+                  join-mem
+                  @PARAM
+                 , build-partition
+                  @PARAM
+                  , build-size
+                  @PARAM
+                  */= sixth.unique1 and fifth.unique2 = sixth.unique2 and fifth.two = sixth.two and fifth.four = sixth.four and fifth.ten = sixth.ten and fifth.twenty = sixth.twenty and fifth.onePercent = sixth.onePercent and fifth.tenPercent = sixth.tenPercent and fifth.twentyPercent = sixth.twentyPercent and fifth.fiftyPercent = sixth.fiftyPercent and fifth.unique3 = sixth.unique3 and fifth.stringu1 = sixth.stringu1 and fifth.stringu2=sixth.stringu2 and fifth.string4 = sixth.string4
+  and
+      sixth.unique1 /*+ temp,
+                join-mem
+                @PARAM
+               , build-partition
+                @PARAM
+                , build-size
+                @PARAM
+                */= seventh.unique1 and sixth.unique2 = seventh.unique2 and sixth.two = seventh.two and sixth.four = seventh.four and sixth.ten = seventh.ten and sixth.twenty = seventh.twenty and sixth.onePercent = seventh.onePercent and sixth.tenPercent = seventh.tenPercent and sixth.twentyPercent = seventh.twentyPercent and sixth.fiftyPercent = seventh.fiftyPercent and sixth.unique3 = seventh.unique3 and sixth.stringu1 = seventh.stringu1 and sixth.stringu2=seventh.stringu2 and sixth.string4 = seventh.string4
+  and
+        seventh.unique1 /*+ temp,
+                  join-mem
+                  @PARAM
+                 , build-partition
+                  @PARAM
+                  , build-size
+                  @PARAM
+                  */= eighth.unique1 and seventh.unique2 = eighth.unique2 and seventh.two = eighth.two and seventh.four = eighth.four and seventh.ten = eighth.ten and seventh.twenty = eighth.twenty and seventh.onePercent = eighth.onePercent and seventh.tenPercent = eighth.tenPercent and seventh.twentyPercent = eighth.twentyPercent and seventh.fiftyPercent = eighth.fiftyPercent and seventh.unique3 = eighth.unique3 and seventh.stringu1 = eighth.stringu1 and seventh.stringu2=eighth.stringu2 and seventh.string4 = eighth.string4
+  and
+          eighth.unique1 /*+ temp,
+                    join-mem
+                    @PARAM
+                   , build-partition
+                    @PARAM
+                    , build-size
+                    @PARAM
+                    */= nineth.unique1 and eighth.unique2 = nineth.unique2 and eighth.two = nineth.two and eighth.four = nineth.four and eighth.ten = nineth.ten and eighth.twenty = nineth.twenty and eighth.onePercent = nineth.onePercent and eighth.tenPercent = nineth.tenPercent and eighth.twentyPercent = nineth.twentyPercent and eighth.fiftyPercent = nineth.fiftyPercent and eighth.unique3 = nineth.unique3 and eighth.stringu1 = nineth.stringu1 and eighth.stringu2=nineth.stringu2 and eighth.string4 = nineth.string4
+
+     limit 1;

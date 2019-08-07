@@ -59,9 +59,13 @@
 #for LDT by 281,4 already everything fits in memory. Note that if you give more memory than that then int overflow happens in memBudgetInBytes of the framepool in buffer managae of hhj.
 
 ####LimitedMemoryStaticRDT####
-314,1,1200,20,1100
-324,1,1200,20,1100
-334,1,1200,20,1100
+301,1,1200,20,1100
+302,1,1200,20,1100
+303,1,1200,20,1100
+304,1,1200,20,1100
+305,1,1200,20,1100
+306,1,1200,20,1100
+307,1,1200,20,1100
 
 #####NogNos-GS######
 1000,1,300,20,1100
