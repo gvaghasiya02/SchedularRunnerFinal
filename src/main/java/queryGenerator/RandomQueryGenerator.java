@@ -72,9 +72,6 @@ public class RandomQueryGenerator {
                 break;
             case 4:
             case 14:
-            case 314:
-            case 324:
-            case 334:
                 nextAllJoinsParam(qIx,vIx,4,1);
                 break;
             case 5:
@@ -91,6 +88,13 @@ public class RandomQueryGenerator {
                 break;
             case 8:
             case 18:
+            case 301:
+            case 302:
+            case 303:
+            case 304:
+            case 305:
+            case 306:
+            case 307:
                 nextAllJoinsParam(qIx,vIx,8,1);
                 break;
             case 280://Hybrid RDT-8 joins
