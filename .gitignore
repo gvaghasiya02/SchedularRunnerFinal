@@ -17,6 +17,7 @@ files/output/
 # External tool builders
 .externalToolBuilders/
 files/output_SSD/
+files/output*
 # Locally stored "Eclipse launch configurations"
 *.launch
 
