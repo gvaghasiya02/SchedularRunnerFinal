@@ -1,10 +1,10 @@
 [
   {
     "clientType" : "AsterixdbReadOnly",
-    "cc" : "128.195.52.217",
+    "cc" : "127.0.0.1",
     "num-concurrent-readers" : 1,
     "dataverse" : "unlimitedMemory;",
-    "iterations" :10,
+    "iterations" :5,
     "ignore_rounds" : 1,
     "seed" : 5,
     "max_id" : 1000000

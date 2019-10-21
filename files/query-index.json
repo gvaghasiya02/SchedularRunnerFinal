@@ -29,5 +29,8 @@
   "1005": "files/queries/q1005.aql",
   "1025": "files/queries/q1025.aql",
   "1075": "files/queries/q1075.aql",
-  "1100": "files/queries/q1100.aql"
+  "1100": "files/queries/q1100.aql",
+  "1200": "files/queries/q1200.aql",
+  "1201": "files/queries/q1201.aql",
+  "1202": "files/queries/q1202.aql"
 }

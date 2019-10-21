@@ -50,6 +50,10 @@ public class RandomQueryGenerator {
     public ArrayList<IArgument> nextQuery(int qIx, int vIx) {
         args.clear();
         switch (qIx) {
+            case 1200:
+            case 1201:
+            case 1202:
+                nextJoinMemory(qIx, vIx);
             case 0:
                 nextQ0(qIx, vIx);
                 break;
@@ -132,6 +136,12 @@ public class RandomQueryGenerator {
             args.add(np);
             args.add(bs);
         }
+    }
+
+    private void nextJoinMemory(int qid, int vid) {
+        int joinMem = (Integer) qps.getParam(qid, vid).get(0);
+        IntArgument jm = new IntArgument(joinMem);
+        args.add(jm);
     }
 
     private void nextQ0(int qid, int vid){
