@@ -1,1 +1,1 @@
-select count(*) from wisconsin_clearcache_40gb;
+select count(*) from wisconsin_clearcache_50gb;
