@@ -30,12 +30,12 @@ public class AsterixClientReadOnlyWorkload extends AbstractReadOnlyClient {
     public AsterixClientReadOnlyWorkload() {};
 
     public AsterixClientReadOnlyWorkload(String cc, String dvName, int iter, String qGenConfigFile, String qIxFile,
-            String statsFile, int ignore, String qSeqFile, String resDumpFile, long seed, long minUserId,long maxUsrId) {
+            String statsFile, int ignore, String qSeqFile, String resDumpFile, long seed, long minUserId,long maxUsrId, String server) {
         super();
         this.ccUrl = cc;
         this.dvName = dvName;
         this.iterations = iter;
-        setClientUtil(qIxFile, qGenConfigFile, statsFile, ignore, qSeqFile, resDumpFile);
+        setClientUtil(qIxFile, qGenConfigFile, statsFile, ignore, qSeqFile, resDumpFile, server);
         clUtil.init();
         initReadOnlyWorkloadGen(seed,minUserId, maxUsrId);
         execQuery = true;
@@ -47,7 +47,7 @@ public class AsterixClientReadOnlyWorkload extends AbstractReadOnlyClient {
     }
 
     @Override
-    public void execute() {
+    public void execute() throws Exception {
         long iteration_start;
         long iteration_end;
         int iterationCount = 0;
@@ -56,7 +56,7 @@ public class AsterixClientReadOnlyWorkload extends AbstractReadOnlyClient {
             if (iterationCount > 0) {
                 System.out.println(",");
             }
-            System.out.println("\n{ \"Iterstion\":" + i+
+            System.out.println("\n{ \"Iteration\":" + i+
                     ",");
             iteration_start = System.currentTimeMillis();
             System.out.println("\"queries\":[");
@@ -86,10 +86,10 @@ public class AsterixClientReadOnlyWorkload extends AbstractReadOnlyClient {
 
     @Override
     public void setClientUtil(String qIxFile, String qGenConfigFile, String statsFile, int ignore, String qSeqFile,
-            String resultsFile) {
+            String resultsFile, String server) {
         try {
             clUtil = new AsterixReadOnlyClientUtility(ccUrl, qIxFile, qGenConfigFile, statsFile, ignore, qSeqFile,
-                    resultsFile);
+                    resultsFile, server);
         } catch (IOException e) {
             e.printStackTrace();
         }

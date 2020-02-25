@@ -50,6 +50,13 @@ public class Constants {
     public static final String ASTX_DS_NAME = "dataset";
     public static final String ASTX_KEY_NAME = "primary_key";
     public static final int ASTX_AQL_REST_API_PORT = 19002;
+    public static final int CB_REST_API_PORT = 8095;
+    public static final String ASTX_READ_API_URL = "/query/service";
+    public static final String ASTX_UPDATE_API_URL = "/update";
+    public static final String CB_ANALYTICS_API_URL = "/analytics/service";
+    public static final String SERVER = "server";
+    public static final String ASTX_SERVER_TAG = "asterixdb";
+    public static final String CB_SERVER_TAG = "couchbase";
     public static final int INVALID_QID = -1;
     public static final long INVALID_TIME = -1;
     public static final String[] FREQ_KW = { "Surface", "Nexus" };

@@ -18,9 +18,11 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.StringTokenizer;
 
 import config.Constants;
+import driver.Driver;
 import structure.Pair;;
 
 public abstract class AbstractReadOnlyClientUtility extends AbstractClientUtility {
@@ -30,7 +32,7 @@ public abstract class AbstractReadOnlyClientUtility extends AbstractClientUtilit
     public ArrayList<Pair> qvids;
     protected boolean dumpResults = true;
 
-    public abstract void executeQuery(int qid, int vid, String qBody);
+    public abstract void executeQuery(int qid, int vid, String qBody) throws Exception;
 
     public AbstractReadOnlyClientUtility(String qIxFile, String qGenConfigFile, String statsFile, int ignore,
             String workloadFile, String resultsFile) {
@@ -78,4 +80,6 @@ public abstract class AbstractReadOnlyClientUtility extends AbstractClientUtilit
     public String getQGenConfigFile() {
         return qGenConfigFile;
     }
+
+
 }

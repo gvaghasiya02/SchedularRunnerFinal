@@ -24,8 +24,10 @@ import structure.UpdateTag;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Map;
 
 public class AsterixClientConfig extends AbstractClientConfig {
+
 
     public AsterixClientConfig(String clientConfigFile) {
         super(clientConfigFile);
@@ -38,7 +40,7 @@ public class AsterixClientConfig extends AbstractClientConfig {
 
         String qIxFile = bigFunHomePath + "/files/" + Constants.Q_IX_FILE_NAME;
         String qGenConfigFile = bigFunHomePath + "/files/" + Constants.Q_GEN_CONFIG_FILE_NAME;
-//        String workloadFile = bigFunHomePath + "/files/workloads/" + Constants.WORKLOAD_FILE_NAME;
+        String workloadFile = Driver.workloadsFolder + Constants.WORKLOAD_FILE_NAME;
 
         String statsFile = bigFunHomePath + "/files/output/" + Constants.STATS_FILE_NAME;
         if (isParamSet(Constants.STATS_FILE,cid)) {
@@ -89,12 +91,12 @@ public class AsterixClientConfig extends AbstractClientConfig {
         if (isParamSet(Constants.IGNORE,cid)) {
             ignore = (int) getParamValue(Constants.IGNORE,cid);
         }
-        String workloadFile= Driver.workload;
-//        if(isParamSet(Constants.WORKLOAD, cid)) {
-//            final Path wlPath=Paths.get(bigFunHomePath , "/files/workloads/",
-//                    getParamValue(Constants.WORKLOAD,cid).toString());
-//            workloadFile = wlPath.toString();
-//        }
+
+        if(isParamSet(Constants.WORKLOAD, cid)) {
+            final Path wlPath=Paths.get(bigFunHomePath ,"/workloads/",
+                    getParamValue(Constants.WORKLOAD,cid).toString());
+            workloadFile = wlPath.toString();
+        }
 
         boolean qExec = true;
         if (isParamSet(Constants.EXECUTE_QUERY,cid)) {
@@ -102,35 +104,32 @@ public class AsterixClientConfig extends AbstractClientConfig {
         }
 
         boolean dumpResults = false;
-        String[] splits = Driver.workload.split("/");
+        String[] splits = workloadFile.split("/");
         String wl = splits[splits.length -1];
         String resultsFile = "/tmp/resdump_"+wl;
-//        if (isParamSet(Constants.ASTX_DUMP_RESULTS,cid)) {
-//            dumpResults = (boolean) getParamValue(Constants.ASTX_DUMP_RESULTS,cid);
-//            resultsFile = (String) getParamValue(Constants.RESULTS_DUMP_FILE,cid);
-//        }
         int numReaders = 1;
         if (isParamSet(Constants.NUM_CONCURRENT_READERS,cid)) {
             numReaders = (int) getParamValue(Constants.NUM_CONCURRENT_READERS,cid);
         }
         AsterixClientReadOnlyWorkload rClient;
+        String server = "asterixdb";
+        if(isParamSet(Constants.SERVER,cid)) {
+           server = (String) getParamValue(Constants.SERVER,cid);
+        }
         if (numReaders == 1) {
-            rClient = getAsterixClientReadOnlyWorkload(cc, dvName, iter, qIxFile, qGenConfigFile, workloadFile, statsFile, seed, maxId, ignore, resultsFile);
+            rClient = getAsterixClientReadOnlyWorkload(cc, dvName, iter, qIxFile, qGenConfigFile, workloadFile, statsFile, seed, maxId, ignore, resultsFile, server);
         }
         else {
            rClient = new AsterixConcurrentReadOnlyWorkload(cc, dvName, iter, qGenConfigFile,
-                qIxFile, statsFile, ignore, workloadFile, /*dumpDirFile,*/ resultsFile, seed,minId, maxId, numReaders);
+                qIxFile, statsFile, ignore, workloadFile, /*dumpDirFile,*/ resultsFile, seed,minId, maxId, numReaders, server);
               }
-//    rClient = new AsterixClientReadOnlyWorkload(cc, dvName, iter, qGenConfigFile,
-//                qIxFile, statsFile, ignore, workloadFile, /*dumpDirFile,*/ resultsFile, seed, maxUserId);
 
         rClient.setExecQuery(qExec);
-       // rClient.setDumpResults(dumpResults);
         return rClient;
     }
-    private AsterixClientReadOnlyWorkload getAsterixClientReadOnlyWorkload(String cc, String dvName, int iter, String qIxFile, String qGenConfigFile, String workloadFile, String statsFile, long seed, long maxUserId, int ignore, String resultsFile) {
+    private AsterixClientReadOnlyWorkload getAsterixClientReadOnlyWorkload(String cc, String dvName, int iter, String qIxFile, String qGenConfigFile, String workloadFile, String statsFile, long seed, long maxUserId, int ignore, String resultsFile, String server) {
         return new AsterixClientReadOnlyWorkload(cc, dvName, iter, qGenConfigFile,
-                qIxFile, statsFile, ignore, workloadFile, /*dumpDirFile,*/ resultsFile, seed, maxUserId,maxUserId);
+                qIxFile, statsFile, ignore, workloadFile, /*dumpDirFile,*/ resultsFile, seed, maxUserId,maxUserId, server);
     }
     @Override
     public AbstractUpdateClient readUpdateClientConfig(String bigFunHomePath,int cid) {

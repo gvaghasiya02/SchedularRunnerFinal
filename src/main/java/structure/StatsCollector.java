@@ -65,11 +65,9 @@ public class StatsCollector {
     private void generateReport(int startRound) {
         try {
             setqvToAvgTimeX();
-            String[] splits = Driver.workload.split("/");
-            String wl = splits[splits.length -1].split(".txt")[0];
             PrintWriter pw =
-                    new PrintWriter(new File("./files/output/user_"+ wl +".json"));
-            PrintWriter avgpw = new PrintWriter(new File("./files/output/avg/avg_"+ wl +".json"));
+                    new PrintWriter(new File("./files/output/user"+Thread.currentThread().getName()+".json"));
+            PrintWriter avgpw = new PrintWriter(new File("./files/output/avg/avg"+Thread.currentThread().getName()+".json"));
             if (startRound != 0) {
                 ignore = -1;
             }

@@ -13,7 +13,7 @@ if [ ! -f ${CONFIGFILE} ]; then
 	exit 1
 fi
 
-QGENCONFIGFILE=${BIGFUN_HOME}/files/query-params.txt
+QGENCONFIGFILE=${BIGFUN_HOME}/files/query-params-OLD2.txt
 if [ ! -f ${QGENCONFIGFILE} ]; then
         echo -e "ERROR: The query generator config file (with the name query-params.txt ) can not be found under ${BIGFUN_HOME}/files directory."
         exit 1
@@ -25,7 +25,7 @@ if [ ! -f ${WORKLOADFILE} ]; then
 	exit 1
 fi
 
-QUERYINDEXFILE=${BIGFUN_HOME}/files/query-index.json
+QUERYINDEXFILE=${BIGFUN_HOME}/files/query-index-OLD2.json
 if [ ! -f ${QUERYINDEXFILE} ]; then    
 	echo -e "Generating query-index file ..."
 	${BIGFUN_HOME}/scripts/qix-gen.sh ${BIGFUN_HOME}/files/queries ${QUERYINDEXFILE}

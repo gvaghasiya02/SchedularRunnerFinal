@@ -50,63 +50,66 @@ public class RandomQueryGenerator {
     public ArrayList<IArgument> nextQuery(int qIx, int vIx) {
         args.clear();
         switch (qIx) {
-            case 1200:
-            case 1201:
-            case 1202:
-                nextJoinMemory(qIx, vIx);
-            case 0:
-                nextQ0(qIx, vIx);
-                break;
-            case 1:
-            case 11:
-            case 1000:
-            case 1025:
-            case 1005:
-            case 1075:
-            case 1100:
-                nextAllJoinsParam(qIx,vIx,1,1);
-                break;
-            case 2:
-            case 12:
-                nextAllJoinsParam(qIx,vIx,2,1);
-                break;
-            case 3:
-            case 13:
-                nextAllJoinsParam(qIx,vIx,3,1);
-                break;
-            case 4:
-            case 14:
-                nextAllJoinsParam(qIx,vIx,4,1);
-                break;
-            case 5:
-            case 15:
-                nextAllJoinsParam(qIx,vIx,5,1);
-                break;
-            case 6:
-            case 16:
-                nextAllJoinsParam(qIx,vIx,6,1);
-                break;
-            case 7:
-            case 17:
-                nextAllJoinsParam(qIx,vIx,7,1);
-                break;
-            case 8:
-            case 18:
-            case 301:
-            case 302:
-            case 303:
-            case 304:
-            case 305:
-            case 306:
-            case 307:
-                nextAllJoinsParam(qIx,vIx,8,1);
-                break;
-            case 280://Hybrid RDT-8 joins
-                nextAllJoinsParam(qIx,vIx,8,8);
-                break;
-            case 281://LDT 8 joins
-                nextAllJoinsParam(qIx,vIx,8,2);
-                break;
+//            case 1200:
+//            case 1201:
+//            case 1202:
+//                nextJoinMemory(qIx, vIx);
+//            case 0:
+//                nextQ0(qIx, vIx);
+//                break;
+//            case 1:
+//            case 11:
+//            case 1000:
+//            case 1025:
+//            case 1005:
+//            case 1075:
+//            case 1100:
+//                nextAllJoinsParam(qIx,vIx,1,1);
+//                break;
+//            case 2:
+//            case 12:
+//                nextAllJoinsParam(qIx,vIx,2,1);
+//                break;
+//            case 3:
+//            case 13:
+//                nextAllJoinsParam(qIx,vIx,3,1);
+//                break;
+//            case 4:
+//            case 14:
+//                nextAllJoinsParam(qIx,vIx,4,1);
+//                break;
+//            case 5:
+//            case 15:
+//                nextAllJoinsParam(qIx,vIx,5,1);
+//                break;
+//            case 6:
+//            case 16:
+//                nextAllJoinsParam(qIx,vIx,6,1);
+//                break;
+//            case 7:
+//            case 17:
+//                nextAllJoinsParam(qIx,vIx,7,1);
+//                break;
+//            case 8:
+//            case 18:
+//            case 301:
+//            case 302:
+//            case 303:
+//            case 304:
+//            case 305:
+//            case 306:
+//            case 307:
+//                nextAllJoinsParam(qIx,vIx,8,1);
+//                break;
+//            case 280://Hybrid RDT-8 joins
+//                nextAllJoinsParam(qIx,vIx,8,8);
+//                break;
+//            case 281://LDT 8 joins
+//                nextAllJoinsParam(qIx,vIx,8,2);
+//                break;
+        case 1:
+            nextQ1(qIx, vIx);
+            break;
             default:
                 next(qIx,vIx);
                 break;
@@ -114,6 +117,11 @@ public class RandomQueryGenerator {
         return (new ArrayList<IArgument>(args));
     }
 
+
+    private void nextQ1(int qid, int vid) {
+     //nextJoinMemory(qid, vid);
+
+    }
     private void next(int qid, int vid){
         ArrayList<Number> p = qps.getParam(qid,vid);
         for(Number element:p){

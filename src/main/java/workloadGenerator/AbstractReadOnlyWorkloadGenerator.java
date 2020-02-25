@@ -25,6 +25,7 @@ import java.util.Map;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import config.Constants;
+import driver.Driver;
 import structure.Query;
 
 public abstract class AbstractReadOnlyWorkloadGenerator {
@@ -53,7 +54,7 @@ public abstract class AbstractReadOnlyWorkloadGenerator {
             return;
         }
 
-        BufferedReader in = new BufferedReader(new FileReader(segmentsFile));
+        BufferedReader in = new BufferedReader(new FileReader(Driver.BIGFUN_HOME+"/"+segmentsFile));
         ArrayList<String> segments = new ArrayList<String>();
         String str;
         String thisSeg = "";

@@ -41,7 +41,8 @@ public class Query {
         Iterator<IArgument> argIt = args.iterator();
 
         //StringBuilder st = new StringBuilder("use dataverse " + dataverse + ";\n");
-        StringBuilder st = new StringBuilder("use " + dataverse + ";\n");//SQL++
+       // StringBuilder st = new StringBuilder("use " + dataverse + ";\n");//SQL++
+        StringBuilder st = new StringBuilder();//SQL++
         while (segIt.hasNext()) {
             st.append(segIt.next().trim()).append(" ");
             if (argIt.hasNext()) {

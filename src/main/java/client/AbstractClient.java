@@ -14,9 +14,11 @@
  */
 package client;
 
+import java.util.HashMap;
+
 public abstract class AbstractClient {
     public static String bigFunHome="";
-    public abstract void execute();
+    public abstract void execute() throws Exception;
 
     public abstract void generateReport();
 

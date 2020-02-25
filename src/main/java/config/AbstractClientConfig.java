@@ -47,7 +47,6 @@ public abstract class AbstractClientConfig {
             System.err.println("Problem in parsing the JSON config file.");
             e.printStackTrace();
         }
-
     }
 
     public boolean isParamSet(String paramName, int userId) {

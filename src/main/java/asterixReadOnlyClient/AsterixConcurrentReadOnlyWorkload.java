@@ -30,7 +30,7 @@ public class AsterixConcurrentReadOnlyWorkload extends AsterixClientReadOnlyWork
 
     public AsterixConcurrentReadOnlyWorkload(String cc, String dvName, int iter, String qGenConfigFile, String
             qIxFile, String statsFile, int ignore, String qSeqFile, String resDumpFile, long seed, long minUserId,long maxUsrId,
-            int numReaders) {
+            int numReaders, String server) {
         super();
         this.ccUrl = cc;
         this.dvName = dvName;
@@ -38,7 +38,7 @@ public class AsterixConcurrentReadOnlyWorkload extends AsterixClientReadOnlyWork
         this.numReaders = numReaders;
         clUtilMap = new HashMap<>();
         initReaderSeeds(seed);
-        setClientUtil(qIxFile, qGenConfigFile, statsFile, ignore, qSeqFile, resDumpFile);
+        setClientUtil(qIxFile, qGenConfigFile, statsFile, ignore, qSeqFile, resDumpFile, server);
         initReadOnlyWorkloadGen(seed, minUserId,maxUsrId);
         initExecutors();
         execQuery = true;
@@ -90,14 +90,14 @@ public class AsterixConcurrentReadOnlyWorkload extends AsterixClientReadOnlyWork
 
     @Override
     public void setClientUtil(String qIxFile, String qGenConfigFile, String statsFile, int ignore,
-            String qSeqFile, String resultsFile) {
+            String qSeqFile, String resultsFile, String server) {
         //TODO: Append the result and other stat files with threadIds.
         IntStream.range(0, numReaders).forEach(x -> {
             String statsF = statsFile.contains(".txt")?statsFile.split(".txt")[0]+x+".txt":statsFile+x+".txt";
             String resF = resultsFile.contains(".txt")?resultsFile.split(".txt")[0]+x+".txt":resultsFile+x+".txt";
             try {
                 clUtilMap.put(x, new AsterixReadOnlyClientUtility(ccUrl, qIxFile, qGenConfigFile, statsF, ignore, qSeqFile,
-                        resF));
+                        resF, server));
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -113,7 +113,7 @@ public class AsterixConcurrentReadOnlyWorkload extends AsterixClientReadOnlyWork
                 long iteration_start = 0l;
                 long iteration_end = 0l;
                 for (int i = 0; i < iterations; i++) {
-                    Thread.currentThread().setName(Integer.toString(i));
+                    Thread.currentThread().setName("Client-"+readerId);
                     System.out.println("\nAsterixDB Client - Read-Only Workload - Starting Iteration " + i + " in " +
                             "thread: " + readerId + " (" + Thread.currentThread().getName() + ")");
                     iteration_start = System.currentTimeMillis();
@@ -127,7 +127,11 @@ public class AsterixConcurrentReadOnlyWorkload extends AsterixClientReadOnlyWork
                         long q_start = System.currentTimeMillis();
 
                         if (execQuery) {
-                            clUtilMap.get(readerId).executeQuery(qid, vid, q.aqlPrint(dvName));
+                            try {
+                                clUtilMap.get(readerId).executeQuery(qid, vid, q.aqlPrint(dvName));
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
                         }
                         long q_end = System.currentTimeMillis();
                         System.out.println("Iteration "+i+" Thread "+ Thread.currentThread().getName()+" Q"+qvPair.getQId()+" version "+qvPair.getVId()+"\t"+(q_end-q_start));

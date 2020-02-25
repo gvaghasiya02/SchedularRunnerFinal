@@ -14,31 +14,38 @@
  */
 package driver;
 
+import Prometheus.BigFunCollector;
 import client.AbstractClient;
 import config.AbstractClientConfig;
 import config.AsterixClientConfig;
 import config.Constants;
+import io.prometheus.client.CollectorRegistry;
+import io.prometheus.client.exporter.HTTPServer;
 
 
+import java.io.IOException;
+import java.net.InetSocketAddress;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.IntStream;
 
 public class Driver {
-public static String bigFunHome = "";
-public static String workload = "";
-    public static void main(String[] args) {
-        if (args.length != 2) {
-            System.out.println("Correct Usage:\n");
-            System.out.println("\t[0]: BigFUN home has to be set to a valid path.");
-            return;
-        }
+    private static Map<String, String> env = System.getenv();
+    public static String BIGFUN_HOME = env.get("BIGFUN_HOME");
+    public static String workloadsFolder = BIGFUN_HOME +"/workloads/";
+    public static HashMap<String,String> clientToRunningQueries = new HashMap<>();
 
-        bigFunHome = args[0].replaceAll("/$", "");
-        workload = args[1].replaceAll("/$", "");
+    public static void main(String[] args) throws IOException {
+        //Prometheus Setup
+        CollectorRegistry registery = new CollectorRegistry();
+        registery.register(new BigFunCollector());
+        HTTPServer server = new HTTPServer(new InetSocketAddress(2020), registery);
 
-         String clientConfigFile = bigFunHome + "/conf/bigfun-conf.json";
+         String clientConfigFile = BIGFUN_HOME + "/conf/bigfun-conf.json";
+
         AbstractClientConfig clientConfig = new AsterixClientConfig(clientConfigFile);
         clientConfig.parseConfigFile();
         ExecutorService executorService = Executors.newFixedThreadPool(clientConfig.getParams().size());
@@ -53,20 +60,28 @@ public static String workload = "";
                 AbstractClient client = null;
                 switch (clientTypeTag) {
                     case Constants.ASTX_RANDOM_CLIENT_TAG:
-                        client = clientConfig.readReadOnlyClientConfig(bigFunHome, c);
+                        client = clientConfig.readReadOnlyClientConfig(BIGFUN_HOME, c);
                         break;
                     case Constants.ASTX_UPDATE_CLIENT_TAG:
-                        client = clientConfig.readUpdateClientConfig(bigFunHome, c);
+                        client = clientConfig.readUpdateClientConfig(BIGFUN_HOME, c);
                         break;
 
                     default:
                         System.err.println("Unknown/Invalid client type:\t" + clientTypeTag);
                 }
-                client.bigFunHome = bigFunHome;
-                client.execute();
+                client.bigFunHome = BIGFUN_HOME;
+                try {
+                    client.execute();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    server.stop();
+                    executorService.shutdownNow();
+                }
+                //Stats Report
                 client.generateReport();
             }));
         try {
+            server.stop();
             executorService.shutdown();
             executorService.awaitTermination(Integer.MAX_VALUE, TimeUnit.SECONDS); // TODO: Is this necessary?
 
@@ -77,10 +92,19 @@ public static String workload = "";
             if (!executorService.isTerminated()) {
                 System.out.println("canceling all pending tasks");
             }
-            //System.out.println("Finished at: " + System.currentTimeMillis());
             executorService.shutdownNow();
         }
-
-        //System.out.println("\nBigFUN Benchmark is done.\n");
+    }
+    private static Map<String, Object> processCommandLineConfig(String[] args) {
+        Map<String, Object> commandLineConfig = new HashMap<>();
+        if (args != null) {
+            for (String arg: args) {
+                if (arg.contains("=")) {
+                    commandLineConfig.put(arg.substring(0, arg.indexOf("=")).toLowerCase(),
+                            arg.substring(arg.indexOf("=")+1));
+                }
+            }
+        }
+        return commandLineConfig;
     }
 }

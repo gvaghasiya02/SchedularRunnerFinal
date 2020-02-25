@@ -1,11 +1,13 @@
 [
   {
     "clientType" : "AsterixdbReadOnly",
-    "cc" : "172.31.21.6",
+    "workload": "allnonprimarykey.txt",
+    "cc" : "34.219.171.224",
+    "server": "couchbase",
     "num-concurrent-readers" : 1,
     "dataverse" : "unlimitedMemory;",
-    "iterations" :2,
-    "ignore_rounds" : 0,
+    "iterations" :12,
+    "ignore_rounds" : 2,
     "seed" : 5,
     "max_id" : 1000000
   }
