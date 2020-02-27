@@ -1,10 +1,10 @@
 [
   {
     "clientType" : "AsterixdbReadOnly",
-    "workload": "allnonprimarykey.txt",
-    "cc" : "34.219.171.224",
+    "workload": "sleep.txt",
+    "cc" : "54.190.23.80",
     "server": "couchbase",
-    "num-concurrent-readers" : 1,
+    "num-concurrent-readers" : 2,
     "dataverse" : "unlimitedMemory;",
     "iterations" :12,
     "ignore_rounds" : 2,

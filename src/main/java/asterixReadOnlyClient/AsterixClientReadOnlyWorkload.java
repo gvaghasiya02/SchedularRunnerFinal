@@ -48,6 +48,8 @@ public class AsterixClientReadOnlyWorkload extends AbstractReadOnlyClient {
 
     @Override
     public void execute() throws Exception {
+        long starttime=System.currentTimeMillis();
+        System.out.println("started at : " +starttime);
         long iteration_start;
         long iteration_end;
         int iterationCount = 0;
@@ -81,6 +83,10 @@ public class AsterixClientReadOnlyWorkload extends AbstractReadOnlyClient {
             iterationCount++;
         }
         System.out.print("]");
+        long endtime= System.currentTimeMillis();
+        System.out.println("finished at : " +endtime);
+        System.out.println("Total experiment execution time : " +(endtime-starttime)+" (ms)");
+        System.out.println("Throughput for user 0: " +(long)(1*1.0/(endtime-starttime)*1.0));
         clUtil.terminate();
     }
 
@@ -94,4 +100,5 @@ public class AsterixClientReadOnlyWorkload extends AbstractReadOnlyClient {
             e.printStackTrace();
         }
     }
+
 }

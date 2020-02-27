@@ -42,7 +42,7 @@ public class AsterixClientConfig extends AbstractClientConfig {
         String qGenConfigFile = bigFunHomePath + "/files/" + Constants.Q_GEN_CONFIG_FILE_NAME;
         String workloadFile = Driver.workloadsFolder + Constants.WORKLOAD_FILE_NAME;
 
-        String statsFile = bigFunHomePath + "/files/output/" + Constants.STATS_FILE_NAME;
+        String statsFile = Constants.STATS_FILE_NAME;
         if (isParamSet(Constants.STATS_FILE,cid)) {
             statsFile = (String) getParamValue(Constants.STATS_FILE,cid);
         }

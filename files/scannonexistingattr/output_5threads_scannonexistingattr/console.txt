@@ -1,0 +1,546 @@
+started at : 1582761431126
+
+AsterixDB Client - Read-Only Workload - Starting Iteration 0 in thread: 0 (Client-0)
+
+AsterixDB Client - Read-Only Workload - Starting Iteration 0 in thread: 2 (Client-2)
+
+AsterixDB Client - Read-Only Workload - Starting Iteration 0 in thread: 4 (Client-4)
+
+AsterixDB Client - Read-Only Workload - Starting Iteration 0 in thread: 1 (Client-1)
+
+AsterixDB Client - Read-Only Workload - Starting Iteration 0 in thread: 3 (Client-3)
+{"qidvid": "Q(5,1)", 
+"rt":1253,
+{"qidvid": "Q(5,1)", 
+"rt":1253,
+"start":"2020-02-26 15:57:11.162",
+"start":"2020-02-26 15:57:11.162",
+"end":"2020-02-26 15:57:12.418"
+}
+"end":"2020-02-26 15:57:12.417"
+}
+Iteration 0 Thread Client-4 Q5 version 1	1287
+Iteration 0 Thread Client-2 Q5 version 1	1287
+Total time for iteration 0 :	1298 ms in thread: 2 (Client-2)
+
+AsterixDB Client - Read-Only Workload - Starting Iteration 1 in thread: 2 (Client-2)
+Total time for iteration 0 :	1298 ms in thread: 4 (Client-4)
+
+AsterixDB Client - Read-Only Workload - Starting Iteration 1 in thread: 4 (Client-4)
+{"qidvid": "Q(5,1)", 
+"rt":1329,
+"start":"2020-02-26 15:57:11.162",
+"end":"2020-02-26 15:57:12.49"
+}
+Iteration 0 Thread Client-0 Q5 version 1	1355
+Total time for iteration 0 :	1355 ms in thread: 0 (Client-0)
+
+AsterixDB Client - Read-Only Workload - Starting Iteration 1 in thread: 0 (Client-0)
+{"qidvid": "Q(5,1)", 
+"rt":2211,
+"start":"2020-02-26 15:57:11.162",
+"end":"2020-02-26 15:57:13.372"
+}
+Iteration 0 Thread Client-3 Q5 version 1	2236
+Total time for iteration 0 :	2236 ms in thread: 3 (Client-3)
+
+AsterixDB Client - Read-Only Workload - Starting Iteration 1 in thread: 3 (Client-3)
+{"qidvid": "Q(5,1)", 
+"rt":2221,
+"start":"2020-02-26 15:57:11.162",
+"end":"2020-02-26 15:57:13.382"
+}
+Iteration 0 Thread Client-1 Q5 version 1	2247
+Total time for iteration 0 :	2247 ms in thread: 1 (Client-1)
+
+AsterixDB Client - Read-Only Workload - Starting Iteration 1 in thread: 1 (Client-1)
+{"qidvid": "Q(5,1)", 
+"rt":1175,
+"start":"2020-02-26 15:57:12.438",
+"end":"2020-02-26 15:57:13.614"
+}
+Iteration 1 Thread Client-4 Q5 version 1	1176
+Total time for iteration 1 :	1176 ms in thread: 4 (Client-4)
+
+AsterixDB Client - Read-Only Workload - Starting Iteration 2 in thread: 4 (Client-4)
+{"qidvid": "Q(5,1)", 
+"rt":2127,
+"start":"2020-02-26 15:57:12.438",
+"end":"2020-02-26 15:57:14.565"
+}
+Iteration 1 Thread Client-2 Q5 version 1	2127
+Total time for iteration 1 :	2127 ms in thread: 2 (Client-2)
+
+AsterixDB Client - Read-Only Workload - Starting Iteration 2 in thread: 2 (Client-2)
+{"qidvid": "Q(5,1)", 
+"rt":2098,
+"start":"2020-02-26 15:57:12.491",
+"end":"2020-02-26 15:57:14.589"
+}
+Iteration 1 Thread Client-0 Q5 version 1	2098
+Total time for iteration 1 :	2098 ms in thread: 0 (Client-0)
+
+AsterixDB Client - Read-Only Workload - Starting Iteration 2 in thread: 0 (Client-0)
+{"qidvid": "Q(5,1)", 
+"rt":1374,
+"start":"2020-02-26 15:57:13.373",
+"end":"2020-02-26 15:57:14.747"
+}
+Iteration 1 Thread Client-3 Q5 version 1	1374
+Total time for iteration 1 :	1374 ms in thread: 3 (Client-3)
+
+AsterixDB Client - Read-Only Workload - Starting Iteration 2 in thread: 3 (Client-3)
+{"qidvid": "Q(5,1)", 
+"rt":2109,
+"start":"2020-02-26 15:57:13.383",
+"end":"2020-02-26 15:57:15.492"
+}
+Iteration 1 Thread Client-1 Q5 version 1	2109
+Total time for iteration 1 :	2110 ms in thread: 1 (Client-1)
+
+AsterixDB Client - Read-Only Workload - Starting Iteration 2 in thread: 1 (Client-1)
+{"qidvid": "Q(5,1)", 
+"rt":2072,
+"start":"2020-02-26 15:57:13.614",
+"end":"2020-02-26 15:57:15.687"
+}
+Iteration 2 Thread Client-4 Q5 version 1	2073
+Total time for iteration 2 :	2073 ms in thread: 4 (Client-4)
+
+AsterixDB Client - Read-Only Workload - Starting Iteration 3 in thread: 4 (Client-4)
+{"qidvid": "Q(5,1)", 
+"rt":1220,
+"start":"2020-02-26 15:57:14.565",
+"end":"2020-02-26 15:57:15.785"
+}
+Iteration 2 Thread Client-2 Q5 version 1	1220
+Total time for iteration 2 :	1220 ms in thread: 2 (Client-2)
+
+AsterixDB Client - Read-Only Workload - Starting Iteration 3 in thread: 2 (Client-2)
+{"qidvid": "Q(5,1)", 
+"rt":2193,
+"start":"2020-02-26 15:57:14.589",
+"end":"2020-02-26 15:57:16.783"
+}
+Iteration 2 Thread Client-0 Q5 version 1	2194
+Total time for iteration 2 :	2194 ms in thread: 0 (Client-0)
+
+AsterixDB Client - Read-Only Workload - Starting Iteration 3 in thread: 0 (Client-0)
+{"qidvid": "Q(5,1)", 
+"rt":2114,
+"start":"2020-02-26 15:57:14.747",
+"end":"2020-02-26 15:57:16.861"
+}
+Iteration 2 Thread Client-3 Q5 version 1	2114
+Total time for iteration 2 :	2114 ms in thread: 3 (Client-3)
+
+AsterixDB Client - Read-Only Workload - Starting Iteration 3 in thread: 3 (Client-3)
+{"qidvid": "Q(5,1)", 
+"rt":1455,
+"start":"2020-02-26 15:57:15.493",
+"end":"2020-02-26 15:57:16.948"
+}
+Iteration 2 Thread Client-1 Q5 version 1	1455
+Total time for iteration 2 :	1455 ms in thread: 1 (Client-1)
+
+AsterixDB Client - Read-Only Workload - Starting Iteration 3 in thread: 1 (Client-1)
+{"qidvid": "Q(5,1)", 
+"rt":2134,
+"start":"2020-02-26 15:57:15.687",
+"end":"2020-02-26 15:57:17.821"
+}
+Iteration 3 Thread Client-4 Q5 version 1	2135
+Total time for iteration 3 :	2135 ms in thread: 4 (Client-4)
+
+AsterixDB Client - Read-Only Workload - Starting Iteration 4 in thread: 4 (Client-4)
+{"qidvid": "Q(5,1)", 
+"rt":2140,
+"start":"2020-02-26 15:57:15.785",
+"end":"2020-02-26 15:57:17.925"
+}
+Iteration 3 Thread Client-2 Q5 version 1	2140
+Total time for iteration 3 :	2140 ms in thread: 2 (Client-2)
+
+AsterixDB Client - Read-Only Workload - Starting Iteration 4 in thread: 2 (Client-2)
+{"qidvid": "Q(5,1)", 
+"rt":1238,
+"start":"2020-02-26 15:57:16.783",
+"end":"2020-02-26 15:57:18.021"
+}
+Iteration 3 Thread Client-0 Q5 version 1	1238
+Total time for iteration 3 :	1238 ms in thread: 0 (Client-0)
+
+AsterixDB Client - Read-Only Workload - Starting Iteration 4 in thread: 0 (Client-0)
+{"qidvid": "Q(5,1)", 
+"rt":2085,
+"start":"2020-02-26 15:57:16.861",
+"end":"2020-02-26 15:57:18.946"
+}
+Iteration 3 Thread Client-3 Q5 version 1	2086
+Total time for iteration 3 :	2086 ms in thread: 3 (Client-3)
+
+AsterixDB Client - Read-Only Workload - Starting Iteration 4 in thread: 3 (Client-3)
+{"qidvid": "Q(5,1)", 
+"rt":2092,
+"start":"2020-02-26 15:57:16.949",
+"end":"2020-02-26 15:57:19.041"
+}
+Iteration 3 Thread Client-1 Q5 version 1	2092
+Total time for iteration 3 :	2092 ms in thread: 1 (Client-1)
+
+AsterixDB Client - Read-Only Workload - Starting Iteration 4 in thread: 1 (Client-1)
+{"qidvid": "Q(5,1)", 
+"rt":1320,
+"start":"2020-02-26 15:57:17.822",
+"end":"2020-02-26 15:57:19.142"
+}
+Iteration 4 Thread Client-4 Q5 version 1	1320
+Total time for iteration 4 :	1320 ms in thread: 4 (Client-4)
+
+AsterixDB Client - Read-Only Workload - Starting Iteration 5 in thread: 4 (Client-4)
+{"qidvid": "Q(5,1)", 
+"rt":2100,
+"start":"2020-02-26 15:57:17.926",
+"end":"2020-02-26 15:57:20.027"
+}
+Iteration 4 Thread Client-2 Q5 version 1	2101
+Total time for iteration 4 :	2101 ms in thread: 2 (Client-2)
+
+AsterixDB Client - Read-Only Workload - Starting Iteration 5 in thread: 2 (Client-2)
+{"qidvid": "Q(5,1)", 
+"rt":2134,
+"start":"2020-02-26 15:57:18.021",
+"end":"2020-02-26 15:57:20.155"
+}
+Iteration 4 Thread Client-0 Q5 version 1	2134
+Total time for iteration 4 :	2134 ms in thread: 0 (Client-0)
+
+AsterixDB Client - Read-Only Workload - Starting Iteration 5 in thread: 0 (Client-0)
+{"qidvid": "Q(5,1)", 
+"rt":1308,
+"start":"2020-02-26 15:57:18.947",
+"end":"2020-02-26 15:57:20.255"
+}
+Iteration 4 Thread Client-3 Q5 version 1	1308
+Total time for iteration 4 :	1308 ms in thread: 3 (Client-3)
+
+AsterixDB Client - Read-Only Workload - Starting Iteration 5 in thread: 3 (Client-3)
+{"qidvid": "Q(5,1)", 
+"rt":2021,
+"start":"2020-02-26 15:57:19.041",
+"end":"2020-02-26 15:57:21.062"
+}
+Iteration 4 Thread Client-1 Q5 version 1	2022
+Total time for iteration 4 :	2022 ms in thread: 1 (Client-1)
+
+AsterixDB Client - Read-Only Workload - Starting Iteration 5 in thread: 1 (Client-1)
+{"qidvid": "Q(5,1)", 
+"rt":2284,
+{"qidvid": "Q(5,1)", 
+"rt":1400,
+"start":"2020-02-26 15:57:19.143",
+"start":"2020-02-26 15:57:20.027",
+"end":"2020-02-26 15:57:21.427"
+}
+"end":"2020-02-26 15:57:21.427"
+}
+Iteration 5 Thread Client-4 Q5 version 1	2286
+Total time for iteration 5 :	2286 ms in thread: 4 (Client-4)
+Iteration 5 Thread Client-2 Q5 version 1	1401
+
+AsterixDB Client - Read-Only Workload - Starting Iteration 6 in thread: 4 (Client-4)
+Total time for iteration 5 :	1401 ms in thread: 2 (Client-2)
+
+AsterixDB Client - Read-Only Workload - Starting Iteration 6 in thread: 2 (Client-2)
+{"qidvid": "Q(5,1)", 
+"rt":1942,
+"start":"2020-02-26 15:57:20.155",
+"end":"2020-02-26 15:57:22.098"
+}
+Iteration 5 Thread Client-0 Q5 version 1	1943
+Total time for iteration 5 :	1943 ms in thread: 0 (Client-0)
+
+AsterixDB Client - Read-Only Workload - Starting Iteration 6 in thread: 0 (Client-0)
+{"qidvid": "Q(5,1)", 
+"rt":2190,
+"start":"2020-02-26 15:57:20.256",
+"end":"2020-02-26 15:57:22.446"
+}
+Iteration 5 Thread Client-3 Q5 version 1	2191
+Total time for iteration 5 :	2191 ms in thread: 3 (Client-3)
+
+AsterixDB Client - Read-Only Workload - Starting Iteration 6 in thread: 3 (Client-3)
+{"qidvid": "Q(5,1)", 
+"rt":1447,
+"start":"2020-02-26 15:57:21.063",
+"end":"2020-02-26 15:57:22.51"
+}
+Iteration 5 Thread Client-1 Q5 version 1	1447
+Total time for iteration 5 :	1447 ms in thread: 1 (Client-1)
+
+AsterixDB Client - Read-Only Workload - Starting Iteration 6 in thread: 1 (Client-1)
+{"qidvid": "Q(5,1)", 
+"rt":1821,
+"start":"2020-02-26 15:57:21.428",
+"end":"2020-02-26 15:57:23.249"
+}
+Iteration 6 Thread Client-2 Q5 version 1	1821
+Total time for iteration 6 :	1821 ms in thread: 2 (Client-2)
+
+AsterixDB Client - Read-Only Workload - Starting Iteration 7 in thread: 2 (Client-2)
+{"qidvid": "Q(5,1)", 
+"rt":2059,
+"start":"2020-02-26 15:57:21.428",
+"end":"2020-02-26 15:57:23.487"
+}
+Iteration 6 Thread Client-4 Q5 version 1	2059
+Total time for iteration 6 :	2059 ms in thread: 4 (Client-4)
+
+AsterixDB Client - Read-Only Workload - Starting Iteration 7 in thread: 4 (Client-4)
+{"qidvid": "Q(5,1)", 
+"rt":1435,
+"start":"2020-02-26 15:57:22.099",
+"end":"2020-02-26 15:57:23.534"
+}
+Iteration 6 Thread Client-0 Q5 version 1	1435
+Total time for iteration 6 :	1436 ms in thread: 0 (Client-0)
+
+AsterixDB Client - Read-Only Workload - Starting Iteration 7 in thread: 0 (Client-0)
+{"qidvid": "Q(5,1)", 
+"rt":1872,
+"start":"2020-02-26 15:57:22.447",
+"end":"2020-02-26 15:57:24.319"
+}
+Iteration 6 Thread Client-3 Q5 version 1	1873
+Total time for iteration 6 :	1874 ms in thread: 3 (Client-3)
+
+AsterixDB Client - Read-Only Workload - Starting Iteration 7 in thread: 3 (Client-3)
+{"qidvid": "Q(5,1)", 
+"rt":2020,
+"start":"2020-02-26 15:57:22.51",
+"end":"2020-02-26 15:57:24.53"
+}
+Iteration 6 Thread Client-1 Q5 version 1	2020
+Total time for iteration 6 :	2020 ms in thread: 1 (Client-1)
+
+AsterixDB Client - Read-Only Workload - Starting Iteration 7 in thread: 1 (Client-1)
+{"qidvid": "Q(5,1)", 
+"rt":1474,
+"start":"2020-02-26 15:57:23.25",
+"end":"2020-02-26 15:57:24.724"
+}
+Iteration 7 Thread Client-2 Q5 version 1	1474
+Total time for iteration 7 :	1474 ms in thread: 2 (Client-2)
+
+AsterixDB Client - Read-Only Workload - Starting Iteration 8 in thread: 2 (Client-2)
+{"qidvid": "Q(5,1)", 
+"rt":1943,
+"start":"2020-02-26 15:57:23.487",
+"end":"2020-02-26 15:57:25.43"
+}
+Iteration 7 Thread Client-4 Q5 version 1	1944
+Total time for iteration 7 :	1944 ms in thread: 4 (Client-4)
+
+AsterixDB Client - Read-Only Workload - Starting Iteration 8 in thread: 4 (Client-4)
+{"qidvid": "Q(5,1)", 
+"rt":2128,
+"start":"2020-02-26 15:57:23.535",
+"end":"2020-02-26 15:57:25.664"
+}
+Iteration 7 Thread Client-0 Q5 version 1	2129
+Total time for iteration 7 :	2129 ms in thread: 0 (Client-0)
+
+AsterixDB Client - Read-Only Workload - Starting Iteration 8 in thread: 0 (Client-0)
+{"qidvid": "Q(5,1)", 
+"rt":1365,
+"start":"2020-02-26 15:57:24.32",
+"end":"2020-02-26 15:57:25.685"
+}
+Iteration 7 Thread Client-3 Q5 version 1	1365
+Total time for iteration 7 :	1365 ms in thread: 3 (Client-3)
+
+AsterixDB Client - Read-Only Workload - Starting Iteration 8 in thread: 3 (Client-3)
+{"qidvid": "Q(5,1)", 
+"rt":2012,
+"start":"2020-02-26 15:57:24.53",
+"end":"2020-02-26 15:57:26.542"
+}
+Iteration 7 Thread Client-1 Q5 version 1	2012
+Total time for iteration 7 :	2012 ms in thread: 1 (Client-1)
+
+AsterixDB Client - Read-Only Workload - Starting Iteration 8 in thread: 1 (Client-1)
+{"qidvid": "Q(5,1)", 
+"rt":1417,
+"start":"2020-02-26 15:57:25.431",
+"end":"2020-02-26 15:57:26.848"
+}
+{"qidvid": "Q(5,1)", 
+"rt":2124,
+Iteration 8 Thread Client-4 Q5 version 1	1417
+"start":"2020-02-26 15:57:24.724",
+Total time for iteration 8 :	1417 ms in thread: 4 (Client-4)
+"end":"2020-02-26 15:57:26.848"
+}
+
+AsterixDB Client - Read-Only Workload - Starting Iteration 9 in thread: 4 (Client-4)
+Iteration 8 Thread Client-2 Q5 version 1	2124
+Total time for iteration 8 :	2124 ms in thread: 2 (Client-2)
+
+AsterixDB Client - Read-Only Workload - Starting Iteration 9 in thread: 2 (Client-2)
+{"qidvid": "Q(5,1)", 
+"rt":1893,
+"start":"2020-02-26 15:57:25.664",
+"end":"2020-02-26 15:57:27.557"
+}
+Iteration 8 Thread Client-0 Q5 version 1	1893
+Total time for iteration 8 :	1893 ms in thread: 0 (Client-0)
+
+AsterixDB Client - Read-Only Workload - Starting Iteration 9 in thread: 0 (Client-0)
+{"qidvid": "Q(5,1)", 
+"rt":1335,
+{"qidvid": "Q(5,1)", 
+"rt":2192,
+"start":"2020-02-26 15:57:26.542",
+"start":"2020-02-26 15:57:25.685",
+"end":"2020-02-26 15:57:27.877"
+}
+"end":"2020-02-26 15:57:27.877"
+}
+Iteration 8 Thread Client-1 Q5 version 1	1335
+Iteration 8 Thread Client-3 Q5 version 1	2192
+Total time for iteration 8 :	1335 ms in thread: 1 (Client-1)
+Total time for iteration 8 :	2192 ms in thread: 3 (Client-3)
+
+AsterixDB Client - Read-Only Workload - Starting Iteration 9 in thread: 1 (Client-1)
+
+AsterixDB Client - Read-Only Workload - Starting Iteration 9 in thread: 3 (Client-3)
+{"qidvid": "Q(5,1)", 
+"rt":1945,
+"start":"2020-02-26 15:57:26.848",
+"end":"2020-02-26 15:57:28.793"
+}
+Iteration 9 Thread Client-4 Q5 version 1	1945
+Total time for iteration 9 :	1945 ms in thread: 4 (Client-4)
+
+AsterixDB Client - Read-Only Workload - Starting Iteration 10 in thread: 4 (Client-4)
+{"qidvid": "Q(5,1)", 
+"rt":2153,
+"start":"2020-02-26 15:57:26.848",
+"end":"2020-02-26 15:57:29.003"
+}
+Iteration 9 Thread Client-2 Q5 version 1	2155
+Total time for iteration 9 :	2155 ms in thread: 2 (Client-2)
+
+AsterixDB Client - Read-Only Workload - Starting Iteration 10 in thread: 2 (Client-2)
+{"qidvid": "Q(5,1)", 
+"rt":1526,
+"start":"2020-02-26 15:57:27.557",
+"end":"2020-02-26 15:57:29.083"
+}
+Iteration 9 Thread Client-0 Q5 version 1	1526
+Total time for iteration 9 :	1526 ms in thread: 0 (Client-0)
+
+AsterixDB Client - Read-Only Workload - Starting Iteration 10 in thread: 0 (Client-0)
+{"qidvid": "Q(5,1)", 
+"rt":1942,
+"start":"2020-02-26 15:57:27.877",
+"end":"2020-02-26 15:57:29.819"
+}
+Iteration 9 Thread Client-3 Q5 version 1	1942
+Total time for iteration 9 :	1942 ms in thread: 3 (Client-3)
+
+AsterixDB Client - Read-Only Workload - Starting Iteration 10 in thread: 3 (Client-3)
+{"qidvid": "Q(5,1)", 
+"rt":1255,
+"start":"2020-02-26 15:57:28.793",
+"end":"2020-02-26 15:57:30.048"
+}
+Iteration 10 Thread Client-4 Q5 version 1	1255
+Total time for iteration 10 :	1255 ms in thread: 4 (Client-4)
+
+AsterixDB Client - Read-Only Workload - Starting Iteration 11 in thread: 4 (Client-4)
+{"qidvid": "Q(5,1)", 
+"rt":2302,
+"start":"2020-02-26 15:57:27.877",
+"end":"2020-02-26 15:57:30.179"
+}
+Iteration 9 Thread Client-1 Q5 version 1	2302
+Total time for iteration 9 :	2302 ms in thread: 1 (Client-1)
+
+AsterixDB Client - Read-Only Workload - Starting Iteration 10 in thread: 1 (Client-1)
+{"qidvid": "Q(5,1)", 
+"rt":2043,
+"start":"2020-02-26 15:57:29.003",
+"end":"2020-02-26 15:57:31.046"
+}
+Iteration 10 Thread Client-2 Q5 version 1	2043
+Total time for iteration 10 :	2043 ms in thread: 2 (Client-2)
+
+AsterixDB Client - Read-Only Workload - Starting Iteration 11 in thread: 2 (Client-2)
+{"qidvid": "Q(5,1)", 
+"rt":2066,
+"start":"2020-02-26 15:57:29.084",
+"end":"2020-02-26 15:57:31.15"
+}
+Iteration 10 Thread Client-0 Q5 version 1	2067
+Total time for iteration 10 :	2067 ms in thread: 0 (Client-0)
+
+AsterixDB Client - Read-Only Workload - Starting Iteration 11 in thread: 0 (Client-0)
+{"qidvid": "Q(5,1)", 
+"rt":1451,
+"start":"2020-02-26 15:57:29.819",
+"end":"2020-02-26 15:57:31.271"
+}
+Iteration 10 Thread Client-3 Q5 version 1	1452
+Total time for iteration 10 :	1452 ms in thread: 3 (Client-3)
+
+AsterixDB Client - Read-Only Workload - Starting Iteration 11 in thread: 3 (Client-3)
+{"qidvid": "Q(5,1)", 
+"rt":2027,
+"start":"2020-02-26 15:57:30.048",
+"end":"2020-02-26 15:57:32.075"
+}
+Iteration 11 Thread Client-4 Q5 version 1	2027
+Total time for iteration 11 :	2027 ms in thread: 4 (Client-4)
+{"qidvid": "Q(5,1)", 
+"rt":2100,
+"start":"2020-02-26 15:57:30.18",
+"end":"2020-02-26 15:57:32.28"
+}
+Iteration 10 Thread Client-1 Q5 version 1	2102
+Total time for iteration 10 :	2102 ms in thread: 1 (Client-1)
+
+AsterixDB Client - Read-Only Workload - Starting Iteration 11 in thread: 1 (Client-1)
+{"qidvid": "Q(5,1)", 
+"rt":1537,
+"start":"2020-02-26 15:57:31.046",
+"end":"2020-02-26 15:57:32.583"
+}
+Iteration 11 Thread Client-2 Q5 version 1	1537
+Total time for iteration 11 :	1537 ms in thread: 2 (Client-2)
+{"qidvid": "Q(5,1)", 
+"rt":1886,
+"start":"2020-02-26 15:57:31.15",
+"end":"2020-02-26 15:57:33.036"
+}
+Iteration 11 Thread Client-0 Q5 version 1	1886
+Total time for iteration 11 :	1886 ms in thread: 0 (Client-0)
+{"qidvid": "Q(5,1)", 
+"rt":1826,
+"start":"2020-02-26 15:57:31.271",
+"end":"2020-02-26 15:57:33.097"
+}
+Iteration 11 Thread Client-3 Q5 version 1	1827
+Total time for iteration 11 :	1827 ms in thread: 3 (Client-3)
+{"qidvid": "Q(5,1)", 
+"rt":978,
+"start":"2020-02-26 15:57:32.281",
+"end":"2020-02-26 15:57:33.259"
+}
+Iteration 11 Thread Client-1 Q5 version 1	978
+Total time for iteration 11 :	978 ms in thread: 1 (Client-1)
+Finished at: 1582761453260
+count :120.0
+total time: 216691.0
+AVG Resp Time: 1805.7583333333334
+Shutdown complete!

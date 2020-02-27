@@ -50,12 +50,12 @@ public class StatsCollector {
        }
     }
 
-    public void updateStat(int qid, int vid, long time) {
+    public void updateStat(int qid, int vid, long clientTime) {
         Pair p = new Pair(qid, vid);
         if (!qvToStat.containsKey(p)) {
             qvToStat.put(p, new QueryStat(qid));
         }
-        qvToStat.get(p).addStat(time);
+        qvToStat.get(p).addStat(clientTime);
     }
 
     public void report() {
@@ -66,8 +66,8 @@ public class StatsCollector {
         try {
             setqvToAvgTimeX();
             PrintWriter pw =
-                    new PrintWriter(new File("./files/output/user"+Thread.currentThread().getName()+".json"));
-            PrintWriter avgpw = new PrintWriter(new File("./files/output/avg/avg"+Thread.currentThread().getName()+".json"));
+                    new PrintWriter(new File(Driver.BIGFUN_HOME+"/files/output/user_"+statsFile));
+            PrintWriter avgpw = new PrintWriter(new File(Driver.BIGFUN_HOME+"/files/output/avg/avg_"+statsFile));
             if (startRound != 0) {
                 ignore = -1;
             }

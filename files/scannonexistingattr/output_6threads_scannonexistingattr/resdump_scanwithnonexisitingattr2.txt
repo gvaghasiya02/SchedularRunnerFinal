@@ -1,0 +1,288 @@
+5
+Ver 1
+select * from w1 ds1 where ds1.unique4=10; 
+
+responseTime : 2200 Msec
+{
+	"requestID": "4630b0a7-e3d6-483c-8074-d270f18b4663",
+	"signature": {
+		"*": "*"
+	},
+	"results": [  ]
+	,
+	"plans":{},
+	"status": "success",
+	"metrics": {
+		"elapsedTime": "2.100667085s",
+		"executionTime": "2.092437296s",
+		"resultCount": 0,
+		"resultSize": 0,
+		"processedObjects": 415690
+	}
+}
+
+
+5
+Ver 1
+select * from w1 ds1 where ds1.unique4=10; 
+
+responseTime : 2136 Msec
+{
+	"requestID": "eaffff82-a8c8-4c52-ad3e-b8001b2e256d",
+	"signature": {
+		"*": "*"
+	},
+	"results": [  ]
+	,
+	"plans":{},
+	"status": "success",
+	"metrics": {
+		"elapsedTime": "1.997767791s",
+		"executionTime": "1.991007901s",
+		"resultCount": 0,
+		"resultSize": 0,
+		"processedObjects": 415690
+	}
+}
+
+
+5
+Ver 1
+select * from w1 ds1 where ds1.unique4=10; 
+
+responseTime : 2251 Msec
+{
+	"requestID": "97f69e76-c53d-4db4-91a8-8c65aa759324",
+	"signature": {
+		"*": "*"
+	},
+	"results": [  ]
+	,
+	"plans":{},
+	"status": "success",
+	"metrics": {
+		"elapsedTime": "2.161251673s",
+		"executionTime": "2.159197736s",
+		"resultCount": 0,
+		"resultSize": 0,
+		"processedObjects": 415690
+	}
+}
+
+
+5
+Ver 1
+select * from w1 ds1 where ds1.unique4=10; 
+
+responseTime : 2081 Msec
+{
+	"requestID": "76557a44-56d6-42e7-baa5-496adc6bdee4",
+	"signature": {
+		"*": "*"
+	},
+	"results": [  ]
+	,
+	"plans":{},
+	"status": "success",
+	"metrics": {
+		"elapsedTime": "2.018624947s",
+		"executionTime": "2.01664531s",
+		"resultCount": 0,
+		"resultSize": 0,
+		"processedObjects": 415690
+	}
+}
+
+
+5
+Ver 1
+select * from w1 ds1 where ds1.unique4=10; 
+
+responseTime : 2428 Msec
+{
+	"requestID": "5d78d6e0-b877-41c0-926c-a03db12fde51",
+	"signature": {
+		"*": "*"
+	},
+	"results": [  ]
+	,
+	"plans":{},
+	"status": "success",
+	"metrics": {
+		"elapsedTime": "2.340356041s",
+		"executionTime": "2.334605838s",
+		"resultCount": 0,
+		"resultSize": 0,
+		"processedObjects": 415690
+	}
+}
+
+
+5
+Ver 1
+select * from w1 ds1 where ds1.unique4=10; 
+
+responseTime : 2560 Msec
+{
+	"requestID": "4303f7bf-bbde-44d0-a7a5-3f87f90d7249",
+	"signature": {
+		"*": "*"
+	},
+	"results": [  ]
+	,
+	"plans":{},
+	"status": "success",
+	"metrics": {
+		"elapsedTime": "2.41543953s",
+		"executionTime": "2.413528222s",
+		"resultCount": 0,
+		"resultSize": 0,
+		"processedObjects": 415690
+	}
+}
+
+
+5
+Ver 1
+select * from w1 ds1 where ds1.unique4=10; 
+
+responseTime : 2145 Msec
+{
+	"requestID": "0ac5c245-b783-48dc-9037-9d26ac0369d6",
+	"signature": {
+		"*": "*"
+	},
+	"results": [  ]
+	,
+	"plans":{},
+	"status": "success",
+	"metrics": {
+		"elapsedTime": "2.004689339s",
+		"executionTime": "1.998587268s",
+		"resultCount": 0,
+		"resultSize": 0,
+		"processedObjects": 415690
+	}
+}
+
+
+5
+Ver 1
+select * from w1 ds1 where ds1.unique4=10; 
+
+responseTime : 2055 Msec
+{
+	"requestID": "77d78d72-490c-4ca4-bb10-245b34d1b46a",
+	"signature": {
+		"*": "*"
+	},
+	"results": [  ]
+	,
+	"plans":{},
+	"status": "success",
+	"metrics": {
+		"elapsedTime": "1.996942948s",
+		"executionTime": "1.990060037s",
+		"resultCount": 0,
+		"resultSize": 0,
+		"processedObjects": 415690
+	}
+}
+
+
+5
+Ver 1
+select * from w1 ds1 where ds1.unique4=10; 
+
+responseTime : 2165 Msec
+{
+	"requestID": "4c6c8b36-c065-49ae-a9f8-fd818f7f600b",
+	"signature": {
+		"*": "*"
+	},
+	"results": [  ]
+	,
+	"plans":{},
+	"status": "success",
+	"metrics": {
+		"elapsedTime": "2.103834811s",
+		"executionTime": "2.102396373s",
+		"resultCount": 0,
+		"resultSize": 0,
+		"processedObjects": 415690
+	}
+}
+
+
+5
+Ver 1
+select * from w1 ds1 where ds1.unique4=10; 
+
+responseTime : 2052 Msec
+{
+	"requestID": "34adf648-eea9-4d22-8e69-c318a6dddf0b",
+	"signature": {
+		"*": "*"
+	},
+	"results": [  ]
+	,
+	"plans":{},
+	"status": "success",
+	"metrics": {
+		"elapsedTime": "1.989534274s",
+		"executionTime": "1.987964477s",
+		"resultCount": 0,
+		"resultSize": 0,
+		"processedObjects": 415690
+	}
+}
+
+
+5
+Ver 1
+select * from w1 ds1 where ds1.unique4=10; 
+
+responseTime : 2120 Msec
+{
+	"requestID": "e88cf93e-9f26-4bba-ae85-097a47ca35b6",
+	"signature": {
+		"*": "*"
+	},
+	"results": [  ]
+	,
+	"plans":{},
+	"status": "success",
+	"metrics": {
+		"elapsedTime": "2.057062245s",
+		"executionTime": "2.055468296s",
+		"resultCount": 0,
+		"resultSize": 0,
+		"processedObjects": 415690
+	}
+}
+
+
+5
+Ver 1
+select * from w1 ds1 where ds1.unique4=10; 
+
+responseTime : 2165 Msec
+{
+	"requestID": "59264057-f41f-494b-af2d-9ff549cb23d7",
+	"signature": {
+		"*": "*"
+	},
+	"results": [  ]
+	,
+	"plans":{},
+	"status": "success",
+	"metrics": {
+		"elapsedTime": "2.102316267s",
+		"executionTime": "2.10052151s",
+		"resultCount": 0,
+		"resultSize": 0,
+		"processedObjects": 415690
+	}
+}
+
+

@@ -57,7 +57,7 @@ public class AsterixConcurrentReadOnlyWorkload extends AsterixClientReadOnlyWork
             if (!executorService.isTerminated()) {
                 System.out.println("canceling all pending tasks");
             }
-            System.out.println("Finished at: "+System.currentTimeMillis());
+
             executorService.shutdownNow();
 
             System.out.println("count :"+count_all_queries.doubleValue());
@@ -93,7 +93,7 @@ public class AsterixConcurrentReadOnlyWorkload extends AsterixClientReadOnlyWork
             String qSeqFile, String resultsFile, String server) {
         //TODO: Append the result and other stat files with threadIds.
         IntStream.range(0, numReaders).forEach(x -> {
-            String statsF = statsFile.contains(".txt")?statsFile.split(".txt")[0]+x+".txt":statsFile+x+".txt";
+            String statsF = statsFile.contains(".json")?statsFile.split(".json")[0]+x+".json":statsFile+x+".json";
             String resF = resultsFile.contains(".txt")?resultsFile.split(".txt")[0]+x+".txt":resultsFile+x+".txt";
             try {
                 clUtilMap.put(x, new AsterixReadOnlyClientUtility(ccUrl, qIxFile, qGenConfigFile, statsF, ignore, qSeqFile,
@@ -107,7 +107,8 @@ public class AsterixConcurrentReadOnlyWorkload extends AsterixClientReadOnlyWork
 
     @Override
     public void execute() {
-        System.out.println("started at : " +System.currentTimeMillis());
+        long starttime = System.currentTimeMillis();
+        System.out.println("started at : " +starttime);
         IntStream.range(0, numReaders).forEach(readerId -> {
             executorService.submit(() -> {
                 long iteration_start = 0l;
@@ -151,6 +152,10 @@ public class AsterixConcurrentReadOnlyWorkload extends AsterixClientReadOnlyWork
             });
         });
 
+        long endtime = System.currentTimeMillis();
+        System.out.println("Finished at: "+endtime);
+        System.out.println("Total experiment execution time : " +(endtime-starttime)+" (ms)");
+        System.out.println("Throughput for "+numReaders+" users: " +(double)(numReaders*1.0/(endtime-starttime)*1.0));
         shutDownExecutors();
     }
 

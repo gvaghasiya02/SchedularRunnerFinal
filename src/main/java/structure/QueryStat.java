@@ -25,7 +25,9 @@ import config.Constants;
 public class QueryStat {
 
     int qid;
-    ArrayList<Long> times;
+    ArrayList<Long> clientTimes;
+    ArrayList<Long> elapsedTimes;
+    ArrayList<Long> executionTimes;
     double totalTime;
     double totalCount;
 
@@ -35,12 +37,12 @@ public class QueryStat {
 
     public QueryStat(int qId) {
         qid = qId;
-        times = new ArrayList<Long>();
+        clientTimes = new ArrayList<Long>();
         totalTime = totalCount = 0;
     }
 
     public void reset(double lastAvg, double lastRSSize, double lastCount) {
-        times.clear();
+        clientTimes.clear();
         if (lastAvg >= 0) {
             totalTime += (lastAvg * lastCount);
             totalCount += lastCount;
@@ -52,12 +54,12 @@ public class QueryStat {
     }
 
     public void addStat(long time) {
-        times.add(time);
+        clientTimes.add(time);
     }
 
-    public String getTimes() {
+    public String getClientTimes() {
         StringBuffer sb = new StringBuffer();
-        for (long t : times) {
+        for (long t : clientTimes) {
             sb.append(t + "\t");
         }
         return sb.toString();
@@ -65,7 +67,7 @@ public class QueryStat {
     public String getTimesForChart(){
         StringBuffer sb = new StringBuffer();
         int index=0;
-        for (long t : times) {
+        for (long t : clientTimes) {
             if(index>0)
                 sb.append(",");
             sb.append(t);
@@ -77,7 +79,7 @@ public class QueryStat {
     public String getIterations() {
         int i=1;
         String result="";
-        for(long t:times) {
+        for(long t: clientTimes) {
             if(i > 1)
                 result = result+",";
             result = result+i;
@@ -87,17 +89,17 @@ public class QueryStat {
     }
 
     public int getTotalSize() {
-        return times.size();
+        return clientTimes.size();
     }
 
     public double getAverageRT(int ignore) {
-        if (ignore >= times.size()) {
+        if (ignore >= clientTimes.size()) {
             return Constants.INVALID_TIME;
         }
         double sum = 0;
         double count = 0;
         int skip = 0;
-        Iterator<Long> it = times.iterator();
+        Iterator<Long> it = clientTimes.iterator();
         while (it.hasNext()) {
             double d = it.next();
             if ((++skip) > ignore) {
@@ -112,7 +114,7 @@ public class QueryStat {
         double standardDeviation = 0;
         double count = 0;
         int skip = 0;
-        Iterator<Long> it = times.iterator();
+        Iterator<Long> it = clientTimes.iterator();
         while (it.hasNext()) {
             double d = it.next();
             if ((++skip) > ignore) {

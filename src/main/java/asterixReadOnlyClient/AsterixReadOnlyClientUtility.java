@@ -14,44 +14,30 @@
  */
 package asterixReadOnlyClient;
 
-import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.net.ConnectException;
 import java.net.URI;
-import java.net.URISyntaxException;
+import java.net.URLEncoder;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
+import java.nio.charset.StandardCharsets;
 import java.sql.Timestamp;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Base64;
-import java.util.HashMap;
-import java.util.List;
+import java.time.Duration;
+import java.util.*;
+import java.util.concurrent.TimeUnit;
 
 import driver.Driver;
-import org.apache.http.HttpHeaders;
+import okhttp3.*;
 import org.apache.http.NameValuePair;
-import org.apache.http.auth.AuthScope;
-import org.apache.http.auth.Credentials;
-import org.apache.http.auth.UsernamePasswordCredentials;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.params.AuthPolicy;
 import org.apache.http.client.utils.URIBuilder;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.message.BasicNameValuePair;
-import org.apache.http.util.EntityUtils;
-
 import client.AbstractReadOnlyClientUtility;
 import config.Constants;
 
 public class AsterixReadOnlyClientUtility extends AbstractReadOnlyClientUtility {
 
     String ccUrl;
-    DefaultHttpClient httpclient;
+    OkHttpClient httpclient;
     ArrayList<NameValuePair> httpPostParams;
     HttpPost httpPost;
     URIBuilder roBuilder;
@@ -67,23 +53,7 @@ public class AsterixReadOnlyClientUtility extends AbstractReadOnlyClientUtility 
 
     @Override
     public void init() {
-
-        httpclient = new DefaultHttpClient();
-        UsernamePasswordCredentials usernamepass = new UsernamePasswordCredentials("Administrator", "pass123");
-        httpclient.getCredentialsProvider().setCredentials(AuthScope.ANY, usernamepass);
-
-        httpPost = new HttpPost();
-        httpPostParams = new ArrayList<>();
-        try {
-            roBuilder = new URIBuilder(getReadUrl());
-            roBuilder.setUserInfo("Administrator", "pass123");
-            System.out.println(roBuilder.toString());
-        } catch (URISyntaxException e) {
-            System.err.println("Problem in initializing Read-Only URI Builder");
-            e.printStackTrace();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        httpclient=new OkHttpClient.Builder().readTimeout(1, TimeUnit.MINUTES).retryOnConnectionFailure(true).build();
     }
 
     @Override
@@ -91,7 +61,6 @@ public class AsterixReadOnlyClientUtility extends AbstractReadOnlyClientUtility 
         if (resPw != null) {
             resPw.close();
         }
-        httpclient.getConnectionManager().shutdown();
     }
 
     @Override
@@ -99,40 +68,44 @@ public class AsterixReadOnlyClientUtility extends AbstractReadOnlyClientUtility 
 
        Driver.clientToRunningQueries.put(Thread.currentThread().getName(), qid+"-"+vid);
         content = null;
-            URI uri = roBuilder.build();
-            httpPost.setURI(uri);
-            httpPostParams.clear();
-            httpPostParams.add(new BasicNameValuePair("statement", qBody));
-            httpPostParams.add(new BasicNameValuePair("mode", "immediate"));
-            httpPost.setEntity(new UrlEncodedFormEntity(httpPostParams));
 
-
+        Map<Object, Object> data = new HashMap<>();
+        data.put("\"statement\"", qBody);
+        data.put("mode", "immediate");
+        //HttpRequest request = HttpRequest.newBuilder().uri(URI.create(getReadUrl())).setHeader("User-Agent", "Bigfun").header("Authorization", basicAuth("Administrator", "pass123")).POST(HttpRequest.BodyPublishers.ofString("statement=select 1;")).build();
+        RequestBody formBody = new FormBody.Builder().add("statement", qBody).add("mode", "immediate").build();
+        Request request = new Request.Builder().url(getReadUrl()).addHeader("Connection","close").addHeader("User-Agent", "Bigfun").header("Authorization", basicAuth("Administrator", "pass123")).post(formBody).build();
 
             long s = System.currentTimeMillis();
             Timestamp startTimeStamp = new Timestamp(System.currentTimeMillis());
-            HttpResponse response = httpclient.execute(httpPost);
+            try (Response response = httpclient.newCall(request).execute()){
 
-           Driver.clientToRunningQueries.remove(Thread.currentThread().getName());
-            long e = System.currentTimeMillis();
-            HttpEntity entity = response.getEntity();
-            content = EntityUtils.toString(entity);
-            Timestamp endTimeStamp = new Timestamp(System.currentTimeMillis());
-            long rspTime = (e - s);
-            System.out.println("{\"qidvid\": \"Q("+qid+","+vid+")\", \n" + "\"rt\":"+rspTime+","); //trace the
-            // progress
-            System.out.println("\"start\":\"" +startTimeStamp +"\",");
-            System.out.println("\"end\":\""+endTimeStamp+"\"\n}");
+                Driver.clientToRunningQueries.remove(Thread.currentThread().getName());
+                long e = System.currentTimeMillis();
+                content = response.body().string();
+                Timestamp endTimeStamp = new Timestamp(System.currentTimeMillis());
+                long rspTime = (e - s);
+                System.out.println("{\"qidvid\": \"Q(" + qid + "," + vid + ")\", \n" + "\"rt\":" + rspTime + ","); //trace the
+                // progress
+                System.out.println("\"start\":\"" + startTimeStamp + "\",");
+                System.out.println("\"end\":\"" + endTimeStamp + "\"\n}");
                 updateStat(qid, vid, rspTime);
                 if (resPw != null) {
                     resPw.println(qid);
                     resPw.println("Ver " + vid);
                     resPw.println(qBody + "\n");
                     resPw.println("responseTime : " + rspTime + " Msec");
+                    System.out.println(content+"\n");
                     if (dumpResults) {
                         resPw.println(content + "\n");
                     }
                 }
+            }
+    }
 
+
+    private static String basicAuth(String username, String password) {
+        return "Basic " + Base64.getEncoder().encodeToString((username + ":" + password).getBytes());
     }
 
     private String getReadUrl() throws Exception {

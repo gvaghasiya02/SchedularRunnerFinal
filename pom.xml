@@ -6,6 +6,11 @@
   <name>AsterixDB BigFUN Client</name>
   <dependencies>
       <dependency>
+          <groupId>com.squareup.okhttp3</groupId>
+          <artifactId>okhttp</artifactId>
+          <version>4.2.2</version>
+      </dependency>
+      <dependency>
           <groupId>io.prometheus</groupId>
           <artifactId>simpleclient</artifactId>
           <version>0.8.1</version>
@@ -55,8 +60,8 @@
            <groupId>org.apache.maven.plugins</groupId>
            <artifactId>maven-compiler-plugin</artifactId>
            <configuration>
-               <source>1.8</source>
-               <target>1.8</target>
+               <source>11</source>
+               <target>11</target>
            </configuration>
        </plugin>
 

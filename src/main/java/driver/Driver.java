@@ -72,13 +72,14 @@ public class Driver {
                 client.bigFunHome = BIGFUN_HOME;
                 try {
                     client.execute();
+                    client.generateReport();
                 } catch (Exception e) {
                     e.printStackTrace();
                     server.stop();
-                    executorService.shutdownNow();
+                    //executorService.shutdownNow();
                 }
                 //Stats Report
-                client.generateReport();
+
             }));
         try {
             server.stop();
