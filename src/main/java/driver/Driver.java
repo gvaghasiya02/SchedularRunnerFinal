@@ -57,15 +57,10 @@ public class Driver {
         HTTPServer server = new HTTPServer(new InetSocketAddress(2020), registery);
         Map<String,String> cmd = processCommandLineConfig(args);
 
-        String confName = cmd.containsKey("conf")?cmd.get("conf"):"bigfun-conf.json";
+        String confName = cmd.containsKey("conf")?cmd.get("conf"):"bigfun-conf_1node.json";
         String clientConfigFile = BIGFUN_HOME+"/conf/"+confName;
 
-        //Create output file
-        outputFolder = BIGFUN_HOME+"/files/output/"+confName.split(".json")[0];
-        File dir = new File(outputFolder+"/avg");
-        if (!dir.exists()){
-            dir.mkdirs();
-        }
+
 
         AbstractClientConfig clientConfig = new AsterixClientConfig(clientConfigFile, cmd);
         clientConfig.parseConfigFile();
@@ -78,6 +73,19 @@ public class Driver {
                     return;
                 }
                 numberOfConcurrentThreads = (Integer)clientConfig.getParamValue(Constants.NUM_CONCURRENT_READERS, c);
+                String workload = Constants.WORKLOAD;
+                String numberOfThreads = Integer.toString(numberOfConcurrentThreads);
+                if (clientConfig.isParamSet(Constants.WORKLOAD, c)) {
+                    workload = (String)clientConfig.getParams().get(c).get(Constants.WORKLOAD);
+                }
+
+                //Create output file
+                outputFolder = BIGFUN_HOME+"/files/output/"+confName.split(".json")[0]+"_"+workload.split(".txt")[0]+"_"+numberOfThreads+"users";
+                File dir = new File(outputFolder+"/avg");
+                if (!dir.exists()){
+                    dir.mkdirs();
+                }
+
                 String clientTypeTag = (String) clientConfig.getParamValue(Constants.CLIENT_TYPE, c);
                 AbstractClient client = null;
                 switch (clientTypeTag) {

@@ -50,7 +50,7 @@ public abstract class AbstractClientConfig {
             e.printStackTrace();
         }
 
-        // Set or reset config values with those from command line.Reset for all users(json element in json array of bigfun-conf.json).
+        // Set or reset config values with those from command line.Reset for all users(json element in json array of bigfun-conf_1node.json).
         for (int i = 0; i <params.size();i++) {
             for (Map.Entry<String, String> entry: commandLine.entrySet()) {
                 params.get(i).put(entry.getKey(),entry.getValue());

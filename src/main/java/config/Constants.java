@@ -74,7 +74,7 @@ public class Constants {
     public static final long DEFAULT_MAX_ID = 10000L;
     public static final long DEFAULT_MIN_ID = 1L;
     public static final long DEFAULT_SEED = 10L;
-    public static final String BIGFUN_CONFIG_FILE_NAME = "bigfun-conf.json";
+    public static final String BIGFUN_CONFIG_FILE_NAME = "bigfun-conf_1node.json";
     public static final String Q_IX_FILE_NAME = "query-index.json";
     public static final String WORKLOAD_FILE_NAME = "workload.txt";
     public static final String STATS_FILE_NAME = "stats.json";
