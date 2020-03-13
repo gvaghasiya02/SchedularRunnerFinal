@@ -1,4 +1,0 @@
- USE unlimitedMemory;
-select count(*) from wisconsin_ds1 ds1, wisconsin_ds2 ds2 where ds1.unique1 /*+ join-mem
-@PARAM
-, build-size 1024, build-partition 20 , data-insertion bestfit */ = ds2.unique1 and  ds1.unique2 = ds2.unique2 and  ds1.onePercent = ds2.onePercent and ds1.tenPercent = ds2.tenPercent and ds1.twentyFivePercent= ds2.twentyFivePercent and ds1.fiftyPercent = ds2.fiftyPercent and ds1.stringu1 = ds2.stringu1 and ds1.stringu2 = ds2.stringu2;

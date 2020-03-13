@@ -1,3 +1,0 @@
-use fixedintersize;
-
-SELECT COUNT(*) FROM wisconsin_1p5MOLD R WHERE R.unique1 = R.unique1;

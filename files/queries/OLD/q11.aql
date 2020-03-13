@@ -1,3 +1,0 @@
-set `compiler.joinmemory`  '2047MB';
-use fixedintersize;
-select * from  wisconsin_1K R, wisconsin_960K2 S where R.unique1 /*+ build-size 1932 */= S.unique1  limit 1;

@@ -1,1 +1,0 @@
-select count(*) from wisconsin_clearcache_50gb;

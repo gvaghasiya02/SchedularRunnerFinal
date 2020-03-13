@@ -1,7 +1,0 @@
-q0: clear cache
-q1-q8:1 to 8 joins, hybrid RDT
-q11-q18: 1 to 8 join, LDT
-q24: RDT 4 joins, given memory is divided equally among them
-q314: static RDT with 4 joins and 1 break
-q324: static RDT with 4 joins and 2 breaks
-q334: static RDT with 4 joins and 3 breaks

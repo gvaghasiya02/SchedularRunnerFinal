@@ -1,3 +1,0 @@
-use fixedintersize;
-
-SELECT COUNT(*) FROM  wisconsin_960K2 R WHERE R.unique1 = R.unique1 ;

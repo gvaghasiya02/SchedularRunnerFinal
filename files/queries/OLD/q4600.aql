@@ -1,3 +1,0 @@
-SELECT *
-FROM wisconsinStd0WithoutBigObject2 ds2, wisconsinStd0WithoutBigObject1 ds1, wisconsinStd0WithoutBigObject3 ds3, wisconsinStd0WithoutBigObject4 ds4
-WHERE ds1.unique2 < int64("60297") and ds2.unique2 < int64("60297") and ds3.unique2 < int64("60297") and ds4.unique2 < int64("60297") and ds1.unique2 /*+ build-size 123 , join-mem 128*/= ds2.unique2 AND ds2.unique2 /*+ build-size 123,temp, join-mem 128 */= ds3.unique2 AND ds3.unique2 /*+ build-size 123, join-mem 256 */= ds4.unique2 limit 1;
