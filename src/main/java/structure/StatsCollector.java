@@ -16,7 +16,6 @@ package structure;
 
 import driver.Driver;
 
-import javax.swing.*;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -106,9 +105,14 @@ public class StatsCollector {
                         .append("\"elapsedTimeSTD\":" ).append(elapsedTimeSTD).append(",\n")
                             .append("\"executionTimeAvg\":").append(executionTimeAvg).append(",\n")
                             .append("\"executionTimeSTD\":" ).append(executionTimeSTD).append("\n}\n");
-                    Driver.totalElapsedTime += qs.elapsedTimes.stream().reduce(0.0, (a,b) -> a+b);
-                    Driver.totalExecutionTime += qs.executionTimes.stream().reduce(0.0, (a,b) -> a+b);
-                    Driver.totalClientResponseTime += qs.clientTimes.stream().reduce(0.0, (a,b) -> a+b);
+                    if(!Driver.totalElapsedTime_perqidvid.containsKey(p.toString())){
+                        Driver.totalElapsedTime_perqidvid.put(p.toString(), (double) 0);
+                        Driver.totalExecutionTime_perqidvid.put(p.toString(), (double) 0);
+                        Driver.totalClientResponseTime_perqidvid.put(p.toString(), (double) 0);
+                    }
+                    Driver.totalElapsedTime_perqidvid.put(p.toString(),Driver.totalElapsedTime_perqidvid.get(p.toString())+elapsedTimeAvg);
+                    Driver.totalExecutionTime_perqidvid.put(p.toString(),Driver.totalExecutionTime_perqidvid.get(p.toString())+executionTimeAvg);
+                    Driver.totalClientResponseTime_perqidvid.put(p.toString(),Driver.totalClientResponseTime_perqidvid.get(p.toString())+clientSideResponseTimeAvg);
                     resCount++;
             }
             tsb.append("]");
