@@ -1,0 +1,300 @@
+6
+Ver 1
+select value sleep(1,500); 
+
+responseTime : 1095 Msec
+{
+	"requestID": "76141853-b220-4757-9a39-5421a5dc0f71",
+	"signature": {
+		"*": "*"
+	},
+	"results": [ 1
+ ]
+	,
+	"plans":{},
+	"status": "success",
+	"metrics": {
+		"elapsedTime": "1.003651026s",
+		"executionTime": "988.011584ms",
+		"resultCount": 1,
+		"resultSize": 2,
+		"processedObjects": 0
+	}
+}
+
+
+6
+Ver 1
+select value sleep(1,500); 
+
+responseTime : 672 Msec
+{
+	"requestID": "8985e39e-beca-4908-91be-769996d1fa4a",
+	"signature": {
+		"*": "*"
+	},
+	"results": [ 1
+ ]
+	,
+	"plans":{},
+	"status": "success",
+	"metrics": {
+		"elapsedTime": "604.479842ms",
+		"executionTime": "601.391292ms",
+		"resultCount": 1,
+		"resultSize": 2,
+		"processedObjects": 0
+	}
+}
+
+
+6
+Ver 1
+select value sleep(1,500); 
+
+responseTime : 924 Msec
+{
+	"requestID": "80a0ba93-d2dd-401e-af1f-3f55a466c840",
+	"signature": {
+		"*": "*"
+	},
+	"results": [ 1
+ ]
+	,
+	"plans":{},
+	"status": "success",
+	"metrics": {
+		"elapsedTime": "800.284012ms",
+		"executionTime": "797.833245ms",
+		"resultCount": 1,
+		"resultSize": 2,
+		"processedObjects": 0
+	}
+}
+
+
+6
+Ver 1
+select value sleep(1,500); 
+
+responseTime : 587 Msec
+{
+	"requestID": "47eb4d3c-d569-4f5b-bf18-118deb4a5979",
+	"signature": {
+		"*": "*"
+	},
+	"results": [ 1
+ ]
+	,
+	"plans":{},
+	"status": "success",
+	"metrics": {
+		"elapsedTime": "526.373286ms",
+		"executionTime": "519.04638ms",
+		"resultCount": 1,
+		"resultSize": 2,
+		"processedObjects": 0
+	}
+}
+
+
+6
+Ver 1
+select value sleep(1,500); 
+
+responseTime : 859 Msec
+{
+	"requestID": "9244bb21-daec-45a8-b163-50afbd448343",
+	"signature": {
+		"*": "*"
+	},
+	"results": [ 1
+ ]
+	,
+	"plans":{},
+	"status": "success",
+	"metrics": {
+		"elapsedTime": "799.364761ms",
+		"executionTime": "797.544398ms",
+		"resultCount": 1,
+		"resultSize": 2,
+		"processedObjects": 0
+	}
+}
+
+
+6
+Ver 1
+select value sleep(1,500); 
+
+responseTime : 1008 Msec
+{
+	"requestID": "7ea44541-dfdc-40b0-bf54-30ee46c3c01d",
+	"signature": {
+		"*": "*"
+	},
+	"results": [ 1
+ ]
+	,
+	"plans":{},
+	"status": "success",
+	"metrics": {
+		"elapsedTime": "926.655636ms",
+		"executionTime": "923.863298ms",
+		"resultCount": 1,
+		"resultSize": 2,
+		"processedObjects": 0
+	}
+}
+
+
+6
+Ver 1
+select value sleep(1,500); 
+
+responseTime : 641 Msec
+{
+	"requestID": "223f1b3a-2c9f-41f9-97cd-d47ae5491ac5",
+	"signature": {
+		"*": "*"
+	},
+	"results": [ 1
+ ]
+	,
+	"plans":{},
+	"status": "success",
+	"metrics": {
+		"elapsedTime": "582.268302ms",
+		"executionTime": "578.790669ms",
+		"resultCount": 1,
+		"resultSize": 2,
+		"processedObjects": 0
+	}
+}
+
+
+6
+Ver 1
+select value sleep(1,500); 
+
+responseTime : 861 Msec
+{
+	"requestID": "a57087b3-ad78-4ffc-b2b6-c02fd32f2309",
+	"signature": {
+		"*": "*"
+	},
+	"results": [ 1
+ ]
+	,
+	"plans":{},
+	"status": "success",
+	"metrics": {
+		"elapsedTime": "801.939851ms",
+		"executionTime": "799.605455ms",
+		"resultCount": 1,
+		"resultSize": 2,
+		"processedObjects": 0
+	}
+}
+
+
+6
+Ver 1
+select value sleep(1,500); 
+
+responseTime : 1056 Msec
+{
+	"requestID": "26fb1ce1-598b-4dbe-8fb9-9c28616fdd40",
+	"signature": {
+		"*": "*"
+	},
+	"results": [ 1
+ ]
+	,
+	"plans":{},
+	"status": "success",
+	"metrics": {
+		"elapsedTime": "951.583879ms",
+		"executionTime": "947.006729ms",
+		"resultCount": 1,
+		"resultSize": 2,
+		"processedObjects": 0
+	}
+}
+
+
+6
+Ver 1
+select value sleep(1,500); 
+
+responseTime : 598 Msec
+{
+	"requestID": "1bc1fff6-fb7f-4c0b-b7dc-869551bbe350",
+	"signature": {
+		"*": "*"
+	},
+	"results": [ 1
+ ]
+	,
+	"plans":{},
+	"status": "success",
+	"metrics": {
+		"elapsedTime": "539.906045ms",
+		"executionTime": "535.880369ms",
+		"resultCount": 1,
+		"resultSize": 2,
+		"processedObjects": 0
+	}
+}
+
+
+6
+Ver 1
+select value sleep(1,500); 
+
+responseTime : 934 Msec
+{
+	"requestID": "609e0846-3f3e-455f-86d2-7d288ca7d384",
+	"signature": {
+		"*": "*"
+	},
+	"results": [ 1
+ ]
+	,
+	"plans":{},
+	"status": "success",
+	"metrics": {
+		"elapsedTime": "819.322586ms",
+		"executionTime": "817.522314ms",
+		"resultCount": 1,
+		"resultSize": 2,
+		"processedObjects": 0
+	}
+}
+
+
+6
+Ver 1
+select value sleep(1,500); 
+
+responseTime : 574 Msec
+{
+	"requestID": "919b7581-16d4-4f09-9099-e73b0f72ca83",
+	"signature": {
+		"*": "*"
+	},
+	"results": [ 1
+ ]
+	,
+	"plans":{},
+	"status": "success",
+	"metrics": {
+		"elapsedTime": "513.622973ms",
+		"executionTime": "511.048797ms",
+		"resultCount": 1,
+		"resultSize": 2,
+		"processedObjects": 0
+	}
+}
+
+

@@ -29,10 +29,12 @@ public abstract class AbstractClientConfig {
     private String clientConfigFile;
 
     private List<Map<String, Object>> params;
+    private Map<String,String> commandLine;
 
-    public AbstractClientConfig(String clientConfigFile) {
+    public AbstractClientConfig(String clientConfigFile, Map<String, String> cmd) {
         this.clientConfigFile = clientConfigFile;
         this.params = new LinkedList<>();
+        this.commandLine = cmd;
     }
 
     public abstract AbstractReadOnlyClient readReadOnlyClientConfig(String bigFunHomePath,int cid);
@@ -46,6 +48,13 @@ public abstract class AbstractClientConfig {
         } catch (Exception e) {
             System.err.println("Problem in parsing the JSON config file.");
             e.printStackTrace();
+        }
+
+        // Set or reset config values with those from command line.Reset for all users(json element in json array of bigfun-conf.json).
+        for (int i = 0; i <params.size();i++) {
+            for (Map.Entry<String, String> entry: commandLine.entrySet()) {
+                params.get(i).put(entry.getKey(),entry.getValue());
+            }
         }
     }
 

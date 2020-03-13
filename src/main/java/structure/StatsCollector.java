@@ -16,6 +16,7 @@ package structure;
 
 import driver.Driver;
 
+import javax.swing.*;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -50,12 +51,14 @@ public class StatsCollector {
        }
     }
 
-    public void updateStat(int qid, int vid, long clientTime) {
+    public void updateStat(int qid, int vid, double clientTime, double elapsedTime, double executionTime) {
         Pair p = new Pair(qid, vid);
         if (!qvToStat.containsKey(p)) {
             qvToStat.put(p, new QueryStat(qid));
         }
-        qvToStat.get(p).addStat(clientTime);
+        qvToStat.get(p).addToClientTimes(clientTime);
+        qvToStat.get(p).addToElapsedTimes(elapsedTime);
+        qvToStat.get(p).addToExecutionTimes(executionTime);
     }
 
     public void report() {
@@ -66,8 +69,8 @@ public class StatsCollector {
         try {
             setqvToAvgTimeX();
             PrintWriter pw =
-                    new PrintWriter(new File(Driver.BIGFUN_HOME+"/files/output/user_"+statsFile));
-            PrintWriter avgpw = new PrintWriter(new File(Driver.BIGFUN_HOME+"/files/output/avg/avg_"+statsFile));
+                    new PrintWriter(new File(Driver.outputFolder+"/user_"+statsFile));
+            PrintWriter avgpw = new PrintWriter(new File(Driver.outputFolder+"/avg/avg_"+statsFile));
             if (startRound != 0) {
                 ignore = -1;
             }
@@ -86,13 +89,26 @@ public class StatsCollector {
                 }
                     QueryStat qs = qvToStat.get(p);
                     tsb.append("{\n \"qidvid\":\""+ p.toString()).append("\", \n")
-                            .append("\"iterations\":[").append(qs.getIterations()).append("],\n")
-                            .append("\"RT\":[").append(qs.getTimesForChart()).append("]\n}\n");
-                    double partialAvg = qs.getAverageRT(ignore);
-                    double partialSTD = qs.getSTD(ignore,partialAvg);
-                    avgsb.append("\n{\n \"qidvid\":\""+ p.toString()).append("\", \n").
-                            append("\"avgRT\":").append(partialAvg).append(",\n")
-                            .append("\"STD\":" ).append(partialSTD).append("\n}\n");
+                            .append("\"iterations\":[").append(qs.getIterations(qs.clientTimes)).append("],\n")
+                            .append("\"Client Side Response Times\":[").append(qs.getTimesForChart(qs.clientTimes)).append("],\n")
+                            .append("\"Elapsed Times: \" :[").append(qs.getTimesForChart(qs.elapsedTimes)).append("],\n")
+                            .append("\"Execution Times: \" :[").append(qs.getTimesForChart(qs.executionTimes)).append("]\n } \n");
+                    double clientSideResponseTimeAvg = qs.getAverageRT(ignore, qs.clientTimes);
+                    double clientSideResponseTimeSTD = qs.getSTD(ignore,qs.clientTimes);
+                    double elapsedTimeAvg = qs.getAverageRT(ignore, qs.elapsedTimes);
+                    double elapsedTimeSTD = qs.getSTD(ignore,qs.elapsedTimes);
+                    double executionTimeAvg = qs.getAverageRT(ignore, qs.executionTimes);
+                    double executionTimeSTD = qs.getSTD(ignore,qs.executionTimes);
+                    avgsb.append("\n{\n \"qidvid\":\""+ p.toString()).append("\", \n")
+                            .append("\"clientSideResponseTimeAvg\":").append(clientSideResponseTimeAvg).append(",\n")
+                            .append("\"clientSideResponseTimeSTD\":" ).append(clientSideResponseTimeSTD).append(",\n")
+                    .append("\"elapsedTimeAvg\":").append(elapsedTimeAvg).append(",\n")
+                        .append("\"elapsedTimeSTD\":" ).append(elapsedTimeSTD).append(",\n")
+                            .append("\"executionTimeAvg\":").append(executionTimeAvg).append(",\n")
+                            .append("\"executionTimeSTD\":" ).append(executionTimeSTD).append("\n}\n");
+                    Driver.totalElapsedTime += qs.elapsedTimes.stream().reduce(0.0, (a,b) -> a+b);
+                    Driver.totalExecutionTime += qs.executionTimes.stream().reduce(0.0, (a,b) -> a+b);
+                    Driver.totalClientResponseTime += qs.clientTimes.stream().reduce(0.0, (a,b) -> a+b);
                     resCount++;
             }
             tsb.append("]");

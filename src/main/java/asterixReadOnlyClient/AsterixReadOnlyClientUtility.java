@@ -26,6 +26,7 @@ import java.time.Duration;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 
+import com.google.gson.JsonParser;
 import driver.Driver;
 import okhttp3.*;
 import org.apache.http.NameValuePair;
@@ -33,14 +34,12 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.utils.URIBuilder;
 import client.AbstractReadOnlyClientUtility;
 import config.Constants;
+import org.json.JSONObject;
 
 public class AsterixReadOnlyClientUtility extends AbstractReadOnlyClientUtility {
 
     String ccUrl;
     OkHttpClient httpclient;
-    ArrayList<NameValuePair> httpPostParams;
-    HttpPost httpPost;
-    URIBuilder roBuilder;
     String content;
     String server;
 
@@ -53,7 +52,7 @@ public class AsterixReadOnlyClientUtility extends AbstractReadOnlyClientUtility 
 
     @Override
     public void init() {
-        httpclient=new OkHttpClient.Builder().readTimeout(1, TimeUnit.MINUTES).retryOnConnectionFailure(true).build();
+        httpclient=new OkHttpClient.Builder().readTimeout(5, TimeUnit.MINUTES).connectTimeout(1, TimeUnit.MINUTES).retryOnConnectionFailure(true).build();
     }
 
     @Override
@@ -64,15 +63,14 @@ public class AsterixReadOnlyClientUtility extends AbstractReadOnlyClientUtility 
     }
 
     @Override
-    public void executeQuery(int qid, int vid, String qBody) throws Exception {
+    public String executeQuery(int qid, int vid, String qBody) throws Exception {
 
        Driver.clientToRunningQueries.put(Thread.currentThread().getName(), qid+"-"+vid);
         content = null;
-
+        StringBuilder sb =  new StringBuilder();
         Map<Object, Object> data = new HashMap<>();
         data.put("\"statement\"", qBody);
         data.put("mode", "immediate");
-        //HttpRequest request = HttpRequest.newBuilder().uri(URI.create(getReadUrl())).setHeader("User-Agent", "Bigfun").header("Authorization", basicAuth("Administrator", "pass123")).POST(HttpRequest.BodyPublishers.ofString("statement=select 1;")).build();
         RequestBody formBody = new FormBody.Builder().add("statement", qBody).add("mode", "immediate").build();
         Request request = new Request.Builder().url(getReadUrl()).addHeader("Connection","close").addHeader("User-Agent", "Bigfun").header("Authorization", basicAuth("Administrator", "pass123")).post(formBody).build();
 
@@ -83,24 +81,37 @@ public class AsterixReadOnlyClientUtility extends AbstractReadOnlyClientUtility 
                 Driver.clientToRunningQueries.remove(Thread.currentThread().getName());
                 long e = System.currentTimeMillis();
                 content = response.body().string();
+                com.google.gson.JsonObject resJsObject = new JsonParser().parse(content).getAsJsonObject();
+                String elapsedTime_str = resJsObject.get("metrics").getAsJsonObject().get("elapsedTime").getAsString();
+                String executionTime_str = resJsObject.get("metrics").getAsJsonObject().get("executionTime").getAsString();
+                double elapsedTime;
+                double executionTime;
+                if (elapsedTime_str.contains("ms")) {
+                    elapsedTime = Double.parseDouble(elapsedTime_str.split("ms")[0]);
+                } else{
+                    elapsedTime = Double.parseDouble(elapsedTime_str.split("s")[0])*1000;
+                }
+                if (executionTime_str.contains("ms")) {
+                    executionTime = Double.parseDouble(executionTime_str.split("ms")[0]);
+                } else{
+                    executionTime = Double.parseDouble(executionTime_str.split("s")[0])*1000;
+                }
+
+
                 Timestamp endTimeStamp = new Timestamp(System.currentTimeMillis());
                 long rspTime = (e - s);
-                System.out.println("{\"qidvid\": \"Q(" + qid + "," + vid + ")\", \n" + "\"rt\":" + rspTime + ","); //trace the
-                // progress
-                System.out.println("\"start\":\"" + startTimeStamp + "\",");
-                System.out.println("\"end\":\"" + endTimeStamp + "\"\n}");
-                updateStat(qid, vid, rspTime);
+
+                sb.append("{\"qidvid\": \"Q(" + qid + "," + vid + ")\", \n" + "\"rt\":" + rspTime + ",\n");
+                sb.append("\"query\":\""+qBody+"\",\n");
+                sb.append("\"start\":\"" + startTimeStamp + "\",\n");
+                sb.append("\"end\":\"" + endTimeStamp + "\",\n");
+                sb.append("\"content\":"+content + "}\n");
+                updateStat(qid, vid, rspTime, elapsedTime, executionTime);
                 if (resPw != null) {
-                    resPw.println(qid);
-                    resPw.println("Ver " + vid);
-                    resPw.println(qBody + "\n");
-                    resPw.println("responseTime : " + rspTime + " Msec");
-                    System.out.println(content+"\n");
-                    if (dumpResults) {
-                        resPw.println(content + "\n");
+                    resPw.println(sb.toString());
                     }
                 }
-            }
+            return sb.toString();
     }
 
 

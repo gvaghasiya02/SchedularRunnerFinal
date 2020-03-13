@@ -40,8 +40,8 @@ public abstract class AbstractUpdateClientUtility extends AbstractClientUtility 
 
     protected abstract void executeUpdate(int qid, Update update);
 
-    protected void updateStat(int qid, int vid, long rspTime) {
-        sc.updateStat(qid, vid, rspTime);
+    protected void updateStat(int qid, int vid, long clientRSTime, long elapsedTime, long executionTime) {
+        sc.updateStat(qid, vid, clientRSTime, elapsedTime, executionTime);
     }
 
     public void generateReport() {

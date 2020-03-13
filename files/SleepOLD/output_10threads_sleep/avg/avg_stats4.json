@@ -1,0 +1,11 @@
+[
+{
+ "qidvid":"Q(6,1)", 
+"clientSideResponseTimeAvg":824.2,
+"clientSideResponseTimeSTD":94.25051723996002,
+"elapsedTimeAvg":675.4267452,
+"elapsedTimeSTD":106.89623049972232,
+"executionTimeAvg":670.9687298,
+"executionTimeSTD":108.09987080911843
+}
+]

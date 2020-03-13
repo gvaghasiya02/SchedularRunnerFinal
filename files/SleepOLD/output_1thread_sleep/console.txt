@@ -1,0 +1,376 @@
+started at : 1582889982911
+[
+{ "Iteration":0,
+"queries":[
+{"qidvid": "Q(6,1)", 
+"rt":661,
+"start":"2020-02-28 03:39:42.936",
+"end":"2020-02-28 03:39:43.611"
+}
+{
+	"requestID": "ab5560fb-f3b1-4c5f-874f-8fdef803c28b",
+	"signature": {
+		"*": "*"
+	},
+	"results": [ 1
+ ]
+	,
+	"plans":{},
+	"status": "success",
+	"metrics": {
+		"elapsedTime": "515.38394ms",
+		"executionTime": "513.231787ms",
+		"resultCount": 1,
+		"resultSize": 2,
+		"processedObjects": 0
+	}
+}
+
+
+],
+"TotalTime 0" :704
+},
+
+{ "Iteration":1,
+"queries":[
+{"qidvid": "Q(6,1)", 
+"rt":595,
+"start":"2020-02-28 03:39:43.62",
+"end":"2020-02-28 03:39:44.215"
+}
+{
+	"requestID": "314792db-4923-4685-a85b-4c00fb935dc1",
+	"signature": {
+		"*": "*"
+	},
+	"results": [ 1
+ ]
+	,
+	"plans":{},
+	"status": "success",
+	"metrics": {
+		"elapsedTime": "515.760356ms",
+		"executionTime": "508.4713ms",
+		"resultCount": 1,
+		"resultSize": 2,
+		"processedObjects": 0
+	}
+}
+
+
+],
+"TotalTime 1" :595
+},
+
+{ "Iteration":2,
+"queries":[
+{"qidvid": "Q(6,1)", 
+"rt":607,
+"start":"2020-02-28 03:39:44.216",
+"end":"2020-02-28 03:39:44.823"
+}
+{
+	"requestID": "342dc7e0-e15a-4f46-86a9-e982650f2695",
+	"signature": {
+		"*": "*"
+	},
+	"results": [ 1
+ ]
+	,
+	"plans":{},
+	"status": "success",
+	"metrics": {
+		"elapsedTime": "510.017166ms",
+		"executionTime": "507.980293ms",
+		"resultCount": 1,
+		"resultSize": 2,
+		"processedObjects": 0
+	}
+}
+
+
+],
+"TotalTime 2" :608
+},
+
+{ "Iteration":3,
+"queries":[
+{"qidvid": "Q(6,1)", 
+"rt":598,
+"start":"2020-02-28 03:39:44.824",
+"end":"2020-02-28 03:39:45.422"
+}
+{
+	"requestID": "67f3c25f-cd11-4573-b599-98dc7d0737b8",
+	"signature": {
+		"*": "*"
+	},
+	"results": [ 1
+ ]
+	,
+	"plans":{},
+	"status": "success",
+	"metrics": {
+		"elapsedTime": "509.871462ms",
+		"executionTime": "507.916232ms",
+		"resultCount": 1,
+		"resultSize": 2,
+		"processedObjects": 0
+	}
+}
+
+
+],
+"TotalTime 3" :599
+},
+
+{ "Iteration":4,
+"queries":[
+{"qidvid": "Q(6,1)", 
+"rt":597,
+"start":"2020-02-28 03:39:45.423",
+"end":"2020-02-28 03:39:46.021"
+}
+{
+	"requestID": "0bbbe2a8-c1d2-43d2-baee-b9d9bfac7b1e",
+	"signature": {
+		"*": "*"
+	},
+	"results": [ 1
+ ]
+	,
+	"plans":{},
+	"status": "success",
+	"metrics": {
+		"elapsedTime": "512.025127ms",
+		"executionTime": "509.366146ms",
+		"resultCount": 1,
+		"resultSize": 2,
+		"processedObjects": 0
+	}
+}
+
+
+],
+"TotalTime 4" :599
+},
+
+{ "Iteration":5,
+"queries":[
+{"qidvid": "Q(6,1)", 
+"rt":603,
+"start":"2020-02-28 03:39:46.021",
+"end":"2020-02-28 03:39:46.625"
+}
+{
+	"requestID": "ad9389cd-4235-4767-8ec8-898f1b555b74",
+	"signature": {
+		"*": "*"
+	},
+	"results": [ 1
+ ]
+	,
+	"plans":{},
+	"status": "success",
+	"metrics": {
+		"elapsedTime": "510.470553ms",
+		"executionTime": "508.356379ms",
+		"resultCount": 1,
+		"resultSize": 2,
+		"processedObjects": 0
+	}
+}
+
+
+],
+"TotalTime 5" :604
+},
+
+{ "Iteration":6,
+"queries":[
+{"qidvid": "Q(6,1)", 
+"rt":596,
+"start":"2020-02-28 03:39:46.626",
+"end":"2020-02-28 03:39:47.222"
+}
+{
+	"requestID": "b2418613-9a95-4411-ada1-f9e0af8ad1c4",
+	"signature": {
+		"*": "*"
+	},
+	"results": [ 1
+ ]
+	,
+	"plans":{},
+	"status": "success",
+	"metrics": {
+		"elapsedTime": "509.338524ms",
+		"executionTime": "507.450735ms",
+		"resultCount": 1,
+		"resultSize": 2,
+		"processedObjects": 0
+	}
+}
+
+
+],
+"TotalTime 6" :598
+},
+
+{ "Iteration":7,
+"queries":[
+{"qidvid": "Q(6,1)", 
+"rt":602,
+"start":"2020-02-28 03:39:47.223",
+"end":"2020-02-28 03:39:47.825"
+}
+{
+	"requestID": "f0e1ebff-79cd-45a1-bd20-f0480946ccc3",
+	"signature": {
+		"*": "*"
+	},
+	"results": [ 1
+ ]
+	,
+	"plans":{},
+	"status": "success",
+	"metrics": {
+		"elapsedTime": "512.82238ms",
+		"executionTime": "507.422484ms",
+		"resultCount": 1,
+		"resultSize": 2,
+		"processedObjects": 0
+	}
+}
+
+
+],
+"TotalTime 7" :602
+},
+
+{ "Iteration":8,
+"queries":[
+{"qidvid": "Q(6,1)", 
+"rt":685,
+"start":"2020-02-28 03:39:47.826",
+"end":"2020-02-28 03:39:48.511"
+}
+{
+	"requestID": "f4260c8e-474f-460e-8438-ed447de589c7",
+	"signature": {
+		"*": "*"
+	},
+	"results": [ 1
+ ]
+	,
+	"plans":{},
+	"status": "success",
+	"metrics": {
+		"elapsedTime": "518.801215ms",
+		"executionTime": "507.7697ms",
+		"resultCount": 1,
+		"resultSize": 2,
+		"processedObjects": 0
+	}
+}
+
+
+],
+"TotalTime 8" :685
+},
+
+{ "Iteration":9,
+"queries":[
+{"qidvid": "Q(6,1)", 
+"rt":716,
+"start":"2020-02-28 03:39:48.512",
+"end":"2020-02-28 03:39:49.229"
+}
+{
+	"requestID": "7e5c4c49-8b7a-4eba-86aa-cece7d14b831",
+	"signature": {
+		"*": "*"
+	},
+	"results": [ 1
+ ]
+	,
+	"plans":{},
+	"status": "success",
+	"metrics": {
+		"elapsedTime": "511.982167ms",
+		"executionTime": "510.100697ms",
+		"resultCount": 1,
+		"resultSize": 2,
+		"processedObjects": 0
+	}
+}
+
+
+],
+"TotalTime 9" :718
+},
+
+{ "Iteration":10,
+"queries":[
+{"qidvid": "Q(6,1)", 
+"rt":644,
+"start":"2020-02-28 03:39:49.229",
+"end":"2020-02-28 03:39:49.873"
+}
+{
+	"requestID": "39fa52b4-6656-4366-8a93-71e933e28db5",
+	"signature": {
+		"*": "*"
+	},
+	"results": [ 1
+ ]
+	,
+	"plans":{},
+	"status": "success",
+	"metrics": {
+		"elapsedTime": "511.881354ms",
+		"executionTime": "509.524247ms",
+		"resultCount": 1,
+		"resultSize": 2,
+		"processedObjects": 0
+	}
+}
+
+
+],
+"TotalTime 10" :644
+},
+
+{ "Iteration":11,
+"queries":[
+{"qidvid": "Q(6,1)", 
+"rt":686,
+"start":"2020-02-28 03:39:49.873",
+"end":"2020-02-28 03:39:50.559"
+}
+{
+	"requestID": "8d8ef85e-4a8c-46cb-a467-c9b3681b45cc",
+	"signature": {
+		"*": "*"
+	},
+	"results": [ 1
+ ]
+	,
+	"plans":{},
+	"status": "success",
+	"metrics": {
+		"elapsedTime": "511.293977ms",
+		"executionTime": "508.096726ms",
+		"resultCount": 1,
+		"resultSize": 2,
+		"processedObjects": 0
+	}
+}
+
+
+],
+"TotalTime 11" :686
+}]finished at : 1582889990559
+Total experiment execution time : 7648 (ms)
+Total queries ran: 12
+Throughput for 1 user: 0.0015690376569037657

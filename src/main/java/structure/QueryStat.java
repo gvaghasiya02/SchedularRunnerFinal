@@ -15,7 +15,9 @@
 package structure;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Iterator;
+import java.util.stream.Stream;
 
 import config.Constants;
 
@@ -25,49 +27,42 @@ import config.Constants;
 public class QueryStat {
 
     int qid;
-    ArrayList<Long> clientTimes;
-    ArrayList<Long> elapsedTimes;
-    ArrayList<Long> executionTimes;
-    double totalTime;
-    double totalCount;
-
-    public QueryStat() {
-        this(Constants.INVALID_QID);
-    }
+    ArrayList<Double> clientTimes;
+    ArrayList<Double> elapsedTimes;
+    ArrayList<Double> executionTimes;
 
     public QueryStat(int qId) {
         qid = qId;
-        clientTimes = new ArrayList<Long>();
-        totalTime = totalCount = 0;
+        clientTimes = new ArrayList<>();
+        elapsedTimes = new ArrayList<>();
+        executionTimes = new ArrayList<>();
     }
 
-    public void reset(double lastAvg, double lastRSSize, double lastCount) {
-        clientTimes.clear();
-        if (lastAvg >= 0) {
-            totalTime += (lastAvg * lastCount);
-            totalCount += lastCount;
-        }
+    public void getSumOfTimes(ArrayList<Double> times) {
+        double sum = times.stream()
+                .mapToDouble(a -> a)
+                .sum();
     }
 
     public void setQid(int qId) {
         qid = qId;
     }
 
-    public void addStat(long time) {
+    public void addToClientTimes(double time) {
         clientTimes.add(time);
     }
 
-    public String getClientTimes() {
-        StringBuffer sb = new StringBuffer();
-        for (long t : clientTimes) {
-            sb.append(t + "\t");
-        }
-        return sb.toString();
+    public void addToElapsedTimes(double time) {
+        elapsedTimes.add(time);
     }
-    public String getTimesForChart(){
+
+    public void addToExecutionTimes(double time) {
+        executionTimes.add(time);
+    }
+    public String getTimesForChart(ArrayList<Double> times){
         StringBuffer sb = new StringBuffer();
         int index=0;
-        for (long t : clientTimes) {
+        for (Double t : times) {
             if(index>0)
                 sb.append(",");
             sb.append(t);
@@ -76,10 +71,10 @@ public class QueryStat {
         return sb.toString();
     }
 
-    public String getIterations() {
+    public String getIterations(ArrayList<Double> times) {
         int i=1;
         String result="";
-        for(long t: clientTimes) {
+        for(Double t: times) {
             if(i > 1)
                 result = result+",";
             result = result+i;
@@ -88,18 +83,14 @@ public class QueryStat {
         return result;
     }
 
-    public int getTotalSize() {
-        return clientTimes.size();
-    }
-
-    public double getAverageRT(int ignore) {
-        if (ignore >= clientTimes.size()) {
+    public double getAverageRT(int ignore, ArrayList<Double> times) {
+        if (ignore >= times.size()) {
             return Constants.INVALID_TIME;
         }
         double sum = 0;
         double count = 0;
         int skip = 0;
-        Iterator<Long> it = clientTimes.iterator();
+        Iterator<Double> it = times.iterator();
         while (it.hasNext()) {
             double d = it.next();
             if ((++skip) > ignore) {
@@ -110,11 +101,12 @@ public class QueryStat {
         return sum / count;
     }
 
-    public double getSTD(int ignore, double avg){
+    public double getSTD(int ignore, ArrayList<Double> times){
         double standardDeviation = 0;
         double count = 0;
         int skip = 0;
-        Iterator<Long> it = clientTimes.iterator();
+        double avg = getAverageRT(ignore, times);
+        Iterator<Double> it = times.iterator();
         while (it.hasNext()) {
             double d = it.next();
             if ((++skip) > ignore) {

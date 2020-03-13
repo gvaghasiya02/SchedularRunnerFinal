@@ -32,7 +32,7 @@ public abstract class AbstractReadOnlyClientUtility extends AbstractClientUtilit
     public ArrayList<Pair> qvids;
     protected boolean dumpResults = true;
 
-    public abstract void executeQuery(int qid, int vid, String qBody) throws Exception;
+    public abstract String executeQuery(int qid, int vid, String qBody) throws Exception;
 
     public AbstractReadOnlyClientUtility(String qIxFile, String qGenConfigFile, String statsFile, int ignore,
             String workloadFile, String resultsFile) {

@@ -41,8 +41,8 @@ public abstract class AbstractClientUtility {
 
     public abstract void terminate();
 
-    protected void updateStat(int qid, int vid, long rspTime) {
-        sc.updateStat(qid, vid, rspTime);
+    protected void updateStat(int qid, int vid, double clientSiderRpTime, double elapsedTime, double executionTime) {
+        sc.updateStat(qid, vid, clientSiderRpTime,elapsedTime,executionTime);
     }
 
     public void generateReport() {

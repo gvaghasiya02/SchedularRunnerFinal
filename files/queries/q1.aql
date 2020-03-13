@@ -1,2 +1,2 @@
 select * from w1 ds1,w2 ds2
- where ds1.unique1=ds2.unique1 limit 1;
+ where ds1.unique2=ds2.unique2 limit 1;

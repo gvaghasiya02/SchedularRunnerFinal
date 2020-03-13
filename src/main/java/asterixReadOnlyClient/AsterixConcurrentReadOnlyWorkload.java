@@ -1,6 +1,7 @@
 package asterixReadOnlyClient;
 
 import client.AbstractReadOnlyClientUtility;
+import driver.Driver;
 import structure.Pair;
 import structure.Query;
 import workloadGenerator.ReadOnlyWorkloadGenerator;
@@ -17,8 +18,7 @@ import java.util.stream.IntStream;
 public class AsterixConcurrentReadOnlyWorkload extends AsterixClientReadOnlyWorkload {
 
     private ExecutorService executorService;
-    AtomicInteger totalResTime = new AtomicInteger(0);
-    AtomicInteger count_all_queries = new AtomicInteger(0);
+
 
     private Map<Integer, ReadOnlyWorkloadGenerator> rwgMap;
 
@@ -59,11 +59,6 @@ public class AsterixConcurrentReadOnlyWorkload extends AsterixClientReadOnlyWork
             }
 
             executorService.shutdownNow();
-
-            System.out.println("count :"+count_all_queries.doubleValue());
-            System.out.println("total time: "+totalResTime.doubleValue());
-            System.out.println("AVG Resp Time: "+ totalResTime.doubleValue()/count_all_queries.doubleValue());
-            System.out.println("Shutdown complete!");
         }
     }
 
@@ -129,7 +124,7 @@ public class AsterixConcurrentReadOnlyWorkload extends AsterixClientReadOnlyWork
 
                         if (execQuery) {
                             try {
-                                clUtilMap.get(readerId).executeQuery(qid, vid, q.aqlPrint(dvName));
+                                System.out.println(clUtilMap.get(readerId).executeQuery(qid, vid, q.aqlPrint(dvName)));
                             } catch (Exception e) {
                                 e.printStackTrace();
                             }
@@ -137,25 +132,18 @@ public class AsterixConcurrentReadOnlyWorkload extends AsterixClientReadOnlyWork
                         long q_end = System.currentTimeMillis();
                         System.out.println("Iteration "+i+" Thread "+ Thread.currentThread().getName()+" Q"+qvPair.getQId()+" version "+qvPair.getVId()+"\t"+(q_end-q_start));
                         int diff= (int)(q_end-q_start);
-                        totalResTime.addAndGet(diff);
-                        count_all_queries.addAndGet(1);
+                        Driver.count_all_queries.addAndGet(1);
                     }
                     iteration_end = System.currentTimeMillis();
 
                     System.out.println("Total time for iteration " + i + " :\t" + (iteration_end - iteration_start) +
                             " ms in thread: " + readerId + " (" + Thread.currentThread().getName() + ")");
-                    int diff= (int)(iteration_end-iteration_start);
-                    totalResTime.addAndGet(diff);
-                    count_all_queries.addAndGet(1);
                 }
                 clUtilMap.get(readerId).terminate();
             });
         });
 
-        long endtime = System.currentTimeMillis();
-        System.out.println("Finished at: "+endtime);
-        System.out.println("Total experiment execution time : " +(endtime-starttime)+" (ms)");
-        System.out.println("Throughput for "+numReaders+" users: " +(double)(numReaders*1.0/(endtime-starttime)*1.0));
+
         shutDownExecutors();
     }
 

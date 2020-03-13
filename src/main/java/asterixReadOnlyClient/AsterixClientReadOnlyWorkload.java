@@ -15,11 +15,14 @@
 package asterixReadOnlyClient;
 
 import client.AbstractReadOnlyClient;
+import driver.Driver;
 import structure.Pair;
 import structure.Query;
 import workloadGenerator.ReadOnlyWorkloadGenerator;
 
 import java.io.IOException;
+import java.sql.Time;
+import java.sql.Timestamp;
 
 public class AsterixClientReadOnlyWorkload extends AbstractReadOnlyClient {
 
@@ -48,8 +51,9 @@ public class AsterixClientReadOnlyWorkload extends AbstractReadOnlyClient {
 
     @Override
     public void execute() throws Exception {
+        Driver.count_all_queries.addAndGet(1);
         long starttime=System.currentTimeMillis();
-        System.out.println("started at : " +starttime);
+        System.out.println("started at : " +new Timestamp(starttime));
         long iteration_start;
         long iteration_end;
         int iterationCount = 0;
@@ -74,7 +78,7 @@ public class AsterixClientReadOnlyWorkload extends AbstractReadOnlyClient {
                     continue; //do not break, if one query is not found
                 }
                 if (execQuery) {
-                    clUtil.executeQuery(qid, vid, q.aqlPrint(dvName));
+                    System.out.println(clUtil.executeQuery(qid, vid, q.aqlPrint(dvName)));
                 }
                 loopCount++;
             }
@@ -83,10 +87,7 @@ public class AsterixClientReadOnlyWorkload extends AbstractReadOnlyClient {
             iterationCount++;
         }
         System.out.print("]");
-        long endtime= System.currentTimeMillis();
-        System.out.println("finished at : " +endtime);
-        System.out.println("Total experiment execution time : " +(endtime-starttime)+" (ms)");
-        System.out.println("Throughput for user 0: " +(long)(1*1.0/(endtime-starttime)*1.0));
+        System.out.println("Finished at: "+new Timestamp(System.currentTimeMillis()));
         clUtil.terminate();
     }
 

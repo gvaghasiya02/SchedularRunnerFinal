@@ -29,8 +29,8 @@ import java.util.Map;
 public class AsterixClientConfig extends AbstractClientConfig {
 
 
-    public AsterixClientConfig(String clientConfigFile) {
-        super(clientConfigFile);
+    public AsterixClientConfig(String clientConfigFile, Map<String,String> cmd) {
+        super(clientConfigFile, cmd);
     }
 
     public AbstractReadOnlyClient readReadOnlyClientConfig(String bigFunHomePath,int cid) {
@@ -68,7 +68,10 @@ public class AsterixClientConfig extends AbstractClientConfig {
                 maxId = (long) value;
             } else if (value instanceof Integer) {
                 maxId = ((Integer) value).longValue();
-            } else {
+            } else if(value instanceof String) {
+                maxId = Integer.valueOf((String)value);
+            }
+            else {
                 System.err.println("WARNING: Invalid " + Constants.MAX_ID + " value in "
                         + Constants.BIGFUN_CONFIG_FILE_NAME + " . Using the default value for the generator.");
             }
@@ -106,14 +109,14 @@ public class AsterixClientConfig extends AbstractClientConfig {
         boolean dumpResults = false;
         String[] splits = workloadFile.split("/");
         String wl = splits[splits.length -1];
-        String resultsFile = "/tmp/resdump_"+wl;
+        String resultsFile = Driver.outputFolder+"/resdump_"+wl;
         int numReaders = 1;
         if (isParamSet(Constants.NUM_CONCURRENT_READERS,cid)) {
             numReaders = (int) getParamValue(Constants.NUM_CONCURRENT_READERS,cid);
         }
         AsterixClientReadOnlyWorkload rClient;
         String server = "asterixdb";
-        if(isParamSet(Constants.SERVER,cid)) {
+        if(isParamSet(Constants.SERVER, cid)) {
            server = (String) getParamValue(Constants.SERVER,cid);
         }
         if (numReaders == 1) {

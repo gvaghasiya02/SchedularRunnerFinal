@@ -1,0 +1,1401 @@
+started at : 1582890167238
+
+AsterixDB Client - Read-Only Workload - Starting Iteration 0 in thread: 2 (Client-2)
+
+AsterixDB Client - Read-Only Workload - Starting Iteration 0 in thread: 1 (Client-1)
+
+AsterixDB Client - Read-Only Workload - Starting Iteration 0 in thread: 3 (Client-3)
+
+AsterixDB Client - Read-Only Workload - Starting Iteration 0 in thread: 0 (Client-0)
+{"qidvid": "Q(6,1)", 
+"rt":648,
+{"qidvid": "Q(6,1)", 
+"rt":648,
+{"qidvid": "Q(6,1)", 
+"rt":648,
+{"qidvid": "Q(6,1)", 
+"rt":648,
+"start":"2020-02-28 03:42:47.277",
+"start":"2020-02-28 03:42:47.277",
+"start":"2020-02-28 03:42:47.277",
+"start":"2020-02-28 03:42:47.277",
+"end":"2020-02-28 03:42:47.945"
+}
+"end":"2020-02-28 03:42:47.945"
+}
+"end":"2020-02-28 03:42:47.945"
+}
+"end":"2020-02-28 03:42:47.945"
+}
+{
+	"requestID": "a19c407d-0fac-43cb-8b8f-3b289ed0d7e0",
+	"signature": {
+		"*": "*"
+	},
+	"results": [ 1
+ ]
+	,
+	"plans":{},
+	"status": "success",
+	"metrics": {
+		"elapsedTime": "513.200577ms",
+		"executionTime": "507.361618ms",
+		"resultCount": 1,
+		"resultSize": 2,
+		"processedObjects": 0
+	}
+}
+
+
+{
+	"requestID": "954dcf31-f39e-4f9c-9e0a-80356fb21a51",
+	"signature": {
+		"*": "*"
+	},
+	"results": [ 1
+ ]
+	,
+	"plans":{},
+	"status": "success",
+	"metrics": {
+		"elapsedTime": "511.583429ms",
+		"executionTime": "509.122927ms",
+		"resultCount": 1,
+		"resultSize": 2,
+		"processedObjects": 0
+	}
+}
+
+
+{
+	"requestID": "decba9d8-06db-4fdf-9f53-ed9cb3ad3524",
+	"signature": {
+		"*": "*"
+	},
+	"results": [ 1
+ ]
+	,
+	"plans":{},
+	"status": "success",
+	"metrics": {
+		"elapsedTime": "513.277898ms",
+		"executionTime": "506.760007ms",
+		"resultCount": 1,
+		"resultSize": 2,
+		"processedObjects": 0
+	}
+}
+
+
+{
+	"requestID": "ed2ff036-8144-4641-a82b-aa1a4df1df59",
+	"signature": {
+		"*": "*"
+	},
+	"results": [ 1
+ ]
+	,
+	"plans":{},
+	"status": "success",
+	"metrics": {
+		"elapsedTime": "508.891573ms",
+		"executionTime": "507.122343ms",
+		"resultCount": 1,
+		"resultSize": 2,
+		"processedObjects": 0
+	}
+}
+
+
+Iteration 0 Thread Client-2 Q6 version 1	703
+Iteration 0 Thread Client-1 Q6 version 1	703
+Iteration 0 Thread Client-3 Q6 version 1	703
+Iteration 0 Thread Client-0 Q6 version 1	703
+Total time for iteration 0 :	711 ms in thread: 3 (Client-3)
+
+AsterixDB Client - Read-Only Workload - Starting Iteration 1 in thread: 3 (Client-3)
+Total time for iteration 0 :	711 ms in thread: 1 (Client-1)
+Total time for iteration 0 :	711 ms in thread: 0 (Client-0)
+
+AsterixDB Client - Read-Only Workload - Starting Iteration 1 in thread: 1 (Client-1)
+
+AsterixDB Client - Read-Only Workload - Starting Iteration 1 in thread: 0 (Client-0)
+Total time for iteration 0 :	711 ms in thread: 2 (Client-2)
+
+AsterixDB Client - Read-Only Workload - Starting Iteration 1 in thread: 2 (Client-2)
+{"qidvid": "Q(6,1)", 
+"rt":673,
+{"qidvid": "Q(6,1)", 
+"rt":674,
+"start":"2020-02-28 03:42:47.964",
+{"qidvid": "Q(6,1)", 
+"rt":673,
+{"qidvid": "Q(6,1)", 
+"rt":673,
+"start":"2020-02-28 03:42:47.964",
+"start":"2020-02-28 03:42:47.964",
+"start":"2020-02-28 03:42:47.963",
+"end":"2020-02-28 03:42:48.638"
+}
+"end":"2020-02-28 03:42:48.638"
+}
+"end":"2020-02-28 03:42:48.638"
+}
+"end":"2020-02-28 03:42:48.638"
+}
+{
+	"requestID": "ce9d295e-b24d-4f2c-b871-11050c550474",
+	"signature": {
+		"*": "*"
+	},
+	"results": [ 1
+ ]
+	,
+	"plans":{},
+	"status": "success",
+	"metrics": {
+		"elapsedTime": "510.451989ms",
+		"executionTime": "508.306383ms",
+		"resultCount": 1,
+		"resultSize": 2,
+		"processedObjects": 0
+	}
+}
+
+
+{
+	"requestID": "e553f026-83f8-4edd-9021-da4bcb222d87",
+	"signature": {
+		"*": "*"
+	},
+	"results": [ 1
+ ]
+	,
+	"plans":{},
+	"status": "success",
+	"metrics": {
+		"elapsedTime": "512.8421ms",
+		"executionTime": "510.457799ms",
+		"resultCount": 1,
+		"resultSize": 2,
+		"processedObjects": 0
+	}
+}
+
+
+Iteration 1 Thread Client-2 Q6 version 1	675
+{
+	"requestID": "ac1dae67-49d0-4692-8312-23b0deeed7c6",
+	"signature": {
+		"*": "*"
+	},
+	"results": [ 1
+ ]
+	,
+	"plans":{},
+	"status": "success",
+	"metrics": {
+		"elapsedTime": "514.842833ms",
+		"executionTime": "512.086187ms",
+		"resultCount": 1,
+		"resultSize": 2,
+		"processedObjects": 0
+	}
+}
+
+
+{
+	"requestID": "11a84177-b14c-4892-93b7-0eadb492d155",
+	"signature": {
+		"*": "*"
+	},
+	"results": [ 1
+ ]
+	,
+	"plans":{},
+	"status": "success",
+	"metrics": {
+		"elapsedTime": "515.452573ms",
+		"executionTime": "512.182118ms",
+		"resultCount": 1,
+		"resultSize": 2,
+		"processedObjects": 0
+	}
+}
+
+
+Iteration 1 Thread Client-1 Q6 version 1	675
+Total time for iteration 1 :	675 ms in thread: 2 (Client-2)
+
+AsterixDB Client - Read-Only Workload - Starting Iteration 2 in thread: 2 (Client-2)
+Iteration 1 Thread Client-0 Q6 version 1	675
+Total time for iteration 1 :	676 ms in thread: 0 (Client-0)
+Total time for iteration 1 :	676 ms in thread: 1 (Client-1)
+
+AsterixDB Client - Read-Only Workload - Starting Iteration 2 in thread: 1 (Client-1)
+Iteration 1 Thread Client-3 Q6 version 1	675
+
+AsterixDB Client - Read-Only Workload - Starting Iteration 2 in thread: 0 (Client-0)
+Total time for iteration 1 :	676 ms in thread: 3 (Client-3)
+
+AsterixDB Client - Read-Only Workload - Starting Iteration 2 in thread: 3 (Client-3)
+{"qidvid": "Q(6,1)", 
+"rt":613,
+"start":"2020-02-28 03:42:48.639",
+"end":"2020-02-28 03:42:49.252"
+}
+{
+	"requestID": "9f868095-ae41-494d-9714-fec1db850e53",
+	"signature": {
+		"*": "*"
+	},
+	"results": [ 1
+ ]
+	,
+	"plans":{},
+	"status": "success",
+	"metrics": {
+		"elapsedTime": "515.110909ms",
+		"executionTime": "513.261977ms",
+		"resultCount": 1,
+		"resultSize": 2,
+		"processedObjects": 0
+	}
+}
+
+
+Iteration 2 Thread Client-2 Q6 version 1	614
+Total time for iteration 2 :	614 ms in thread: 2 (Client-2)
+
+AsterixDB Client - Read-Only Workload - Starting Iteration 3 in thread: 2 (Client-2)
+{"qidvid": "Q(6,1)", 
+"rt":616,
+"start":"2020-02-28 03:42:48.639",
+"end":"2020-02-28 03:42:49.255"
+}
+{
+	"requestID": "f82ccd69-563d-42b7-900f-7d1f45ccb942",
+	"signature": {
+		"*": "*"
+	},
+	"results": [ 1
+ ]
+	,
+	"plans":{},
+	"status": "success",
+	"metrics": {
+		"elapsedTime": "516.609822ms",
+		"executionTime": "514.849123ms",
+		"resultCount": 1,
+		"resultSize": 2,
+		"processedObjects": 0
+	}
+}
+
+
+Iteration 2 Thread Client-1 Q6 version 1	616
+Total time for iteration 2 :	616 ms in thread: 1 (Client-1)
+
+AsterixDB Client - Read-Only Workload - Starting Iteration 3 in thread: 1 (Client-1)
+{"qidvid": "Q(6,1)", 
+"rt":623,
+"start":"2020-02-28 03:42:48.639",
+"end":"2020-02-28 03:42:49.262"
+}
+{
+	"requestID": "08729dce-d98b-4ab2-b40c-8bb155eb5da9",
+	"signature": {
+		"*": "*"
+	},
+	"results": [ 1
+ ]
+	,
+	"plans":{},
+	"status": "success",
+	"metrics": {
+		"elapsedTime": "516.42779ms",
+		"executionTime": "511.525246ms",
+		"resultCount": 1,
+		"resultSize": 2,
+		"processedObjects": 0
+	}
+}
+
+
+Iteration 2 Thread Client-3 Q6 version 1	623
+Total time for iteration 2 :	623 ms in thread: 3 (Client-3)
+
+AsterixDB Client - Read-Only Workload - Starting Iteration 3 in thread: 3 (Client-3)
+{"qidvid": "Q(6,1)", 
+"rt":633,
+"start":"2020-02-28 03:42:48.639",
+"end":"2020-02-28 03:42:49.272"
+}
+{
+	"requestID": "4d0bfb86-76d6-41c6-8ea8-ae800eb9ea11",
+	"signature": {
+		"*": "*"
+	},
+	"results": [ 1
+ ]
+	,
+	"plans":{},
+	"status": "success",
+	"metrics": {
+		"elapsedTime": "518.346492ms",
+		"executionTime": "513.683363ms",
+		"resultCount": 1,
+		"resultSize": 2,
+		"processedObjects": 0
+	}
+}
+
+
+Iteration 2 Thread Client-0 Q6 version 1	633
+Total time for iteration 2 :	633 ms in thread: 0 (Client-0)
+
+AsterixDB Client - Read-Only Workload - Starting Iteration 3 in thread: 0 (Client-0)
+{"qidvid": "Q(6,1)", 
+"rt":615,
+"start":"2020-02-28 03:42:49.256",
+{"qidvid": "Q(6,1)", 
+"rt":618,
+"end":"2020-02-28 03:42:49.871"
+}
+"start":"2020-02-28 03:42:49.253",
+{
+	"requestID": "f626f346-7525-465c-a4a0-a038e5fcc178",
+	"signature": {
+		"*": "*"
+	},
+	"results": [ 1
+ ]
+	,
+	"plans":{},
+	"status": "success",
+	"metrics": {
+		"elapsedTime": "517.137483ms",
+		"executionTime": "515.142177ms",
+		"resultCount": 1,
+		"resultSize": 2,
+		"processedObjects": 0
+	}
+}
+
+
+"end":"2020-02-28 03:42:49.871"
+}
+Iteration 3 Thread Client-1 Q6 version 1	616
+Total time for iteration 3 :	616 ms in thread: 1 (Client-1)
+{
+	"requestID": "214a79cf-ac51-4130-a0de-0e9df3d1fba6",
+	"signature": {
+		"*": "*"
+	},
+	"results": [ 1
+ ]
+	,
+	"plans":{},
+	"status": "success",
+	"metrics": {
+		"elapsedTime": "513.397018ms",
+		"executionTime": "511.09229ms",
+		"resultCount": 1,
+		"resultSize": 2,
+		"processedObjects": 0
+	}
+}
+
+
+
+AsterixDB Client - Read-Only Workload - Starting Iteration 4 in thread: 1 (Client-1)
+Iteration 3 Thread Client-2 Q6 version 1	619
+Total time for iteration 3 :	619 ms in thread: 2 (Client-2)
+
+AsterixDB Client - Read-Only Workload - Starting Iteration 4 in thread: 2 (Client-2)
+{"qidvid": "Q(6,1)", 
+"rt":636,
+"start":"2020-02-28 03:42:49.263",
+"end":"2020-02-28 03:42:49.9"
+}
+{
+	"requestID": "2f48b438-dd3f-42ca-b26d-43461cc043bc",
+	"signature": {
+		"*": "*"
+	},
+	"results": [ 1
+ ]
+	,
+	"plans":{},
+	"status": "success",
+	"metrics": {
+		"elapsedTime": "520.331326ms",
+		"executionTime": "518.302702ms",
+		"resultCount": 1,
+		"resultSize": 2,
+		"processedObjects": 0
+	}
+}
+
+
+Iteration 3 Thread Client-3 Q6 version 1	637
+Total time for iteration 3 :	637 ms in thread: 3 (Client-3)
+
+AsterixDB Client - Read-Only Workload - Starting Iteration 4 in thread: 3 (Client-3)
+{"qidvid": "Q(6,1)", 
+"rt":636,
+"start":"2020-02-28 03:42:49.272",
+"end":"2020-02-28 03:42:49.908"
+}
+{
+	"requestID": "8e6b6de4-1270-485b-ad82-738c2659ab8d",
+	"signature": {
+		"*": "*"
+	},
+	"results": [ 1
+ ]
+	,
+	"plans":{},
+	"status": "success",
+	"metrics": {
+		"elapsedTime": "514.005238ms",
+		"executionTime": "511.524857ms",
+		"resultCount": 1,
+		"resultSize": 2,
+		"processedObjects": 0
+	}
+}
+
+
+Iteration 3 Thread Client-0 Q6 version 1	636
+Total time for iteration 3 :	636 ms in thread: 0 (Client-0)
+
+AsterixDB Client - Read-Only Workload - Starting Iteration 4 in thread: 0 (Client-0)
+{"qidvid": "Q(6,1)", 
+"rt":682,
+{"qidvid": "Q(6,1)", 
+"rt":711,
+"start":"2020-02-28 03:42:49.901",
+"start":"2020-02-28 03:42:49.872",
+{"qidvid": "Q(6,1)", 
+"rt":674,
+{"qidvid": "Q(6,1)", 
+"rt":711,
+"start":"2020-02-28 03:42:49.909",
+"end":"2020-02-28 03:42:50.583"
+}
+"end":"2020-02-28 03:42:50.583"
+}
+{
+	"requestID": "4a0ce615-f656-4b9c-865c-292c41d568d4",
+	"signature": {
+		"*": "*"
+	},
+	"results": [ 1
+ ]
+	,
+	"plans":{},
+	"status": "success",
+	"metrics": {
+		"elapsedTime": "509.538055ms",
+		"executionTime": "507.659252ms",
+		"resultCount": 1,
+		"resultSize": 2,
+		"processedObjects": 0
+	}
+}
+
+
+"end":"2020-02-28 03:42:50.583"
+}
+{
+	"requestID": "e1840aa2-f159-49e2-a8d7-7bbc5d85ee63",
+	"signature": {
+		"*": "*"
+	},
+	"results": [ 1
+ ]
+	,
+	"plans":{},
+	"status": "success",
+	"metrics": {
+		"elapsedTime": "514.028019ms",
+		"executionTime": "508.807372ms",
+		"resultCount": 1,
+		"resultSize": 2,
+		"processedObjects": 0
+	}
+}
+
+
+"start":"2020-02-28 03:42:49.872",
+Iteration 4 Thread Client-0 Q6 version 1	675
+"end":"2020-02-28 03:42:50.583"
+}
+Total time for iteration 4 :	675 ms in thread: 0 (Client-0)
+{
+	"requestID": "cc254371-4499-4a0d-b996-8f92ac2f7265",
+	"signature": {
+		"*": "*"
+	},
+	"results": [ 1
+ ]
+	,
+	"plans":{},
+	"status": "success",
+	"metrics": {
+		"elapsedTime": "513.587133ms",
+		"executionTime": "510.305517ms",
+		"resultCount": 1,
+		"resultSize": 2,
+		"processedObjects": 0
+	}
+}
+
+
+
+AsterixDB Client - Read-Only Workload - Starting Iteration 5 in thread: 0 (Client-0)
+Iteration 4 Thread Client-3 Q6 version 1	684
+Iteration 4 Thread Client-2 Q6 version 1	712
+Total time for iteration 4 :	712 ms in thread: 2 (Client-2)
+Total time for iteration 4 :	684 ms in thread: 3 (Client-3)
+{
+	"requestID": "a3200962-f0aa-440f-b8e5-282279988542",
+	"signature": {
+		"*": "*"
+	},
+	"results": [ 1
+ ]
+	,
+	"plans":{},
+	"status": "success",
+	"metrics": {
+		"elapsedTime": "509.367541ms",
+		"executionTime": "507.363078ms",
+		"resultCount": 1,
+		"resultSize": 2,
+		"processedObjects": 0
+	}
+}
+
+
+
+AsterixDB Client - Read-Only Workload - Starting Iteration 5 in thread: 2 (Client-2)
+
+AsterixDB Client - Read-Only Workload - Starting Iteration 5 in thread: 3 (Client-3)
+Iteration 4 Thread Client-1 Q6 version 1	712
+Total time for iteration 4 :	713 ms in thread: 1 (Client-1)
+
+AsterixDB Client - Read-Only Workload - Starting Iteration 5 in thread: 1 (Client-1)
+{"qidvid": "Q(6,1)", 
+"rt":656,
+"start":"2020-02-28 03:42:50.584",
+"end":"2020-02-28 03:42:51.241"
+}
+{
+	"requestID": "df38d462-a146-4f87-bfd0-b5fff601130f",
+	"signature": {
+		"*": "*"
+	},
+	"results": [ 1
+ ]
+	,
+	"plans":{},
+	"status": "success",
+	"metrics": {
+		"elapsedTime": "512.424142ms",
+		"executionTime": "509.884539ms",
+		"resultCount": 1,
+		"resultSize": 2,
+		"processedObjects": 0
+	}
+}
+
+
+Iteration 5 Thread Client-0 Q6 version 1	657
+Total time for iteration 5 :	657 ms in thread: 0 (Client-0)
+
+AsterixDB Client - Read-Only Workload - Starting Iteration 6 in thread: 0 (Client-0)
+{"qidvid": "Q(6,1)", 
+"rt":664,
+{"qidvid": "Q(6,1)", 
+"rt":664,
+"start":"2020-02-28 03:42:50.585",
+"start":"2020-02-28 03:42:50.585",
+"end":"2020-02-28 03:42:51.249"
+}
+"end":"2020-02-28 03:42:51.249"
+}
+{
+	"requestID": "94718552-362a-407c-a57b-2c68c14674fd",
+	"signature": {
+		"*": "*"
+	},
+	"results": [ 1
+ ]
+	,
+	"plans":{},
+	"status": "success",
+	"metrics": {
+		"elapsedTime": "520.110913ms",
+		"executionTime": "513.196066ms",
+		"resultCount": 1,
+		"resultSize": 2,
+		"processedObjects": 0
+	}
+}
+
+
+{
+	"requestID": "c351e4af-2582-4baf-99e0-bb5c605891d3",
+	"signature": {
+		"*": "*"
+	},
+	"results": [ 1
+ ]
+	,
+	"plans":{},
+	"status": "success",
+	"metrics": {
+		"elapsedTime": "517.380096ms",
+		"executionTime": "514.090081ms",
+		"resultCount": 1,
+		"resultSize": 2,
+		"processedObjects": 0
+	}
+}
+
+
+Iteration 5 Thread Client-1 Q6 version 1	665
+Iteration 5 Thread Client-2 Q6 version 1	666
+Total time for iteration 5 :	665 ms in thread: 1 (Client-1)
+Total time for iteration 5 :	666 ms in thread: 2 (Client-2)
+
+AsterixDB Client - Read-Only Workload - Starting Iteration 6 in thread: 1 (Client-1)
+
+AsterixDB Client - Read-Only Workload - Starting Iteration 6 in thread: 2 (Client-2)
+{"qidvid": "Q(6,1)", 
+"rt":667,
+"start":"2020-02-28 03:42:50.585",
+"end":"2020-02-28 03:42:51.252"
+}
+{
+	"requestID": "3f8f3340-8123-4d50-9a56-c9b4b3d1cb2a",
+	"signature": {
+		"*": "*"
+	},
+	"results": [ 1
+ ]
+	,
+	"plans":{},
+	"status": "success",
+	"metrics": {
+		"elapsedTime": "517.134622ms",
+		"executionTime": "513.279987ms",
+		"resultCount": 1,
+		"resultSize": 2,
+		"processedObjects": 0
+	}
+}
+
+
+Iteration 5 Thread Client-3 Q6 version 1	668
+Total time for iteration 5 :	668 ms in thread: 3 (Client-3)
+
+AsterixDB Client - Read-Only Workload - Starting Iteration 6 in thread: 3 (Client-3)
+{"qidvid": "Q(6,1)", 
+"rt":673,
+{"qidvid": "Q(6,1)", 
+"rt":664,
+"start":"2020-02-28 03:42:51.241",
+{"qidvid": "Q(6,1)", 
+"rt":664,
+{"qidvid": "Q(6,1)", 
+"rt":662,
+"start":"2020-02-28 03:42:51.25",
+"start":"2020-02-28 03:42:51.252",
+"end":"2020-02-28 03:42:51.914"
+}
+"start":"2020-02-28 03:42:51.25",
+"end":"2020-02-28 03:42:51.914"
+}
+{
+	"requestID": "12410109-1149-46f3-84d0-8069687c71f5",
+	"signature": {
+		"*": "*"
+	},
+	"results": [ 1
+ ]
+	,
+	"plans":{},
+	"status": "success",
+	"metrics": {
+		"elapsedTime": "513.995479ms",
+		"executionTime": "510.648122ms",
+		"resultCount": 1,
+		"resultSize": 2,
+		"processedObjects": 0
+	}
+}
+
+
+"end":"2020-02-28 03:42:51.914"
+}
+Iteration 6 Thread Client-3 Q6 version 1	662
+{
+	"requestID": "d84617c5-8ee6-46b7-bec6-009b2cd02041",
+	"signature": {
+		"*": "*"
+	},
+	"results": [ 1
+ ]
+	,
+	"plans":{},
+	"status": "success",
+	"metrics": {
+		"elapsedTime": "514.372265ms",
+		"executionTime": "511.931715ms",
+		"resultCount": 1,
+		"resultSize": 2,
+		"processedObjects": 0
+	}
+}
+
+
+Total time for iteration 6 :	662 ms in thread: 3 (Client-3)
+Iteration 6 Thread Client-2 Q6 version 1	664
+
+AsterixDB Client - Read-Only Workload - Starting Iteration 7 in thread: 3 (Client-3)
+"end":"2020-02-28 03:42:51.914"
+}
+{
+	"requestID": "dd3ef8b3-37a4-448c-b780-ebfd272b5842",
+	"signature": {
+		"*": "*"
+	},
+	"results": [ 1
+ ]
+	,
+	"plans":{},
+	"status": "success",
+	"metrics": {
+		"elapsedTime": "508.422485ms",
+		"executionTime": "506.884129ms",
+		"resultCount": 1,
+		"resultSize": 2,
+		"processedObjects": 0
+	}
+}
+
+
+{
+	"requestID": "33c2bcf4-07ae-44e1-bd5b-b4e041a17474",
+	"signature": {
+		"*": "*"
+	},
+	"results": [ 1
+ ]
+	,
+	"plans":{},
+	"status": "success",
+	"metrics": {
+		"elapsedTime": "519.125116ms",
+		"executionTime": "517.241633ms",
+		"resultCount": 1,
+		"resultSize": 2,
+		"processedObjects": 0
+	}
+}
+
+
+Iteration 6 Thread Client-1 Q6 version 1	665
+Iteration 6 Thread Client-0 Q6 version 1	674
+Total time for iteration 6 :	664 ms in thread: 2 (Client-2)
+Total time for iteration 6 :	674 ms in thread: 0 (Client-0)
+
+AsterixDB Client - Read-Only Workload - Starting Iteration 7 in thread: 2 (Client-2)
+
+AsterixDB Client - Read-Only Workload - Starting Iteration 7 in thread: 0 (Client-0)
+Total time for iteration 6 :	665 ms in thread: 1 (Client-1)
+
+AsterixDB Client - Read-Only Workload - Starting Iteration 7 in thread: 1 (Client-1)
+{"qidvid": "Q(6,1)", 
+"rt":717,
+"start":"2020-02-28 03:42:51.915",
+{"qidvid": "Q(6,1)", 
+"rt":717,
+"end":"2020-02-28 03:42:52.632"
+}
+"start":"2020-02-28 03:42:51.915",
+{
+	"requestID": "50ab907b-ff79-4446-a1b9-d93466aeb165",
+	"signature": {
+		"*": "*"
+	},
+	"results": [ 1
+ ]
+	,
+	"plans":{},
+	"status": "success",
+	"metrics": {
+		"elapsedTime": "513.842846ms",
+		"executionTime": "511.05009ms",
+		"resultCount": 1,
+		"resultSize": 2,
+		"processedObjects": 0
+	}
+}
+
+
+"end":"2020-02-28 03:42:52.632"
+}
+Iteration 7 Thread Client-1 Q6 version 1	717
+Total time for iteration 7 :	717 ms in thread: 1 (Client-1)
+{
+	"requestID": "79eb3209-ac10-4bcb-807d-5243b526702b",
+	"signature": {
+		"*": "*"
+	},
+	"results": [ 1
+ ]
+	,
+	"plans":{},
+	"status": "success",
+	"metrics": {
+		"elapsedTime": "509.770088ms",
+		"executionTime": "507.722724ms",
+		"resultCount": 1,
+		"resultSize": 2,
+		"processedObjects": 0
+	}
+}
+
+
+
+AsterixDB Client - Read-Only Workload - Starting Iteration 8 in thread: 1 (Client-1)
+Iteration 7 Thread Client-3 Q6 version 1	717
+Total time for iteration 7 :	717 ms in thread: 3 (Client-3)
+
+AsterixDB Client - Read-Only Workload - Starting Iteration 8 in thread: 3 (Client-3)
+{"qidvid": "Q(6,1)", 
+"rt":717,
+"start":"2020-02-28 03:42:51.915",
+{"qidvid": "Q(6,1)", 
+"rt":717,
+"end":"2020-02-28 03:42:52.633"
+}
+"start":"2020-02-28 03:42:51.915",
+"end":"2020-02-28 03:42:52.633"
+}
+{
+	"requestID": "5db0c343-e8f4-4511-8bbc-416f54812d3c",
+	"signature": {
+		"*": "*"
+	},
+	"results": [ 1
+ ]
+	,
+	"plans":{},
+	"status": "success",
+	"metrics": {
+		"elapsedTime": "509.746027ms",
+		"executionTime": "507.395838ms",
+		"resultCount": 1,
+		"resultSize": 2,
+		"processedObjects": 0
+	}
+}
+
+
+Iteration 7 Thread Client-0 Q6 version 1	719
+{
+	"requestID": "bc4eeb5d-127d-4af0-8413-d8ca67429da9",
+	"signature": {
+		"*": "*"
+	},
+	"results": [ 1
+ ]
+	,
+	"plans":{},
+	"status": "success",
+	"metrics": {
+		"elapsedTime": "511.137671ms",
+		"executionTime": "508.179752ms",
+		"resultCount": 1,
+		"resultSize": 2,
+		"processedObjects": 0
+	}
+}
+
+
+Total time for iteration 7 :	719 ms in thread: 0 (Client-0)
+Iteration 7 Thread Client-2 Q6 version 1	719
+
+AsterixDB Client - Read-Only Workload - Starting Iteration 8 in thread: 0 (Client-0)
+Total time for iteration 7 :	719 ms in thread: 2 (Client-2)
+
+AsterixDB Client - Read-Only Workload - Starting Iteration 8 in thread: 2 (Client-2)
+{"qidvid": "Q(6,1)", 
+"rt":715,
+{"qidvid": "Q(6,1)", 
+"rt":715,
+"start":"2020-02-28 03:42:52.633",
+"start":"2020-02-28 03:42:52.633",
+"end":"2020-02-28 03:42:53.349"
+}
+"end":"2020-02-28 03:42:53.349"
+}
+{"qidvid": "Q(6,1)", 
+"rt":714,
+"start":"2020-02-28 03:42:52.634",
+"end":"2020-02-28 03:42:53.349"
+}
+{
+	"requestID": "459625c1-b366-4c31-b9b1-9f640e530c73",
+	"signature": {
+		"*": "*"
+	},
+	"results": [ 1
+ ]
+	,
+	"plans":{},
+	"status": "success",
+	"metrics": {
+		"elapsedTime": "515.173208ms",
+		"executionTime": "512.431833ms",
+		"resultCount": 1,
+		"resultSize": 2,
+		"processedObjects": 0
+	}
+}
+
+
+{
+	"requestID": "619f7bb3-8503-4f38-b8dc-2ec10337be60",
+	"signature": {
+		"*": "*"
+	},
+	"results": [ 1
+ ]
+	,
+	"plans":{},
+	"status": "success",
+	"metrics": {
+		"elapsedTime": "512.412912ms",
+		"executionTime": "509.187998ms",
+		"resultCount": 1,
+		"resultSize": 2,
+		"processedObjects": 0
+	}
+}
+
+
+Iteration 8 Thread Client-1 Q6 version 1	717
+{
+	"requestID": "6e316639-6496-4a83-9adb-1fc461a14e46",
+	"signature": {
+		"*": "*"
+	},
+	"results": [ 1
+ ]
+	,
+	"plans":{},
+	"status": "success",
+	"metrics": {
+		"elapsedTime": "510.871136ms",
+		"executionTime": "508.6996ms",
+		"resultCount": 1,
+		"resultSize": 2,
+		"processedObjects": 0
+	}
+}
+
+
+Total time for iteration 8 :	717 ms in thread: 1 (Client-1)
+Iteration 8 Thread Client-2 Q6 version 1	715
+
+AsterixDB Client - Read-Only Workload - Starting Iteration 9 in thread: 1 (Client-1)
+Iteration 8 Thread Client-3 Q6 version 1	717
+Total time for iteration 8 :	717 ms in thread: 3 (Client-3)
+Total time for iteration 8 :	715 ms in thread: 2 (Client-2)
+
+AsterixDB Client - Read-Only Workload - Starting Iteration 9 in thread: 3 (Client-3)
+
+AsterixDB Client - Read-Only Workload - Starting Iteration 9 in thread: 2 (Client-2)
+{"qidvid": "Q(6,1)", 
+"rt":729,
+"start":"2020-02-28 03:42:52.634",
+"end":"2020-02-28 03:42:53.363"
+}
+{
+	"requestID": "7792f0a7-e965-42a8-aef7-405a266722b0",
+	"signature": {
+		"*": "*"
+	},
+	"results": [ 1
+ ]
+	,
+	"plans":{},
+	"status": "success",
+	"metrics": {
+		"elapsedTime": "519.809177ms",
+		"executionTime": "514.417815ms",
+		"resultCount": 1,
+		"resultSize": 2,
+		"processedObjects": 0
+	}
+}
+
+
+Iteration 8 Thread Client-0 Q6 version 1	730
+Total time for iteration 8 :	730 ms in thread: 0 (Client-0)
+
+AsterixDB Client - Read-Only Workload - Starting Iteration 9 in thread: 0 (Client-0)
+{"qidvid": "Q(6,1)", 
+"rt":716,
+{"qidvid": "Q(6,1)", 
+"rt":716,
+{"qidvid": "Q(6,1)", 
+"rt":716,
+"start":"2020-02-28 03:42:53.349",
+"start":"2020-02-28 03:42:53.349",
+"end":"2020-02-28 03:42:54.065"
+}
+"end":"2020-02-28 03:42:54.065"
+}
+{"qidvid": "Q(6,1)", 
+"rt":701,
+{
+	"requestID": "a9a1f622-7ee8-4fbf-9846-ebed048da56a",
+	"signature": {
+		"*": "*"
+	},
+	"results": [ 1
+ ]
+	,
+	"plans":{},
+	"status": "success",
+	"metrics": {
+		"elapsedTime": "518.426134ms",
+		"executionTime": "509.86244ms",
+		"resultCount": 1,
+		"resultSize": 2,
+		"processedObjects": 0
+	}
+}
+
+
+"start":"2020-02-28 03:42:53.364",
+{
+	"requestID": "78af14c2-63fa-4552-9d95-f2ea611e663b",
+	"signature": {
+		"*": "*"
+	},
+	"results": [ 1
+ ]
+	,
+	"plans":{},
+	"status": "success",
+	"metrics": {
+		"elapsedTime": "512.005645ms",
+		"executionTime": "507.587031ms",
+		"resultCount": 1,
+		"resultSize": 2,
+		"processedObjects": 0
+	}
+}
+
+
+"start":"2020-02-28 03:42:53.349",
+Iteration 9 Thread Client-2 Q6 version 1	716
+"end":"2020-02-28 03:42:54.065"
+}
+Total time for iteration 9 :	716 ms in thread: 2 (Client-2)
+"end":"2020-02-28 03:42:54.065"
+}
+
+AsterixDB Client - Read-Only Workload - Starting Iteration 10 in thread: 2 (Client-2)
+Iteration 9 Thread Client-1 Q6 version 1	716
+{
+	"requestID": "f900bfcf-24a4-4755-8fcc-38fee38d5fdc",
+	"signature": {
+		"*": "*"
+	},
+	"results": [ 1
+ ]
+	,
+	"plans":{},
+	"status": "success",
+	"metrics": {
+		"elapsedTime": "509.426331ms",
+		"executionTime": "507.576261ms",
+		"resultCount": 1,
+		"resultSize": 2,
+		"processedObjects": 0
+	}
+}
+
+
+Total time for iteration 9 :	716 ms in thread: 1 (Client-1)
+Iteration 9 Thread Client-0 Q6 version 1	702
+
+AsterixDB Client - Read-Only Workload - Starting Iteration 10 in thread: 1 (Client-1)
+{
+	"requestID": "e763cb7b-ae68-4214-be78-d5f42b8b6599",
+	"signature": {
+		"*": "*"
+	},
+	"results": [ 1
+ ]
+	,
+	"plans":{},
+	"status": "success",
+	"metrics": {
+		"elapsedTime": "512.080037ms",
+		"executionTime": "507.880086ms",
+		"resultCount": 1,
+		"resultSize": 2,
+		"processedObjects": 0
+	}
+}
+
+
+Iteration 9 Thread Client-3 Q6 version 1	717
+Total time for iteration 9 :	702 ms in thread: 0 (Client-0)
+Total time for iteration 9 :	717 ms in thread: 3 (Client-3)
+
+AsterixDB Client - Read-Only Workload - Starting Iteration 10 in thread: 0 (Client-0)
+
+AsterixDB Client - Read-Only Workload - Starting Iteration 10 in thread: 3 (Client-3)
+{"qidvid": "Q(6,1)", 
+"rt":716,
+{"qidvid": "Q(6,1)", 
+"rt":716,
+"start":"2020-02-28 03:42:54.066",
+{"qidvid": "Q(6,1)", 
+"rt":716,
+{"qidvid": "Q(6,1)", 
+"rt":716,
+"start":"2020-02-28 03:42:54.066",
+"start":"2020-02-28 03:42:54.066",
+"end":"2020-02-28 03:42:54.783"
+}
+"end":"2020-02-28 03:42:54.783"
+}
+{
+	"requestID": "b627d6b4-6f48-48e0-8160-98f2522baccf",
+	"signature": {
+		"*": "*"
+	},
+	"results": [ 1
+ ]
+	,
+	"plans":{},
+	"status": "success",
+	"metrics": {
+		"elapsedTime": "515.821259ms",
+		"executionTime": "512.966482ms",
+		"resultCount": 1,
+		"resultSize": 2,
+		"processedObjects": 0
+	}
+}
+
+
+Iteration 10 Thread Client-0 Q6 version 1	717
+"end":"2020-02-28 03:42:54.783"
+}
+{
+	"requestID": "10e44ffc-0095-4e51-9d18-2ea650f89976",
+	"signature": {
+		"*": "*"
+	},
+	"results": [ 1
+ ]
+	,
+	"plans":{},
+	"status": "success",
+	"metrics": {
+		"elapsedTime": "519.616004ms",
+		"executionTime": "511.109561ms",
+		"resultCount": 1,
+		"resultSize": 2,
+		"processedObjects": 0
+	}
+}
+
+
+"start":"2020-02-28 03:42:54.066",
+Iteration 10 Thread Client-3 Q6 version 1	718
+Total time for iteration 10 :	718 ms in thread: 3 (Client-3)
+Total time for iteration 10 :	717 ms in thread: 0 (Client-0)
+
+AsterixDB Client - Read-Only Workload - Starting Iteration 11 in thread: 3 (Client-3)
+
+AsterixDB Client - Read-Only Workload - Starting Iteration 11 in thread: 0 (Client-0)
+{
+	"requestID": "027e7262-3d30-40d4-9609-086dd1600a13",
+	"signature": {
+		"*": "*"
+	},
+	"results": [ 1
+ ]
+	,
+	"plans":{},
+	"status": "success",
+	"metrics": {
+		"elapsedTime": "522.721545ms",
+		"executionTime": "515.993982ms",
+		"resultCount": 1,
+		"resultSize": 2,
+		"processedObjects": 0
+	}
+}
+
+
+"end":"2020-02-28 03:42:54.783"
+}
+Iteration 10 Thread Client-2 Q6 version 1	719
+{
+	"requestID": "cc510e51-639a-4be9-b9f6-7d315057193d",
+	"signature": {
+		"*": "*"
+	},
+	"results": [ 1
+ ]
+	,
+	"plans":{},
+	"status": "success",
+	"metrics": {
+		"elapsedTime": "514.602949ms",
+		"executionTime": "509.521523ms",
+		"resultCount": 1,
+		"resultSize": 2,
+		"processedObjects": 0
+	}
+}
+
+
+Total time for iteration 10 :	719 ms in thread: 2 (Client-2)
+Iteration 10 Thread Client-1 Q6 version 1	718
+
+AsterixDB Client - Read-Only Workload - Starting Iteration 11 in thread: 2 (Client-2)
+Total time for iteration 10 :	718 ms in thread: 1 (Client-1)
+
+AsterixDB Client - Read-Only Workload - Starting Iteration 11 in thread: 1 (Client-1)
+{"qidvid": "Q(6,1)", 
+"rt":715,
+{"qidvid": "Q(6,1)", 
+"rt":715,
+{"qidvid": "Q(6,1)", 
+"rt":714,
+{"qidvid": "Q(6,1)", 
+"rt":715,
+"start":"2020-02-28 03:42:54.784",
+"start":"2020-02-28 03:42:54.785",
+"start":"2020-02-28 03:42:54.784",
+"end":"2020-02-28 03:42:55.5"
+}
+"start":"2020-02-28 03:42:54.784",
+{
+	"requestID": "e5b6a615-7714-4fcb-8892-0cf782e541a5",
+	"signature": {
+		"*": "*"
+	},
+	"results": [ 1
+ ]
+	,
+	"plans":{},
+	"status": "success",
+	"metrics": {
+		"elapsedTime": "517.311555ms",
+		"executionTime": "514.0574ms",
+		"resultCount": 1,
+		"resultSize": 2,
+		"processedObjects": 0
+	}
+}
+
+
+"end":"2020-02-28 03:42:55.5"
+}
+Iteration 11 Thread Client-1 Q6 version 1	716
+"end":"2020-02-28 03:42:55.5"
+}
+{
+	"requestID": "20518b11-99d3-4289-9c73-3a1cefdbb246",
+	"signature": {
+		"*": "*"
+	},
+	"results": [ 1
+ ]
+	,
+	"plans":{},
+	"status": "success",
+	"metrics": {
+		"elapsedTime": "527.372904ms",
+		"executionTime": "522.013063ms",
+		"resultCount": 1,
+		"resultSize": 2,
+		"processedObjects": 0
+	}
+}
+
+
+{
+	"requestID": "287d108d-40c8-41be-8723-125f7d2f97fe",
+	"signature": {
+		"*": "*"
+	},
+	"results": [ 1
+ ]
+	,
+	"plans":{},
+	"status": "success",
+	"metrics": {
+		"elapsedTime": "521.8291ms",
+		"executionTime": "519.605263ms",
+		"resultCount": 1,
+		"resultSize": 2,
+		"processedObjects": 0
+	}
+}
+
+
+Iteration 11 Thread Client-3 Q6 version 1	717
+Total time for iteration 11 :	716 ms in thread: 1 (Client-1)
+"end":"2020-02-28 03:42:55.5"
+}
+{
+	"requestID": "f0802101-fbf1-47eb-930c-c02ebcede67d",
+	"signature": {
+		"*": "*"
+	},
+	"results": [ 1
+ ]
+	,
+	"plans":{},
+	"status": "success",
+	"metrics": {
+		"elapsedTime": "512.586995ms",
+		"executionTime": "509.970231ms",
+		"resultCount": 1,
+		"resultSize": 2,
+		"processedObjects": 0
+	}
+}
+
+
+Total time for iteration 11 :	717 ms in thread: 3 (Client-3)
+Iteration 11 Thread Client-2 Q6 version 1	717
+Iteration 11 Thread Client-0 Q6 version 1	717
+Total time for iteration 11 :	717 ms in thread: 2 (Client-2)
+Total time for iteration 11 :	717 ms in thread: 0 (Client-0)
+Finished at: 1582890175502
+Total experiment execution time : 8264 (ms)
+Total queries ran: 48
+Throughput for 4 users: 0.005808325266214908
+count :96.0
+total time: 65938.0
+AVG Resp Time: 686.8541666666666
+Shutdown complete!

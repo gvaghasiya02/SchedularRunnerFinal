@@ -71,7 +71,8 @@ public class AsterixUpdateClientUtility extends AbstractUpdateClientUtility {
             rspTime = (e - s);
         } catch (Exception e) {
             System.err.println("Problem in running update " + qid + " against Asterixdb !");
-            updateStat(qid, 0, Constants.INVALID_TIME);
+            //SHIVAHERE
+            updateStat(qid, 0, Constants.INVALID_TIME,0,0);
             return;
         }
 
@@ -80,7 +81,8 @@ public class AsterixUpdateClientUtility extends AbstractUpdateClientUtility {
             System.err.println("Update " + qid + " against Asterixdb returned http error code");
             rspTime = Constants.INVALID_TIME;
         }
-        updateStat(qid, 0, rspTime);
+        //SHIVAHERE
+        updateStat(qid, 0, rspTime,0,0);
 
         if (++counter % TRACE_PACE == 0) {
             System.out

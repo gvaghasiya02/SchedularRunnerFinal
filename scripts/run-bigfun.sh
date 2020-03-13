@@ -31,8 +31,6 @@ if [ ! -f ${QUERYINDEXFILE} ]; then
 	${BIGFUN_HOME}/scripts/qix-gen.sh ${BIGFUN_HOME}/files/queries ${QUERYINDEXFILE}
 fi
 
-mkdir -p ${BIGFUN_HOME}/files/output
-mkdir -p ${BIGFUN_HOME}/files/output/avg
 
 java -cp ${BIGFUN_HOME}/target/bigfun-driver-jar-with-dependencies.jar driver.Driver ${BIGFUN_HOME} ${WORKLOADFILE}
 
