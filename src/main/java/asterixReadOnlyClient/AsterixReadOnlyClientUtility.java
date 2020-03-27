@@ -52,7 +52,7 @@ public class AsterixReadOnlyClientUtility extends AbstractReadOnlyClientUtility 
 
     @Override
     public void init() {
-        httpclient=new OkHttpClient.Builder().readTimeout(5, TimeUnit.MINUTES).connectTimeout(1, TimeUnit.MINUTES).retryOnConnectionFailure(true).build();
+        httpclient=new OkHttpClient.Builder().readTimeout(60, TimeUnit.MINUTES).connectTimeout(5, TimeUnit.MINUTES).retryOnConnectionFailure(true).build();
     }
 
     @Override
@@ -69,9 +69,8 @@ public class AsterixReadOnlyClientUtility extends AbstractReadOnlyClientUtility 
         content = null;
         StringBuilder sb =  new StringBuilder();
         Map<Object, Object> data = new HashMap<>();
-        data.put("\"statement\"", qBody);
-        data.put("mode", "immediate");
-        RequestBody formBody = new FormBody.Builder().add("statement", qBody).add("mode", "immediate").build();
+//         RequestBody formBody = new FormBody.Builder().add("statement", qBody).add("mode", "immediate").add("scan_consistency","request_plus").add("profile","timings").build();
+        RequestBody formBody = new FormBody.Builder().add("statement", qBody).add("mode", "immediate").add("scan_consistency","request_plus").build();
         Request request = new Request.Builder().url(getReadUrl()).addHeader("Connection","close").addHeader("User-Agent", "Bigfun").header("Authorization", basicAuth("Administrator", "pass123")).post(formBody).build();
 
             long s = System.currentTimeMillis();
@@ -80,6 +79,7 @@ public class AsterixReadOnlyClientUtility extends AbstractReadOnlyClientUtility 
 
                 Driver.clientToRunningQueries.remove(Thread.currentThread().getName());
                 long e = System.currentTimeMillis();
+                System.out.println(request.headers());
                 content = response.body().string();
                 com.google.gson.JsonObject resJsObject = new JsonParser().parse(content).getAsJsonObject();
                 String elapsedTime_str = resJsObject.get("metrics").getAsJsonObject().get("elapsedTime").getAsString();

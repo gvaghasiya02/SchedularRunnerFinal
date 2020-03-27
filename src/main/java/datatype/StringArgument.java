@@ -27,7 +27,7 @@ public class StringArgument implements IArgument {
 
     @Override
     public String dump() {
-        return "\"" + value + "\"";
+        return value;
     }
 
     @Override
@@ -37,7 +37,7 @@ public class StringArgument implements IArgument {
 
     @Override
     public String admPrint() {
-        return "\"" + value + "\"";
+        return value;
     }
 
     public String getValue() {

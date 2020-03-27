@@ -51,7 +51,6 @@ public class AsterixClientReadOnlyWorkload extends AbstractReadOnlyClient {
 
     @Override
     public void execute() throws Exception {
-        Driver.count_all_queries.addAndGet(1);
         long starttime=System.currentTimeMillis();
         System.out.println("started at : " +new Timestamp(starttime));
         long iteration_start;
@@ -59,6 +58,7 @@ public class AsterixClientReadOnlyWorkload extends AbstractReadOnlyClient {
         int iterationCount = 0;
         System.out.print("[");
         for (int i = 0; i < iterations; i++) {
+            Driver.count_all_queries.addAndGet(1);
             if (iterationCount > 0) {
                 System.out.println(",");
             }

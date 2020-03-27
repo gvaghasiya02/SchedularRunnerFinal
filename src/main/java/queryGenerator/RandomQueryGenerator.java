@@ -63,6 +63,15 @@ public class RandomQueryGenerator {
         case 7:
             nextQ7(qIx, vIx);
             break;
+        case 1000:
+        case 1001:
+        case 1003:
+        case 1004:
+        case 1005:
+        case 1006:
+            case 1007:
+            nextThousand(qIx,vIx);
+            break;
         default:
             next(qIx,vIx);
             break;
@@ -86,6 +95,13 @@ public class RandomQueryGenerator {
         ArrayList<Number> p = qps.getParam(qid,vid);
         for(Number element:p){
             args.add(new LongArgument((Integer)element));
+        }
+    }
+
+    private void nextThousand(int qid,int vid) {
+        ArrayList<Number> p = qps.getParam(qid,vid);
+        for(Number element:p){
+            args.add(new StringArgument("w"+element.toString()));
         }
     }
 

@@ -6,5 +6,11 @@
   "5": "files/queries/q5.aql",
   "6": "files/queries/q6.aql",
   "7": "files/queries/q7.aql",
-  "8": "files/queries/q8.aql"
+  "8": "files/queries/q8.aql",
+  "1000": "files/queries/q1000.aql",
+  "1002": "files/queries/q1002.aql",
+  "1003": "files/queries/q1003.aql",
+  "1004": "files/queries/q1004.aql",
+  "1006": "files/queries/q1006.aql",
+  "1007": "files/queries/q1007.aql"
 }

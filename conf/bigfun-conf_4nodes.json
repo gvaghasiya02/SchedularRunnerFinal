@@ -2,7 +2,7 @@
   {
     "clientType" : "AsterixdbReadOnly",
     "workload": "sleep.txt",
-    "cc" : "52.41.46.81",
+    "cc" : "54.188.12.11",
     "server": "couchbase",
     "num-concurrent-readers" : 1,
     "dataverse" : "unlimitedMemory;",
