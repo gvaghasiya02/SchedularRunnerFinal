@@ -23,7 +23,7 @@ public abstract class AbstractReadOnlyClient extends AbstractClient {
     }
 
     protected abstract void setClientUtil(String qIxFile, String qGenConfigFile, String statsFile, int ignore,
-            String qSeqFile, String resultsFile, String server);
+            String qSeqFile, String resultsFile, String server, int thinking_min_ms, int thinking_max_ms);
 
     protected abstract void initReadOnlyWorkloadGen(long seed, long minUserId,long maxUsrId);
 

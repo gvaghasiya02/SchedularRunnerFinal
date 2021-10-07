@@ -46,6 +46,24 @@ public class AsterixClientConfig extends AbstractClientConfig {
         if (isParamSet(Constants.STATS_FILE,cid)) {
             statsFile = (String) getParamValue(Constants.STATS_FILE,cid);
         }
+        int thinking_min_ms = 0;
+        int thinking_max_ms = 0;
+
+        if (isParamSet(Constants.ASTX_THINKING_MIN_MS,cid)) {
+            if (getParamValue(Constants.ASTX_THINKING_MIN_MS,cid) instanceof String)
+                thinking_min_ms = Integer.parseInt((String)getParamValue(Constants.ASTX_THINKING_MIN_MS,cid));
+            else
+                thinking_min_ms = (Integer)getParamValue(Constants.ASTX_THINKING_MIN_MS,cid);
+
+        }
+
+
+        if (isParamSet(Constants.ASTX_THINKING_MAX_MS,cid)) {
+            if (getParamValue(Constants.ASTX_THINKING_MAX_MS,cid) instanceof String)
+                thinking_max_ms = Integer.parseInt((String)getParamValue(Constants.ASTX_THINKING_MAX_MS,cid));
+            else
+                thinking_max_ms = (Integer)getParamValue(Constants.ASTX_THINKING_MAX_MS,cid);
+        }
 
         long seed = Constants.DEFAULT_SEED;
         if (isParamSet(Constants.SEED,cid)) {
@@ -112,7 +130,10 @@ public class AsterixClientConfig extends AbstractClientConfig {
         String resultsFile = Driver.outputFolder+"/resdump_"+wl;
         int numReaders = 1;
         if (isParamSet(Constants.NUM_CONCURRENT_READERS,cid)) {
-            numReaders = (int) getParamValue(Constants.NUM_CONCURRENT_READERS,cid);
+            if (getParamValue(Constants.NUM_CONCURRENT_READERS,cid) instanceof  String)
+                numReaders = Integer.parseInt((String)getParamValue(Constants.NUM_CONCURRENT_READERS,cid));
+            else
+                numReaders = (Integer)getParamValue(Constants.NUM_CONCURRENT_READERS,cid);
         }
         AsterixClientReadOnlyWorkload rClient;
         String server = "asterixdb";
@@ -120,19 +141,23 @@ public class AsterixClientConfig extends AbstractClientConfig {
            server = (String) getParamValue(Constants.SERVER,cid);
         }
         if (numReaders == 1) {
-            rClient = getAsterixClientReadOnlyWorkload(cc, dvName, iter, qIxFile, qGenConfigFile, workloadFile, statsFile, seed, maxId, ignore, resultsFile, server);
+            rClient = getAsterixClientReadOnlyWorkload(cc, dvName, iter, qIxFile, qGenConfigFile, workloadFile,
+                    statsFile, seed, maxId, ignore, resultsFile, server, thinking_min_ms, thinking_max_ms);
         }
         else {
            rClient = new AsterixConcurrentReadOnlyWorkload(cc, dvName, iter, qGenConfigFile,
-                qIxFile, statsFile, ignore, workloadFile, /*dumpDirFile,*/ resultsFile, seed,minId, maxId, numReaders, server);
+                qIxFile, statsFile, ignore, workloadFile, /*dumpDirFile,*/ resultsFile, seed,minId, maxId, numReaders
+                   , server, thinking_min_ms, thinking_max_ms);
               }
-
         rClient.setExecQuery(qExec);
         return rClient;
     }
-    private AsterixClientReadOnlyWorkload getAsterixClientReadOnlyWorkload(String cc, String dvName, int iter, String qIxFile, String qGenConfigFile, String workloadFile, String statsFile, long seed, long maxUserId, int ignore, String resultsFile, String server) {
+    private AsterixClientReadOnlyWorkload getAsterixClientReadOnlyWorkload(String cc, String dvName, int iter,
+            String qIxFile, String qGenConfigFile, String workloadFile, String statsFile, long seed, long maxUserId,
+            int ignore, String resultsFile, String server, int thinking_min_ms, int thinking_max_ms) {
         return new AsterixClientReadOnlyWorkload(cc, dvName, iter, qGenConfigFile,
-                qIxFile, statsFile, ignore, workloadFile, /*dumpDirFile,*/ resultsFile, seed, maxUserId,maxUserId, server);
+                qIxFile, statsFile, ignore, workloadFile, /*dumpDirFile,*/ resultsFile, seed, maxUserId,maxUserId,
+                server, thinking_min_ms, thinking_max_ms);
     }
     @Override
     public AbstractUpdateClient readUpdateClientConfig(String bigFunHomePath,int cid) {

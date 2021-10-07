@@ -24,6 +24,8 @@ import java.util.StringTokenizer;
 import queryGenerator.QueryParamSetting;
 import queryGenerator.RandomQueryGenerator;
 
+import static java.lang.Character.isDigit;
+
 /**
  * Goes through a config file and configures a RandomQueryGenerator accordingly
  * 
@@ -48,18 +50,22 @@ public class RandomQueryGeneratorConfig {
             StringTokenizer st = new StringTokenizer(str, Constants.QPARAM_FILE_DELIM);
             int qid = Integer.parseInt(st.nextToken());
             int vid = Integer.parseInt(st.nextToken());
-            ArrayList<Number> pList = new ArrayList<Number>();
+            ArrayList<Object> pList = new ArrayList<>();
             while (st.hasMoreTokens()) {
                 String next = st.nextToken();
-                if(next.contains(".")){
-                    pList.add(Double.parseDouble(next));
-                }
-                else {
-                    pList.add(Integer.parseInt(next));
+                if (isDigit(next.charAt(0))) {
+                    if (next.contains(".")) {
+                        pList.add(Double.parseDouble(next));
+                    } else {
+                        pList.add(Integer.parseInt(next));
+                    }
+                } else {
+                    pList.add(next);
                 }
             }
             qps.addParamSetting(qid, vid, pList);
         }
+
         in.close();
         return qps;
     }

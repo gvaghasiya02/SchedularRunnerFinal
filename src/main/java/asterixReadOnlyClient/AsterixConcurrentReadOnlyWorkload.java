@@ -30,7 +30,7 @@ public class AsterixConcurrentReadOnlyWorkload extends AsterixClientReadOnlyWork
 
     public AsterixConcurrentReadOnlyWorkload(String cc, String dvName, int iter, String qGenConfigFile, String
             qIxFile, String statsFile, int ignore, String qSeqFile, String resDumpFile, long seed, long minUserId,long maxUsrId,
-            int numReaders, String server) {
+            int numReaders, String server, int thinking_min_ms, int thinking_max_ms) {
         super();
         this.ccUrl = cc;
         this.dvName = dvName;
@@ -38,9 +38,8 @@ public class AsterixConcurrentReadOnlyWorkload extends AsterixClientReadOnlyWork
         this.numReaders = numReaders;
         clUtilMap = new HashMap<>();
         initReaderSeeds(seed);
-        setClientUtil(qIxFile, qGenConfigFile, statsFile, ignore, qSeqFile, resDumpFile, server);
+        setClientUtil(qIxFile, qGenConfigFile, statsFile, ignore, qSeqFile, resDumpFile, server, thinking_min_ms, thinking_max_ms);
         initReadOnlyWorkloadGen(seed, minUserId,maxUsrId);
-        initExecutors();
         execQuery = true;
         //super(cc, dvName, iter, qGenConfigFile, qIxFile, statsFile, ignore, qSeqFile, resDumpFile, seed, maxUsrId);
     }
@@ -70,10 +69,6 @@ public class AsterixConcurrentReadOnlyWorkload extends AsterixClientReadOnlyWork
         });
     }
 
-    private void initExecutors() {
-        executorService = Executors.newFixedThreadPool(this.numReaders);
-    }
-
     @Override
     public void initReadOnlyWorkloadGen(long seed, long minUserId,long maxUsrId) {
         rwgMap = new HashMap<>();
@@ -85,14 +80,14 @@ public class AsterixConcurrentReadOnlyWorkload extends AsterixClientReadOnlyWork
 
     @Override
     public void setClientUtil(String qIxFile, String qGenConfigFile, String statsFile, int ignore,
-            String qSeqFile, String resultsFile, String server) {
+            String qSeqFile, String resultsFile, String server, int thinking_min_ms, int thinking_max_ms) {
         //TODO: Append the result and other stat files with threadIds.
         IntStream.range(0, numReaders).forEach(x -> {
             String statsF = statsFile.contains(".json")?statsFile.split(".json")[0]+x+".json":statsFile+x+".json";
             String resF = resultsFile.contains(".txt")?resultsFile.split(".txt")[0]+x+".txt":resultsFile+x+".txt";
             try {
                 clUtilMap.put(x, new AsterixReadOnlyClientUtility(ccUrl, qIxFile, qGenConfigFile, statsF, ignore, qSeqFile,
-                        resF, server));
+                        resF, server, thinking_min_ms, thinking_max_ms));
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -104,47 +99,60 @@ public class AsterixConcurrentReadOnlyWorkload extends AsterixClientReadOnlyWork
     public void execute() {
         long starttime = System.currentTimeMillis();
         System.out.println("started at : " +starttime);
-        IntStream.range(0, numReaders).forEach(readerId -> {
-            executorService.submit(() -> {
-                long iteration_start = 0l;
-                long iteration_end = 0l;
-                for (int i = 0; i < iterations; i++) {
-                    Thread.currentThread().setName("Client-"+readerId);
-                    System.out.println("\nAsterixDB Client - Read-Only Workload - Starting Iteration " + i + " in " +
-                            "thread: " + readerId + " (" + Thread.currentThread().getName() + ")");
-                    iteration_start = System.currentTimeMillis();
-                    for (Pair qvPair : clUtilMap.get(readerId).qvids) {
-                        int qid = qvPair.getQId();
-                        int vid = qvPair.getVId();
-                        Query q = rwgMap.get(readerId).nextQuery(qid, vid);
-                        if (q == null) {
-                            continue; //do not break, if one query is not found
-                        }
-                        long q_start = System.currentTimeMillis();
+        for (int i = 0; i < numReaders; i++ ){
+            int readerId= i;
+            new Thread("" + i){
+                public void run(){
+                        long iteration_start = 0l;
+                        long iteration_end = 0l;
+                        Random rand = new Random();
+                        for (int i = 0; i < iterations; i++) {
+                            Thread.currentThread().setName("Client-" + readerId);
+                            System.out.println("\nAsterixDB Client - Read-Only Workload - Starting Iteration " + i + " in "
+                                    + "thread: " + readerId + " (" + Thread.currentThread().getName() + ")");
+                            iteration_start = System.currentTimeMillis();
+                            for (Pair qvPair : clUtilMap.get(readerId).qvids) {
+                                int qid = qvPair.getQId();
+                                int vid = qvPair.getVId();
+                                Query q = rwgMap.get(readerId).nextQuery(qid, vid);
+                                if (q == null) {
+                                    continue; //do not break, if one query is not found
+                                }
+                                long q_start = -1;
 
-                        if (execQuery) {
-                            try {
-                                System.out.println(clUtilMap.get(readerId).executeQuery(qid, vid, q.aqlPrint(dvName)));
-                            } catch (Exception e) {
-                                e.printStackTrace();
+                                if (execQuery) {
+                                    try {
+                                        int thinking_min_ms = ((AsterixReadOnlyClientUtility) clUtilMap.get(readerId)).getThinking_min_ms();
+                                        int thinking_max_ms = ((AsterixReadOnlyClientUtility) clUtilMap.get(readerId)).getThinking_max_ms();
+                                        long bs = System.currentTimeMillis();
+                                        int sleepTime = rand.nextInt(thinking_max_ms - thinking_min_ms) + thinking_min_ms;
+                                        Thread.sleep(sleepTime);
+                                        long as = System.currentTimeMillis();
+                                        System.out.println(
+                                                "Actual Sleep:(ms) " + (as - bs) + " " + Thread.currentThread().getName());
+                                        q_start = System.currentTimeMillis();
+                                        System.out.println(clUtilMap.get(readerId).executeQuery(qid, vid, q.aqlPrint(dvName)));
+                                    } catch (Exception e) {
+                                        e.printStackTrace();
+                                    }
+                                }
+                                long q_end = System.currentTimeMillis();
+                                System.out.println(
+                                        "Iteration " + i + " Thread " + Thread.currentThread().getName() + " Q" + qvPair
+                                                .getQId() + " version " + qvPair.getVId() + "\t" + (q_end - q_start));
+                                int diff = (int) (q_end - q_start);
+                                Driver.count_all_queries.addAndGet(1);
                             }
+                            iteration_end = System.currentTimeMillis();
+
+                            System.out.println("Total time for iteration " + i + " :\t" + (iteration_end - iteration_start)
+                                    + " ms in thread: " + readerId + " (" + Thread.currentThread().getName() + ")");
                         }
-                        long q_end = System.currentTimeMillis();
-                        System.out.println("Iteration "+i+" Thread "+ Thread.currentThread().getName()+" Q"+qvPair.getQId()+" version "+qvPair.getVId()+"\t"+(q_end-q_start));
-                        int diff= (int)(q_end-q_start);
-                        Driver.count_all_queries.addAndGet(1);
+                        clUtilMap.get(readerId).terminate();
                     }
-                    iteration_end = System.currentTimeMillis();
+            }.start();
+        }
 
-                    System.out.println("Total time for iteration " + i + " :\t" + (iteration_end - iteration_start) +
-                            " ms in thread: " + readerId + " (" + Thread.currentThread().getName() + ")");
-                }
-                clUtilMap.get(readerId).terminate();
-            });
-        });
-
-
-        shutDownExecutors();
     }
 
     @Override

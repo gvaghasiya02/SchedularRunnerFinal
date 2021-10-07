@@ -19,22 +19,22 @@ import java.util.HashMap;
 import java.util.Set;
 
 public class QueryParamSetting {
-    private HashMap<Integer, HashMap<Integer, ArrayList<Number>>> map;
+    private HashMap<Integer, HashMap<Integer, ArrayList<Object>>> map;
 
     public QueryParamSetting() {
-        this.map = new HashMap<Integer, HashMap<Integer, ArrayList<Number>>>();
+        this.map = new HashMap<Integer, HashMap<Integer, ArrayList<Object>>>();
     }
 
-    public void addParamSetting(int qid, int vid, ArrayList<Number> params) {
-        HashMap<Integer, ArrayList<Number>> m = map.get(qid);
+    public void addParamSetting(int qid, int vid, ArrayList<Object> params) {
+        HashMap<Integer, ArrayList<Object>> m = map.get(qid);
         if (m == null) {
-            m = new HashMap<Integer, ArrayList<Number>>();
+            m = new HashMap<Integer, ArrayList<Object>>();
         }
         m.put(vid, params);
         map.put(qid, m);
     }
 
-    public ArrayList<Number> getParam(int qid, int vid) {
+    public ArrayList<Object> getParam(int qid, int vid) {
         if (!map.containsKey(qid)) {
             System.err.println("No query parameter(s) is provided for q" + qid);
             return null;
@@ -46,12 +46,12 @@ public class QueryParamSetting {
         StringBuffer sb = new StringBuffer();
         Set<Integer> qs = map.keySet();
         for (int q : qs) {
-            HashMap<Integer, ArrayList<Number>> vsm = map.get(q);
+            HashMap<Integer, ArrayList<Object>> vsm = map.get(q);
             Set<Integer> vs = vsm.keySet();
             for (int v : vs) {
-                ArrayList<Number> ps = vsm.get(v);
+                ArrayList<Object> ps = vsm.get(v);
                 sb.append("(").append(q).append(", ").append(v).append("): ");
-                for (Number p : ps) {
+                for (Object p : ps) {
                     sb.append(p).append(",");
                 }
                 sb.append("\n");

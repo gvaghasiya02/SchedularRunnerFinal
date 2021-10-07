@@ -33,12 +33,13 @@ public class AsterixClientReadOnlyWorkload extends AbstractReadOnlyClient {
     public AsterixClientReadOnlyWorkload() {};
 
     public AsterixClientReadOnlyWorkload(String cc, String dvName, int iter, String qGenConfigFile, String qIxFile,
-            String statsFile, int ignore, String qSeqFile, String resDumpFile, long seed, long minUserId,long maxUsrId, String server) {
+            String statsFile, int ignore, String qSeqFile, String resDumpFile, long seed, long minUserId,
+            long maxUsrId, String server, int thinking_min_ms, int thinking_max_ms ) {
         super();
         this.ccUrl = cc;
         this.dvName = dvName;
         this.iterations = iter;
-        setClientUtil(qIxFile, qGenConfigFile, statsFile, ignore, qSeqFile, resDumpFile, server);
+        setClientUtil(qIxFile, qGenConfigFile, statsFile, ignore, qSeqFile, resDumpFile, server, thinking_min_ms, thinking_max_ms);
         clUtil.init();
         initReadOnlyWorkloadGen(seed,minUserId, maxUsrId);
         execQuery = true;
@@ -93,10 +94,10 @@ public class AsterixClientReadOnlyWorkload extends AbstractReadOnlyClient {
 
     @Override
     public void setClientUtil(String qIxFile, String qGenConfigFile, String statsFile, int ignore, String qSeqFile,
-            String resultsFile, String server) {
+            String resultsFile, String server, int thinking_min_ms, int thinking_max_ms) {
         try {
             clUtil = new AsterixReadOnlyClientUtility(ccUrl, qIxFile, qGenConfigFile, statsFile, ignore, qSeqFile,
-                    resultsFile, server);
+                    resultsFile, server, thinking_min_ms, thinking_max_ms);
         } catch (IOException e) {
             e.printStackTrace();
         }

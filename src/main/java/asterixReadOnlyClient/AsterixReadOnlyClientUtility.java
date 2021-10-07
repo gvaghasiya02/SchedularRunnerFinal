@@ -15,26 +15,15 @@
 package asterixReadOnlyClient;
 
 import java.io.IOException;
-import java.net.URI;
-import java.net.URLEncoder;
-import java.net.http.HttpClient;
-import java.net.http.HttpRequest;
-import java.net.http.HttpResponse;
-import java.nio.charset.StandardCharsets;
 import java.sql.Timestamp;
-import java.time.Duration;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 
 import com.google.gson.JsonParser;
 import driver.Driver;
 import okhttp3.*;
-import org.apache.http.NameValuePair;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.client.utils.URIBuilder;
 import client.AbstractReadOnlyClientUtility;
 import config.Constants;
-import org.json.JSONObject;
 
 public class AsterixReadOnlyClientUtility extends AbstractReadOnlyClientUtility {
 
@@ -42,17 +31,24 @@ public class AsterixReadOnlyClientUtility extends AbstractReadOnlyClientUtility 
     OkHttpClient httpclient;
     String content;
     String server;
+    int thinking_min_ms;
+    int thinking_max_ms;
+
+
 
     public AsterixReadOnlyClientUtility(String cc, String qIxFile, String qGenConfigFile, String statsFile, int ignore,
-            String qSeqFile, String resultsFile, String server) throws IOException {
+            String qSeqFile, String resultsFile, String server, int thinking_min_ms, int thinking_max_ms) throws IOException {
         super(qIxFile, qGenConfigFile, statsFile, ignore, qSeqFile, resultsFile);
         this.ccUrl = cc;
         this.server = server;
+        this.thinking_min_ms = thinking_min_ms;
+        this.thinking_max_ms = thinking_max_ms;
     }
 
     @Override
     public void init() {
-        httpclient=new OkHttpClient.Builder().readTimeout(60, TimeUnit.MINUTES).connectTimeout(5, TimeUnit.MINUTES).retryOnConnectionFailure(true).build();
+        httpclient=
+                new OkHttpClient.Builder().readTimeout(1000, TimeUnit.MINUTES).connectTimeout(30, TimeUnit.MINUTES).retryOnConnectionFailure(true).build();
     }
 
     @Override
@@ -62,15 +58,24 @@ public class AsterixReadOnlyClientUtility extends AbstractReadOnlyClientUtility 
         }
     }
 
+    public int getThinking_min_ms() {
+        return thinking_min_ms;
+    }
+
+    public int getThinking_max_ms() {
+        return thinking_max_ms;
+    }
+
+
     @Override
     public String executeQuery(int qid, int vid, String qBody) throws Exception {
 
        Driver.clientToRunningQueries.put(Thread.currentThread().getName(), qid+"-"+vid);
         content = null;
         StringBuilder sb =  new StringBuilder();
-        Map<Object, Object> data = new HashMap<>();
 //         RequestBody formBody = new FormBody.Builder().add("statement", qBody).add("mode", "immediate").add("scan_consistency","request_plus").add("profile","timings").build();
-        RequestBody formBody = new FormBody.Builder().add("statement", qBody).add("mode", "immediate").add("scan_consistency","request_plus").build();
+        RequestBody formBody = new FormBody.Builder().add("statement", qBody).add("mode", "immediate").add(
+                "scan_consistency","request_plus").build();
         Request request = new Request.Builder().url(getReadUrl()).addHeader("Connection","close").addHeader("User-Agent", "Bigfun").header("Authorization", basicAuth("Administrator", "pass123")).post(formBody).build();
 
             long s = System.currentTimeMillis();
@@ -88,13 +93,21 @@ public class AsterixReadOnlyClientUtility extends AbstractReadOnlyClientUtility 
                 double executionTime;
                 if (elapsedTime_str.contains("ms")) {
                     elapsedTime = Double.parseDouble(elapsedTime_str.split("ms")[0]);
-                } else{
+                } else if (elapsedTime_str.contains("ns")) {
+                    elapsedTime = Double.parseDouble(elapsedTime_str.split("ns")[0])*1000*1000*1000;
+                } else if (elapsedTime_str.contains("s")) {
                     elapsedTime = Double.parseDouble(elapsedTime_str.split("s")[0])*1000;
+                } else {
+                    elapsedTime = -1;
                 }
                 if (executionTime_str.contains("ms")) {
                     executionTime = Double.parseDouble(executionTime_str.split("ms")[0]);
-                } else{
+                } else if (executionTime_str.contains("ns")) {
+                    executionTime = Double.parseDouble(executionTime_str.split("ns")[0])*1000*1000*1000;
+                } else if (executionTime_str.contains("s")){
                     executionTime = Double.parseDouble(executionTime_str.split("s")[0])*1000;
+                } else {
+                    executionTime = -1;
                 }
 
 

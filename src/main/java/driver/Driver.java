@@ -38,7 +38,8 @@ import java.util.stream.IntStream;
 
 public class Driver {
     private static Map<String, String> env = System.getenv();
-    public static String BIGFUN_HOME = env.get("BIGFUN_HOME");
+    public static String BIGFUN_HOME = env.get("BIGFUN_HOME") == null ? "/Users/shiva/bigfun_afterCB":env.get("BIGFUN_HOME") ;
+
     public static String workloadsFolder = BIGFUN_HOME +"/workloads/";
     public static HashMap<String,String> clientToRunningQueries = new HashMap<>();
     public static HashMap<String, Double> totalExecutionTime_perqidvid = new HashMap<>();
@@ -52,9 +53,9 @@ public class Driver {
 
 
         //Prometheus Setup
-        CollectorRegistry registery = new CollectorRegistry();
-        registery.register(new BigFunCollector());
-        HTTPServer server = new HTTPServer(new InetSocketAddress(2020), registery);
+        //        CollectorRegistry registery = new CollectorRegistry();
+        //        registery.register(new BigFunCollector());
+        //        HTTPServer server = new HTTPServer(new InetSocketAddress(2020), registery);
         Map<String,String> cmd = processCommandLineConfig(args);
 
         String confName = cmd.containsKey("conf")?cmd.get("conf"):"bigfun-conf_1node.json";
@@ -65,52 +66,62 @@ public class Driver {
         AbstractClientConfig clientConfig = new AsterixClientConfig(clientConfigFile, cmd);
         clientConfig.parseConfigFile();
         ExecutorService executorService = Executors.newFixedThreadPool(clientConfig.getParams().size());
-            IntStream.range(0,clientConfig.getParams().size()).forEach(c ->
-            executorService.submit(()-> {
-                Thread.currentThread().setName("Client"+c);
-                if (!clientConfig.isParamSet(Constants.CLIENT_TYPE, c)) {
-                    System.err.println("The Client Type is not set to a valid value in the config file.");
-                    return;
-                }
-                numberOfConcurrentThreads = (Integer)clientConfig.getParamValue(Constants.NUM_CONCURRENT_READERS, c);
-                String workload = Constants.WORKLOAD;
-                String numberOfThreads = Integer.toString(numberOfConcurrentThreads);
-                if (clientConfig.isParamSet(Constants.WORKLOAD, c)) {
-                    workload = (String)clientConfig.getParams().get(c).get(Constants.WORKLOAD);
-                }
+        IntStream.range(0,clientConfig.getParams().size()).forEach(c ->
+                executorService.submit(()-> {
+                    Thread.currentThread().setName("Client"+c);
+                    if (!clientConfig.isParamSet(Constants.CLIENT_TYPE, c)) {
+                        System.err.println("The Client Type is not set to a valid value in the config file.");
+                        return;
+                    }
+                    if (clientConfig.isParamSet(Constants.NUM_CONCURRENT_READERS, c)) {
+                        if (clientConfig.getParamValue(Constants.NUM_CONCURRENT_READERS, c) instanceof  String)
+                            numberOfConcurrentThreads =
+                                    Integer.parseInt((String)clientConfig.getParamValue(Constants.NUM_CONCURRENT_READERS,
+                                            c));
+                        else
+                            numberOfConcurrentThreads = (Integer)clientConfig.getParamValue(Constants.NUM_CONCURRENT_READERS, c);
+                    }
 
-                //Create output file
-                outputFolder = BIGFUN_HOME+"/files/output/"+confName.split(".json")[0]+"_"+workload.split(".txt")[0]+"_"+numberOfThreads+"users";
-                File dir = new File(outputFolder+"/avg");
-                if (!dir.exists()){
-                    dir.mkdirs();
-                }
+                    String workload = Constants.WORKLOAD;
+                    String numberOfThreads = Integer.toString(numberOfConcurrentThreads);
+                    //                String workload = Constants.WORKLOAD;
+                    //                String numberOfThreads = Integer.toString(numberOfConcurrentThreads);
+                    if (clientConfig.isParamSet(Constants.WORKLOAD, c)) {
+                        workload = (String)clientConfig.getParams().get(c).get(Constants.WORKLOAD);
+                    }
 
-                String clientTypeTag = (String) clientConfig.getParamValue(Constants.CLIENT_TYPE, c);
-                AbstractClient client = null;
-                switch (clientTypeTag) {
-                    case Constants.ASTX_RANDOM_CLIENT_TAG:
-                        client = clientConfig.readReadOnlyClientConfig(BIGFUN_HOME, c);
-                        break;
-                    case Constants.ASTX_UPDATE_CLIENT_TAG:
-                        client = clientConfig.readUpdateClientConfig(BIGFUN_HOME, c);
-                        break;
+                    //Create output file
+                    outputFolder = BIGFUN_HOME+"/files/output/"+confName.split(".json")[0]+"_"+workload.split(".txt")[0]+"_"+numberOfThreads+"users";
+                    File dir = new File(outputFolder+"/avg");
+                    if (!dir.exists()){
+                        dir.mkdirs();
+                    }
 
-                    default:
-                        System.err.println("Unknown/Invalid client type:\t" + clientTypeTag);
-                }
-                client.bigFunHome = BIGFUN_HOME;
-                try {
-                    client.execute();
-                    client.generateReport();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                    server.stop();
-                }
+                    String clientTypeTag = (String) clientConfig.getParamValue(Constants.CLIENT_TYPE, c);
+                    AbstractClient client = null;
+                    switch (clientTypeTag) {
+                        case Constants.ASTX_RANDOM_CLIENT_TAG:
+                            client = clientConfig.readReadOnlyClientConfig(BIGFUN_HOME, c);
+                            break;
+                        case Constants.ASTX_UPDATE_CLIENT_TAG:
+                            client = clientConfig.readUpdateClientConfig(BIGFUN_HOME, c);
+                            break;
 
-            }));
+                        default:
+                            System.err.println("Unknown/Invalid client type:\t" + clientTypeTag);
+                    }
+                    client.bigFunHome = BIGFUN_HOME;
+                    try {
+                        client.execute();
+                        client.generateReport();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        // server.stop();
+                    }
+
+                }));
         try {
-            server.stop();
+            // server.stop();
             executorService.shutdown();
             executorService.awaitTermination(Integer.MAX_VALUE, TimeUnit.SECONDS);
 
