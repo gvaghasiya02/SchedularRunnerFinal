@@ -10,32 +10,32 @@ FROM  (
                l.l_extendedprice * (1 - l.l_discount) AS revenue,
                n2.n_name AS s_name
         FROM LineItem l , Part p  , Orders o , Customer c , Nation n1 , Region r , Supplier s ,  Nation2 n2
-        WHERE p.p_partkey /*+  min-build-partitions 20 , build-size
+        WHERE p.p_partkey /*+   build-size
                           @PARAM
                           , join-mem
                           @PARAM
-                           */= l.l_partkey AND s.s_suppkey /*+  min-build-partitions 20 , build-size
+                           */= l.l_partkey AND s.s_suppkey /*+   build-size
                                                            @PARAM
                                                            , join-mem
                                                            @PARAM
-                                                            */= l.l_suppkey  AND l.l_orderkey /*+  min-build-partitions 20 , build-size
+                                                            */= l.l_suppkey  AND l.l_orderkey /*+   build-size
                                                                                               @PARAM
                                                                                               , join-mem
                                                                                               @PARAM
-                                                                                               */= o.o_orderkey AND c.c_custkey /*+  min-build-partitions 20 , build-size
+                                                                                               */= o.o_orderkey AND c.c_custkey /*+   build-size
                                                                                                                                 @PARAM
                                                                                                                                 , join-mem
                                                                                                                                 @PARAM
                                                                                                                                 , temp */= o.o_custkey
-         AND c.c_nationkey /*+  min-build-partitions 20 , build-size
+         AND c.c_nationkey /*+   build-size
                            @PARAM
                            , join-mem
                            @PARAM
-                            */= n1.n_nationkey AND n1.n_regionkey /*+  min-build-partitions 20 , build-size
+                            */= n1.n_nationkey AND n1.n_regionkey /*+   build-size
                                                                   @PARAM
                                                                   , join-mem
                                                                   @PARAM
-                                                                   */= r.r_regionkey AND r.r_name = 'AMERICA' AND s.s_nationkey /*+  min-build-partitions 20 , build-size
+                                                                   */= r.r_regionkey AND r.r_name = 'AMERICA' AND s.s_nationkey /*+   build-size
                                                                                                                                 @PARAM
                                                                                                                                 , join-mem
                                                                                                                                 @PARAM

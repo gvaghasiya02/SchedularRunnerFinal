@@ -15,6 +15,7 @@
 package config;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -28,12 +29,12 @@ import client.AbstractUpdateClient;
 public abstract class AbstractClientConfig {
     private String clientConfigFile;
 
-    private List<Map<String, Object>> params;
+    private ArrayList<Map<String, Object>> params;
     private Map<String,String> commandLine;
 
     public AbstractClientConfig(String clientConfigFile, Map<String, String> cmd) {
         this.clientConfigFile = clientConfigFile;
-        this.params = new LinkedList<>();
+        this.params = new ArrayList<>();
         this.commandLine = cmd;
     }
 
@@ -82,7 +83,7 @@ public abstract class AbstractClientConfig {
         }
         return sb.toString();
     }
-    public List<Map<String, Object>> getParams() {
+    public ArrayList<Map<String, Object>> getParams() {
         return params;
     }
 }

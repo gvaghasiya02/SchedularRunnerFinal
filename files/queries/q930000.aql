@@ -15,31 +15,31 @@ FROM
              FROM Partsupp ps ,
                ( SELECT l.l_suppkey , l.l_partkey , l.l_extendedprice, l.l_discount, l.l_quantity, l.l_orderkey, l.ps_supplycost
                 FROM  LineItem l , Part p
-                WHERE contains(p.p_name,'green') AND p.p_partkey /*+  min-build-partitions 20 , build-size
+                WHERE contains(p.p_name,'green') AND p.p_partkey /*+   build-size
                                                                  @PARAM
                                                                  , join-mem
                                                                  @PARAM
                                                                   */= l.l_partkey
-               ) a1 WHERE ps.ps_suppkey /*+  min-build-partitions 20 , build-size
+               ) a1 WHERE ps.ps_suppkey /*+   build-size
                                         @PARAM
                                         , join-mem
                                         @PARAM
-                                         */= a1.l_suppkey AND ps.ps_partkey /*+  min-build-partitions 20 , build-size
+                                         */= a1.l_suppkey AND ps.ps_partkey /*+   build-size
                                                                             @PARAM
                                                                             , join-mem
                                                                             @PARAM
                                                                              */= a1.l_partkey
-         ) a2 WHERE s.s_suppkey /*+  min-build-partitions 20 , build-size
+         ) a2 WHERE s.s_suppkey /*+   build-size
                                 @PARAM
                                 , join-mem
                                 @PARAM
                                  */= a2.l_suppkey
-     ) a3 WHERE n.n_nationkey /*+  min-build-partitions 20 , build-size
+     ) a3 WHERE n.n_nationkey /*+   build-size
                               @PARAM
                               , join-mem
                               @PARAM
                                */= a3.s_nationkey
-     ) a4 where o.o_orderkey /*+  min-build-partitions 20 , build-size
+     ) a4 where o.o_orderkey /*+   build-size
                              @PARAM
                              , join-mem
                              @PARAM

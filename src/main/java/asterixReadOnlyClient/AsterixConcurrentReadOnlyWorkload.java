@@ -9,8 +9,10 @@ import workloadGenerator.ReadOnlyWorkloadGenerator;
 import java.io.IOException;
 import java.math.BigInteger;
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.Semaphore;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.IntStream;
@@ -20,27 +22,31 @@ public class AsterixConcurrentReadOnlyWorkload extends AsterixClientReadOnlyWork
     private ExecutorService executorService;
 
 
-    private Map<Integer, ReadOnlyWorkloadGenerator> rwgMap;
+    private static Map<Integer, ReadOnlyWorkloadGenerator> rwgMap;
 
-    private Map<Integer, AbstractReadOnlyClientUtility> clUtilMap;
+    private static Map<Integer, AbstractReadOnlyClientUtility> clUtilMap;
 
     private int numReaders;
 
     private List<Long> readerSeeds;
 
+    private String class_;
+
     public AsterixConcurrentReadOnlyWorkload(String cc, String dvName, int iter, String qGenConfigFile, String
             qIxFile, String statsFile, int ignore, String qSeqFile, String resDumpFile, long seed, long minUserId,long maxUsrId,
-            int numReaders, String server, int thinking_min_ms, int thinking_max_ms) {
+            int numReaders, String server, int thinking_min_ms, int thinking_max_ms, String class_) {
         super();
         this.ccUrl = cc;
         this.dvName = dvName;
         this.iterations = iter;
         this.numReaders = numReaders;
-        clUtilMap = new HashMap<>();
+        this.clUtilMap = new ConcurrentHashMap<>();
+        this.rwgMap = new ConcurrentHashMap<>();
         initReaderSeeds(seed);
         setClientUtil(qIxFile, qGenConfigFile, statsFile, ignore, qSeqFile, resDumpFile, server, thinking_min_ms, thinking_max_ms);
         initReadOnlyWorkloadGen(seed, minUserId,maxUsrId);
         execQuery = true;
+        this.class_ = class_;
         //super(cc, dvName, iter, qGenConfigFile, qIxFile, statsFile, ignore, qSeqFile, resDumpFile, seed, maxUsrId);
     }
 
@@ -71,10 +77,10 @@ public class AsterixConcurrentReadOnlyWorkload extends AsterixClientReadOnlyWork
 
     @Override
     public void initReadOnlyWorkloadGen(long seed, long minUserId,long maxUsrId) {
-        rwgMap = new HashMap<>();
         IntStream.range(0, numReaders).forEach(x -> {
             rwgMap.put(x, new ReadOnlyWorkloadGenerator(clUtilMap.get(x).getQIxFile(), clUtilMap.get(x)
                     .getQGenConfigFile(), readerSeeds.get(x), minUserId,maxUsrId));
+
         });
     }
 
@@ -109,12 +115,13 @@ public class AsterixConcurrentReadOnlyWorkload extends AsterixClientReadOnlyWork
                         for (int i = 0; i < iterations; i++) {
                             Thread.currentThread().setName("Client-" + readerId);
                             System.out.println("\nAsterixDB Client - Read-Only Workload - Starting Iteration " + i + " in "
-                                    + "thread: " + readerId + " (" + Thread.currentThread().getName() + ")");
+                                    + "thread: " + readerId + " (" + Thread.currentThread().getName() + "class: "+class_+")");
                             iteration_start = System.currentTimeMillis();
                             for (Pair qvPair : clUtilMap.get(readerId).qvids) {
                                 int qid = qvPair.getQId();
                                 int vid = qvPair.getVId();
-                                Query q = rwgMap.get(readerId).nextQuery(qid, vid);
+                                ReadOnlyWorkloadGenerator ro = rwgMap.get(readerId);
+                                Query q = ro.nextQuery(qid, vid);
                                 if (q == null) {
                                     continue; //do not break, if one query is not found
                                 }
@@ -124,12 +131,10 @@ public class AsterixConcurrentReadOnlyWorkload extends AsterixClientReadOnlyWork
                                     try {
                                         int thinking_min_ms = ((AsterixReadOnlyClientUtility) clUtilMap.get(readerId)).getThinking_min_ms();
                                         int thinking_max_ms = ((AsterixReadOnlyClientUtility) clUtilMap.get(readerId)).getThinking_max_ms();
-                                        long bs = System.currentTimeMillis();
-                                        int sleepTime = rand.nextInt(thinking_max_ms - thinking_min_ms) + thinking_min_ms;
-                                        Thread.sleep(sleepTime);
-                                        long as = System.currentTimeMillis();
-                                        System.out.println(
-                                                "Actual Sleep:(ms) " + (as - bs) + " " + Thread.currentThread().getName());
+                                        if (thinking_max_ms > 0 && thinking_min_ms > 0) {
+                                            int sleepTime = rand.nextInt(thinking_max_ms - thinking_min_ms) + thinking_min_ms;
+                                            Thread.sleep(sleepTime);
+                                        }
                                         q_start = System.currentTimeMillis();
                                         System.out.println(clUtilMap.get(readerId).executeQuery(qid, vid, q.aqlPrint(dvName)));
                                     } catch (Exception e) {
@@ -147,6 +152,10 @@ public class AsterixConcurrentReadOnlyWorkload extends AsterixClientReadOnlyWork
 
                             System.out.println("Total time for iteration " + i + " :\t" + (iteration_end - iteration_start)
                                     + " ms in thread: " + readerId + " (" + Thread.currentThread().getName() + ")");
+//                            if (System.currentTimeMillis() >= starttime+ (3*60*60*1000)) {
+//                                System.out.println("Exiting Client-"+ Thread.currentThread().getName());
+//                                break;
+//                            }
                         }
                         clUtilMap.get(readerId).terminate();
                     }

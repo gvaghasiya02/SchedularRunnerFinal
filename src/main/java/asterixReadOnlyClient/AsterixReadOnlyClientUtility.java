@@ -25,6 +25,8 @@ import okhttp3.*;
 import client.AbstractReadOnlyClientUtility;
 import config.Constants;
 
+import javax.xml.bind.SchemaOutputResolver;
+
 public class AsterixReadOnlyClientUtility extends AbstractReadOnlyClientUtility {
 
     String ccUrl;
@@ -69,23 +71,26 @@ public class AsterixReadOnlyClientUtility extends AbstractReadOnlyClientUtility 
 
     @Override
     public String executeQuery(int qid, int vid, String qBody) throws Exception {
-
-       Driver.clientToRunningQueries.put(Thread.currentThread().getName(), qid+"-"+vid);
+        System.out.println(Thread.currentThread().getName());
+       //Driver.clientToRunningQueries.put(Thread.currentThread().getName(), qid+"-"+vid);
         content = null;
         StringBuilder sb =  new StringBuilder();
 //         RequestBody formBody = new FormBody.Builder().add("statement", qBody).add("mode", "immediate").add("scan_consistency","request_plus").add("profile","timings").build();
-        RequestBody formBody = new FormBody.Builder().add("statement", qBody).add("mode", "immediate").add(
+        RequestBody formBody = new FormBody.Builder().add("statement", qBody).add("mode",
+                "immediate").add(
                 "scan_consistency","request_plus").build();
-        Request request = new Request.Builder().url(getReadUrl()).addHeader("Connection","close").addHeader("User-Agent", "Bigfun").header("Authorization", basicAuth("Administrator", "pass123")).post(formBody).build();
+        Request request = new Request.Builder().url(getReadUrl()).addHeader("Connection","close").addHeader("User-Agent"
+                , Thread.currentThread().getName()).header("Authorization", basicAuth("Administrator", "pass123")).post(formBody).build();
 
-            long s = System.currentTimeMillis();
+        long s = System.currentTimeMillis();
             Timestamp startTimeStamp = new Timestamp(System.currentTimeMillis());
-            try (Response response = httpclient.newCall(request).execute()){
 
+            try (Response response = httpclient.newCall(request).execute()){
                 Driver.clientToRunningQueries.remove(Thread.currentThread().getName());
                 long e = System.currentTimeMillis();
                 System.out.println(request.headers());
                 content = response.body().string();
+                //System.out.println(content);
                 com.google.gson.JsonObject resJsObject = new JsonParser().parse(content).getAsJsonObject();
                 String elapsedTime_str = resJsObject.get("metrics").getAsJsonObject().get("elapsedTime").getAsString();
                 String executionTime_str = resJsObject.get("metrics").getAsJsonObject().get("executionTime").getAsString();
@@ -115,6 +120,7 @@ public class AsterixReadOnlyClientUtility extends AbstractReadOnlyClientUtility 
                 long rspTime = (e - s);
 
                 sb.append("{\"qidvid\": \"Q(" + qid + "," + vid + ")\", \n" + "\"rt\":" + rspTime + ",\n");
+                sb.append("\"user\":\""+Thread.currentThread().getName()+"\",\n");
                 sb.append("\"query\":\""+qBody+"\",\n");
                 sb.append("\"start\":\"" + startTimeStamp + "\",\n");
                 sb.append("\"end\":\"" + endTimeStamp + "\",\n");

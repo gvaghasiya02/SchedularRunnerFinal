@@ -1,10 +1,5 @@
-99999,1,"1024MB",2,17
-100000,1,"1024MB",3,17
-200001,1,"1024MB",3,17
-300001,1,"1024MB",3,17
-100002,1,"1024MB",5,17
-200003,1,"1024MB",5,17
-300003,1,"1024MB",5,17
-100006,1,"1024MB",9,17
-200007,1,"1024MB",9,17
-300007,1,"1024MB",9,17
+960000,1,wisconsin_dataset_40960_ds,wisconsin_dataset_40960_ds,0.05,0.25
+960000,2,wisconsin_dataset_40960_ds,wisconsin_dataset_40960_ds,0.26,0.75
+960000,3,wisconsin_dataset_40960_ds,wisconsin_dataset_40960_ds,0.76,0.95
+960001,1,wisconsin_dataset_40960_ds,80
+960002,1,wisconsin_dataset_40960_ds,0.95

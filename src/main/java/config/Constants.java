@@ -44,7 +44,10 @@ public class Constants {
     public static final String CC_URL = "cc";
     public static final String ASTX_DV_NAME = "dataverse";
     public static final String ASTX_RANDOM_CLIENT_TAG = "AsterixdbReadOnly";
+
     public static final String NUM_CONCURRENT_READERS = "num-concurrent-readers";
+    public static final String USERID = "userid";
+    public static final String CLASS = "class";
     public static final String ASTX_DUMP_RESULTS = "dumpResults";
     public static final String ASTX_UPDATE_CLIENT_TAG = "AsterixdbUpdate";
     public static final String ASTX_THINKING_MIN_MS = "thinking_min_ms";

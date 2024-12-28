@@ -58,12 +58,13 @@ public class AsterixClientReadOnlyWorkload extends AbstractReadOnlyClient {
         long iteration_end;
         int iterationCount = 0;
         System.out.print("[");
-        for (int i = 0; i < iterations; i++) {
+        boolean condition = true;
+        while(condition){
             Driver.count_all_queries.addAndGet(1);
             if (iterationCount > 0) {
                 System.out.println(",");
             }
-            System.out.println("\n{ \"Iteration\":" + i+
+            System.out.println("\n{ \"Iteration\":" + iterationCount+
                     ",");
             iteration_start = System.currentTimeMillis();
             System.out.println("\"queries\":[");
@@ -84,12 +85,20 @@ public class AsterixClientReadOnlyWorkload extends AbstractReadOnlyClient {
                 loopCount++;
             }
             iteration_end = System.currentTimeMillis();
-            System.out.print("],\n\"TotalTime " + i + "\" :" + (iteration_end - iteration_start) + "\n}");
+            System.out.print("],\n\"TotalTime " + iterationCount + "\" :" + (iteration_end - iteration_start) + "\n}");
             iterationCount++;
+            if (iterations > 0) {
+                condition = iterationCount < iterations;
+            }
+            //            if (System.currentTimeMillis() >= starttime+ (3*60*60*1000)) {//3hrs
+            //                System.out.println("Exiting Client-"+ Thread.currentThread().getName());
+            //                break;
+            //            }
         }
         System.out.print("]");
         System.out.println("Finished at: "+new Timestamp(System.currentTimeMillis()));
         clUtil.terminate();
+
     }
 
     @Override

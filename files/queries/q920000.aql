@@ -24,44 +24,44 @@ FROM  (
                                                 SELECT l.l_discount, l.l_extendedprice, l.l_suppkey , l.l_orderkey
                                                 FROM  LineItem l ,
                                                       Part p
-                                                WHERE p.p_partkey /*+  min-build-partitions 20 , build-size
+                                                WHERE p.p_partkey /*+ build-size
                                                                   @PARAM
                                                                   , join-mem
                                                                   @PARAM
                                                                    */ = l.l_partkey and p.p_type = 'ECONOMY ANODIZED STEEL'
                                                 ) AS lp
-                                         WHERE lp.l_orderkey /*+  min-build-partitions 20 , build-size
+                                         WHERE lp.l_orderkey /*+ build-size
                                                              @PARAM
                                                              , join-mem
                                                              @PARAM
                                                               */= o.o_orderkey and o.o_orderdate >= '1995-01-01' and o.o_orderdate < '1996-12-31'
                                        ) AS olp
-                                WHERE c.c_custkey /*+  min-build-partitions 20 , build-size
+                                WHERE c.c_custkey /*+ build-size
                                                   @PARAM
                                                   , join-mem
                                                   @PARAM
                                                    */= olp.o_custkey
                                 ) AS colp
-                        WHERE colp.c_nationkey /*+  min-build-partitions 20 , build-size
+                        WHERE colp.c_nationkey /*+ build-size
                                                @PARAM
                                                , join-mem
                                                @PARAM
                                                 */= n.n_nationkey
                         ) AS ncolp
-                        WHERE ncolp.n_regionkey /*+  min-build-partitions 20 , build-size
+                        WHERE ncolp.n_regionkey /*+ build-size
                                                 @PARAM
                                                 , join-mem
                                                 @PARAM
                                                  */= r.r_regionkey AND r.r_name = 'AMERICA'
                     ) AS rncolp
-                WHERE s.s_suppkey /*+  min-build-partitions 20 , build-size
+                WHERE s.s_suppkey /*+ build-size
                                   @PARAM
                                   , join-mem
                                   @PARAM
                                    */= rncolp.l_suppkey
                 ) AS srncolp
                 LET o_year = `get-year`(srncolp.o_orderdate)
-                WHERE srncolp.s_nationkey /*+  min-build-partitions 20 , build-size
+                WHERE srncolp.s_nationkey /*+ build-size
                                           @PARAM
                                           , join-mem
                                           @PARAM

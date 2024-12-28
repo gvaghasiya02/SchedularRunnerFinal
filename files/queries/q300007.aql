@@ -1,4 +1,4 @@
-SET `compiler.seqbuild` '1';
+SET `compiler.seqbuild` "1";
          SET `compiler.joinmemory`
          @PARAM
          ;

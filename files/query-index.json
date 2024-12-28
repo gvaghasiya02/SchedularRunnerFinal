@@ -122,6 +122,7 @@
   "200005": "files/queries/q200005.aql",
   "200006": "files/queries/q200006.aql",
   "200007": "files/queries/q200007.aql",
+  "300000": "files/queries/q300000.aql",
   "300001": "files/queries/q300001.aql",
   "300002": "files/queries/q300002.aql",
   "300003": "files/queries/q300003.aql",
@@ -135,6 +136,7 @@
   "400004": "files/queries/q400004.aql",
   "400005": "files/queries/q400005.aql",
   "400006": "files/queries/q400006.aql",
+  "400007": "files/queries/q400007.aql",
   "500007": "files/queries/q500007.aql",
   "500008": "files/queries/q500008.aql",
   "500009": "files/queries/q500009.aql",
@@ -178,6 +180,7 @@
   "910016": "files/queries/q910016.aql",
   "910017": "files/queries/q910017.aql",
   "910018": "files/queries/q910018.aql",
+  "910019": "files/queries/q910019.aql",
   "920000": "files/queries/q920000.aql",
   "920001": "files/queries/q920001.aql",
   "920002": "files/queries/q920002.aql",
@@ -199,5 +202,13 @@
   "930006": "files/queries/q930006.aql",
   "940000": "files/queries/q940000.aql",
   "930007": "files/queries/q930007.aql",
-  "920012": "files/queries/q920012.aql"
+  "920012": "files/queries/q920012.aql",
+  "10": "files/queries/q10.aql",
+  "11": "files/queries/q11.aql",
+  "12": "files/queries/q12.aql",
+  "950000": "files/queries/q950000.aql",
+  "950001": "files/queries/q950001.aql",
+  "960000": "files/queries/q960000.aql",
+  "960001": "files/queries/q960001.aql",
+  "960002": "files/queries/q960002.aql"
 }

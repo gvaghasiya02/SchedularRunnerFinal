@@ -12,33 +12,33 @@ FROM
     FROM
              LineItem l , Part p ,  Partsupp ps  ,  Supplier s , Nation n , Orders o
              WHERE
-             n.n_nationkey /*+  min-build-partitions 20 , build-size
+             n.n_nationkey /*+   build-size
                            @PARAM
                            , join-mem
                            @PARAM
                               */= s.s_nationkey AND
-             s.s_suppkey /*+  min-build-partitions 20 , build-size
+             s.s_suppkey /*+   build-size
                          @PARAM
                          , join-mem
                          @PARAM
                             */= l.l_suppkey AND
-             ps.ps_suppkey /*+  min-build-partitions 20 , build-size
+             ps.ps_suppkey /*+   build-size
                            @PARAM
                            , join-mem
                            @PARAM
                              , temp */= l.l_suppkey AND
-             ps.ps_partkey /*+  min-build-partitions 20 , build-size
+             ps.ps_partkey /*+   build-size
                            @PARAM
                            , join-mem
                            @PARAM
                              , temp */= l.l_partkey AND
              contains(p.p_name,'green') AND
-             p.p_partkey /*+  min-build-partitions 20 , build-size
+             p.p_partkey /*+   build-size
                          @PARAM
                          , join-mem
                          @PARAM
                             */= l.l_partkey AND
-             o.o_orderkey /*+  min-build-partitions 20 , build-size
+             o.o_orderkey /*+   build-size
                           @PARAM
                           , join-mem
                           @PARAM

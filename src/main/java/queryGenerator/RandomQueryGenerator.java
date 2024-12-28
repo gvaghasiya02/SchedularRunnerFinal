@@ -50,16 +50,56 @@ public class RandomQueryGenerator {
     public ArrayList<IArgument> nextQuery(int qIx, int vIx) {
         args.clear();
         switch (qIx) {
-            case 99999:
+            case 11:
+            case 12:
+                nextQ11(qIx, vIx);
+                break;
+            case 10:
+                nextQ10(qIx,vIx);
+                break;
             case 100000:
+            case 100001:
             case 100002:
+            case 100003:
+            case 100004:
+            case 100005:
             case 100006:
             case 200001:
+            case 200002:
             case 200003:
+            case 200004:
+            case 200005:
+            case 200006:
             case 200007:
+            case 300000:
             case 300001:
+            case 300002:
             case 300003:
+            case 300004:
+            case 300005:
+            case 300006:
             case 300007:
+            case 400001:
+            case 400002:
+            case 400003:
+            case 400004:
+            case 400005:
+            case 400006:
+            case 500007:
+            case 500008:
+            case 500009:
+            case 500010:
+            case 500011:
+            case 500012:
+            case 500013:
+            case 600007:
+            case 600008:
+            case 600009:
+            case 600010:
+            case 600011:
+            case 600012:
+            case 600013:
+            case 99999:
                 nextQRandMulti(qIx,vIx);
                 break;
         case 0:
@@ -185,11 +225,16 @@ public class RandomQueryGenerator {
             case 910016:
             case 910017:
             case 910018:
+
                 nextQRDTEXPR3(qIx, vIx);
                 break;
             case 910002:
             case 910012:
                 nextQLDTEXPR3(qIx, vIx);
+                break;
+            case 400007:
+            case 910019:
+                nextQBUSHYEXPR3(qIx, vIx);
                 break;
             case 920000:
                 nextTpch8LDT(qIx, vIx);
@@ -220,6 +265,21 @@ public class RandomQueryGenerator {
             case 930007:
                 nextTpch9RDT(qIx, vIx);
                 break;
+            case 950000:
+                nextQ950000(qIx,vIx);
+                break;
+            case 950001:
+                nextQ950001(qIx, vIx);
+                break;
+            case 960000:
+                nextQ960000(qIx, vIx);
+                break;
+            case 960001:
+                nextQ960001(qIx, vIx);
+                break;
+            case 960002:
+                nextQ960002(qIx, vIx);
+                break;
         default:
             next(qIx,vIx);
             break;
@@ -231,22 +291,65 @@ public class RandomQueryGenerator {
     private void nextQRandMulti(int qid, int vid) {
         Random rand = new Random();
         //get threadId
-        int threadId = Integer.parseInt(Thread.currentThread().getName().split("Client")[1]);
+        System.out.println(Thread.currentThread().getName());
+        int threadId = Integer.parseInt(Thread.currentThread().getName().split("Client-")[1]);
+        System.out.println(threadId);
+        System.out.println(Thread.currentThread().getName());
         String joinMemory = (String)qps.getParam(qid, vid).get(0);
         int numberOfDS = (Integer)qps.getParam(qid, vid).get(1);
         int totalNumberOfDS = (Integer)qps.getParam(qid, vid).get(2);
+        System.out.println(totalNumberOfDS);
         args.add(new StringArgument(joinMemory));
         Set<Integer> dsNumbers = new HashSet<Integer>();
-        for (int i=0; i<numberOfDS; i++) {
-            int ds = rand.nextInt(totalNumberOfDS) +(threadId*totalNumberOfDS);
+        for (int i = 0; i < numberOfDS; i++) {
+            int ds = (rand.nextInt()%totalNumberOfDS)+1 +(threadId*totalNumberOfDS);
             while (!dsNumbers.add(ds) || ds < 1) {
-                ds = rand.nextInt(totalNumberOfDS)+(threadId*totalNumberOfDS);
+                ds = (rand.nextInt()%totalNumberOfDS)+1 + (threadId*totalNumberOfDS);
             }
+            System.out.println("threadID: "+threadId+" ds"+i+": "+ds);
+//            int ds = i+1;
             args.add(new StringArgument("wisconsin_fixed_record_size_1GB_1000000_ds"+ds));
         }
 
     }
 
+
+    private void nextQ950000(int qid, int vid){
+        String joinMem = (String)qps.getParam(qid, vid).get(0);
+        String rel1 = (String)qps.getParam(qid, vid).get(1);
+        int bSize = (Integer)qps.getParam(qid, vid).get(2);
+        String rel2 = (String)qps.getParam(qid, vid).get(3);
+        args.add(new StringArgument(joinMem));
+        args.add(new StringArgument(rel1));
+        args.add(new StringArgument(rel2));
+        args.add(new IntArgument(bSize));
+        args.add(new IntArgument(bSize));
+        args.add(new IntArgument(bSize));
+        args.add(new IntArgument(bSize));
+        args.add(new IntArgument(bSize));
+        args.add(new IntArgument(bSize));
+        args.add(new IntArgument(bSize));
+        args.add(new IntArgument(bSize));
+        args.add(new IntArgument(bSize));
+        args.add(new IntArgument(bSize));
+        args.add(new IntArgument(bSize));
+        args.add(new IntArgument(bSize));
+        args.add(new IntArgument(bSize));
+        args.add(new IntArgument(bSize));
+        args.add(new IntArgument(bSize));
+        args.add(new IntArgument(bSize));
+
+    }
+
+    private void nextQ950001(int qid, int vid){
+        String joinMem = (String)qps.getParam(qid, vid).get(0);
+        String rel1 = (String)qps.getParam(qid, vid).get(1);
+        String rel2 = (String)qps.getParam(qid, vid).get(2);
+        args.add(new StringArgument(joinMem));
+        args.add(new StringArgument(rel1));
+        args.add(new StringArgument(rel2));
+
+    }
     private void nextTpch8RDT(int qid, int vid) {
         String seqbuild = (String)qps.getParam(qid, vid).get(0);
         int j1BuildSize = (Integer)qps.getParam(qid, vid).get(1);
@@ -448,7 +551,54 @@ public class RandomQueryGenerator {
         args.add(new IntArgument(j4JoinMemory2));
     }
 
+    private void nextQBUSHYEXPR3(int qid, int vid) {
+        int recordSize = (Integer)qps.getParam(qid, vid).get(0);
+        int j1JoinMemory1=(Integer)qps.getParam(qid, vid).get(1)* recordSize/1024/1024/4;
+        int j1BuildSize1 = (Integer)qps.getParam(qid, vid).get(2)* recordSize/1024/1024;
+        int j1BuildSize2 = (Integer)qps.getParam(qid, vid).get(3)* recordSize/1024/1024;
+        int j2BuildSize1 = (Integer)qps.getParam(qid, vid).get(4)* recordSize/1024/1024;
+        int j2BuildSize2 = (Integer)qps.getParam(qid, vid).get(5)* recordSize/1024/1024;
+        int j3BuildSize1 = (Integer)qps.getParam(qid, vid).get(6)* recordSize/1024/1024;
+        int j3BuildSize2 = (Integer)qps.getParam(qid, vid).get(7)* recordSize/1024/1024;
+        int j4BuildSize1 = (Integer)qps.getParam(qid, vid).get(8)* recordSize/1024/1024;
+        int j4BuildSize2 = (Integer)qps.getParam(qid, vid).get(9)* recordSize/1024/1024;
+        args.add(new StringArgument(j1JoinMemory1+"MB"));
+        args.add(new IntArgument(j1BuildSize1));
+        args.add(new IntArgument(j1BuildSize2));
+        args.add(new IntArgument(j2BuildSize1));
+        args.add(new IntArgument(j2BuildSize2));
+        args.add(new IntArgument(j3BuildSize1));
+        args.add(new IntArgument(j3BuildSize2));
+        args.add(new IntArgument(j4BuildSize1));
+        args.add(new IntArgument(j4BuildSize2));
+    }
+
     private void nextQ1() {}
+    private void nextQ11(int qid, int vid) {
+        String memory = (String) qps.getParam(qid,vid).get(0);
+        args.add(new StringArgument(memory));
+    }
+    private void nextQ10(int qid, int vid) {
+        String memory = (String) qps.getParam(qid,vid).get(0);
+        int numPartitions = (Integer)qps.getParam(qid, vid).get(1);
+        args.add(new StringArgument(memory));
+        args.add(new IntArgument(numPartitions));
+        args.add(new IntArgument(numPartitions));
+        args.add(new IntArgument(numPartitions));
+        args.add(new IntArgument(numPartitions));
+        args.add(new IntArgument(numPartitions));
+        args.add(new IntArgument(numPartitions));
+        args.add(new IntArgument(numPartitions));
+        args.add(new IntArgument(numPartitions));
+        args.add(new IntArgument(numPartitions));
+        args.add(new IntArgument(numPartitions));
+        args.add(new IntArgument(numPartitions));
+        args.add(new IntArgument(numPartitions));
+        args.add(new IntArgument(numPartitions));
+        args.add(new IntArgument(numPartitions));
+        args.add(new IntArgument(numPartitions));
+        args.add(new IntArgument(numPartitions));
+    }
 
     private void nextQFF_N_RANDOM_N(int qid, int vid) {
         String memory = (String) qps.getParam(qid,vid).get(0);
@@ -563,6 +713,61 @@ public class RandomQueryGenerator {
         args.add(new StringArgument(ds2));
     }
 
+    private void nextQ960000(int qid,int vid){
+        //String memory = (String) qps.getParam(qid,vid).get(0);
+        String ds1 = (String) qps.getParam(qid,vid).get(0);
+        String ds2 = (String) qps.getParam(qid,vid).get(1);
+        Number lowRange = (Number)qps.getParam(qid, vid).get(2);
+        Number highRange = (Number)qps.getParam(qid, vid).get(3);
+        double percentage = generateRandomDouble((double)lowRange,(double)highRange);
+        int memory = (int)Math.ceil(percentage*13*1024)/4; //14GB is size of workspace. 4data partitions
+        String memoryArg = "\""+memory+"MB\"";
+        double recordPercentage = memory*4.0/(44*1024*1.0); //40  GB is size of the dataset
+        long len = (long)(MAX_ID * (double)recordPercentage);
+        LongArgument s = randomLongArg(1,MAX_ID - len);
+        LongArgument e = new LongArgument(s.getValue() + len);
+
+
+        int ds1_posix = 1+rand.nextInt(5);//between [0,6)
+        int ds2_posix = ds1_posix;
+        while(ds2_posix==ds1_posix){
+            ds2_posix=1+rand.nextInt(5);
+        }
+        args.add(new StringArgument(memoryArg));
+        args.add(new StringArgument(ds1+ds1_posix));
+        args.add(new StringArgument(ds2+ds2_posix));
+        args.add(s);//ds1
+        args.add(e);//ds1
+        args.add(s);//ds2
+        args.add(e);//ds2
+    }
+
+    private void nextQ960001(int qid,int vid){
+        String ds1 = (String) qps.getParam(qid,vid).get(0);
+        Long len = ((Number)qps.getParam(qid, vid).get(1)).longValue();
+        LongArgument s = randomLongArg(1,MAX_ID - len);
+        LongArgument e = new LongArgument(s.getValue() + len);
+
+
+        int ds1_posix = 1+rand.nextInt(5);//between [0,6)
+        args.add(new StringArgument(ds1+ds1_posix));
+        args.add(s);//ds1
+        args.add(e);//ds1
+    }
+
+    private void nextQ960002(int qid,int vid){
+        String ds1 = (String) qps.getParam(qid,vid).get(0);
+        Number percentage = (Number)qps.getParam(qid, vid).get(1);
+        long len = (long)(MAX_ID * percentage.doubleValue());
+        LongArgument s = randomLongArg(1,MAX_ID - len);
+        LongArgument e = new LongArgument(s.getValue() + len);
+
+
+        int ds1_posix = 1+rand.nextInt(5);//between [0,6)
+        args.add(new StringArgument(ds1+ds1_posix));
+        args.add(s);//ds1
+        args.add(e);//ds1
+    }
     //Utility Methods
     public void setStartDate(DateTimeArgument sd) {
         this.START_DATE = sd;
@@ -590,6 +795,10 @@ public class RandomQueryGenerator {
 
     private long generateRandomLong(long x, long y) {
         return (x + ((long) (rand.nextDouble() * (y - x))));
+    }
+
+    private double generateRandomDouble(double x, double y) {
+        return (x + (rand.nextDouble() * (y - x)));
     }
 
 }

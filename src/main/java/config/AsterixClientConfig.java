@@ -22,6 +22,7 @@ import client.AbstractUpdateClient;
 import driver.Driver;
 import structure.UpdateTag;
 
+import javax.xml.bind.SchemaOutputResolver;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Map;
@@ -130,10 +131,20 @@ public class AsterixClientConfig extends AbstractClientConfig {
         String resultsFile = Driver.outputFolder+"/resdump_"+wl;
         int numReaders = 1;
         if (isParamSet(Constants.NUM_CONCURRENT_READERS,cid)) {
-            if (getParamValue(Constants.NUM_CONCURRENT_READERS,cid) instanceof  String)
+            if (getParamValue(Constants.NUM_CONCURRENT_READERS,cid) instanceof  String){
                 numReaders = Integer.parseInt((String)getParamValue(Constants.NUM_CONCURRENT_READERS,cid));
-            else
-                numReaders = (Integer)getParamValue(Constants.NUM_CONCURRENT_READERS,cid);
+                System.out.println("here1");
+            }
+            else {
+                numReaders = (Integer) getParamValue(Constants.NUM_CONCURRENT_READERS, cid);
+                System.out.println("here2");
+            }
+        }
+        System.out.println(numReaders);
+        String class_="NONE";
+        if (isParamSet(Constants.CLASS,cid)) {
+            if (getParamValue(Constants.CLASS,cid) instanceof  String)
+                class_ = (String)getParamValue(Constants.CLASS,cid);
         }
         AsterixClientReadOnlyWorkload rClient;
         String server = "asterixdb";
@@ -147,7 +158,7 @@ public class AsterixClientConfig extends AbstractClientConfig {
         else {
            rClient = new AsterixConcurrentReadOnlyWorkload(cc, dvName, iter, qGenConfigFile,
                 qIxFile, statsFile, ignore, workloadFile, /*dumpDirFile,*/ resultsFile, seed,minId, maxId, numReaders
-                   , server, thinking_min_ms, thinking_max_ms);
+                   , server, thinking_min_ms, thinking_max_ms, class_);
               }
         rClient.setExecQuery(qExec);
         return rClient;

@@ -14,25 +14,22 @@
  */
 package driver;
 
-import Prometheus.BigFunCollector;
 import client.AbstractClient;
 import config.AbstractClientConfig;
 import config.AsterixClientConfig;
 import config.Constants;
-import io.prometheus.client.CollectorRegistry;
-import io.prometheus.client.exporter.HTTPServer;
 
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.net.InetSocketAddress;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.IntStream;
 
@@ -51,11 +48,6 @@ public class Driver {
 
     public static void main(String[] args) throws IOException {
 
-
-        //Prometheus Setup
-        //        CollectorRegistry registery = new CollectorRegistry();
-        //        registery.register(new BigFunCollector());
-        //        HTTPServer server = new HTTPServer(new InetSocketAddress(2020), registery);
         Map<String,String> cmd = processCommandLineConfig(args);
 
         String confName = cmd.containsKey("conf")?cmd.get("conf"):"bigfun-conf_1node.json";
@@ -66,9 +58,11 @@ public class Driver {
         AbstractClientConfig clientConfig = new AsterixClientConfig(clientConfigFile, cmd);
         clientConfig.parseConfigFile();
         ExecutorService executorService = Executors.newFixedThreadPool(clientConfig.getParams().size());
+        Collections.shuffle(clientConfig.getParams());
         IntStream.range(0,clientConfig.getParams().size()).forEach(c ->
                 executorService.submit(()-> {
-                    Thread.currentThread().setName("Client"+c);
+                    Thread.currentThread().setName("USERID-"+clientConfig.getParamValue(Constants.USERID, c)+
+                            "="+clientConfig.getParamValue(Constants.CLASS,c));
                     if (!clientConfig.isParamSet(Constants.CLIENT_TYPE, c)) {
                         System.err.println("The Client Type is not set to a valid value in the config file.");
                         return;
@@ -79,13 +73,19 @@ public class Driver {
                                     Integer.parseInt((String)clientConfig.getParamValue(Constants.NUM_CONCURRENT_READERS,
                                             c));
                         else
-                            numberOfConcurrentThreads = (Integer)clientConfig.getParamValue(Constants.NUM_CONCURRENT_READERS, c);
+                            numberOfConcurrentThreads =
+                                    (Integer)clientConfig.getParamValue(Constants.NUM_CONCURRENT_READERS, c);
                     }
 
                     String workload = Constants.WORKLOAD;
                     String numberOfThreads = Integer.toString(numberOfConcurrentThreads);
                     //                String workload = Constants.WORKLOAD;
                     //                String numberOfThreads = Integer.toString(numberOfConcurrentThreads);
+                    if (clientConfig.isParamSet(Constants.NUM_CONCURRENT_READERS, c)) {
+                        numberOfThreads =
+                                Integer.toString(
+                                        (Integer) clientConfig.getParams().get(c).get(Constants.NUM_CONCURRENT_READERS));
+                    }
                     if (clientConfig.isParamSet(Constants.WORKLOAD, c)) {
                         workload = (String)clientConfig.getParams().get(c).get(Constants.WORKLOAD);
                     }
@@ -113,28 +113,31 @@ public class Driver {
                     client.bigFunHome = BIGFUN_HOME;
                     try {
                         client.execute();
-                        client.generateReport();
+                        System.out.println("Exited");
+                        return;
+                        //client.generateReport();
                     } catch (Exception e) {
                         e.printStackTrace();
                         // server.stop();
                     }
 
                 }));
-        try {
-            // server.stop();
-            executorService.shutdown();
-            executorService.awaitTermination(Integer.MAX_VALUE, TimeUnit.SECONDS);
-
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        finally {
-            printGlobalStats();
-            if (!executorService.isTerminated()) {
-                System.out.println("canceling all pending tasks");
-            }
-            executorService.shutdownNow();
-        }
+//        try {
+//            System.out.println("Killing all");
+////             server.stop();
+//            executorService.shutdownNow();
+//            executorService.awaitTermination(100, TimeUnit.SECONDS);
+//
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
+//        finally {
+//            printGlobalStats();
+//            if (!executorService.isTerminated()) {
+//                System.out.println("canceling all pending tasks");
+//            }
+//            executorService.shutdownNow();
+//        }
     }
     private static Map<String, String> processCommandLineConfig(String[] args) {
         Map<String, String> commandLineConfig = new HashMap<>();

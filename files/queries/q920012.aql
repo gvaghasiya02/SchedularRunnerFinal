@@ -13,24 +13,24 @@ FROM  (
 
   (SELECT l.l_suppkey , o.o_orderdate, l.l_extendedprice, l.l_discount
   FROM LineItem l , Part p  , Orders o , Customer c , Nation n1 , Region r
-  WHERE p.p_partkey /*+  min-build-partitions 20 , build-size
+  WHERE p.p_partkey /*+   build-size
     @PARAM
     , join-mem
     @PARAM
-     */= l.l_partkey AND l.l_orderkey /*+  min-build-partitions 20 , build-size
+     */= l.l_partkey AND l.l_orderkey /*+   build-size
     @PARAM
     , join-mem
     @PARAM
-     */= o.o_orderkey AND c.c_custkey /*+  min-build-partitions 20 , build-size
+     */= o.o_orderkey AND c.c_custkey /*+   build-size
   @PARAM
   , join-mem
   @PARAM
    */= o.o_custkey
-   AND c.c_nationkey /*+  min-build-partitions 20 , build-size
+   AND c.c_nationkey /*+   build-size
      @PARAM
      , join-mem
      @PARAM
-  */= n1.n_nationkey AND n1.n_regionkey /*+  min-build-partitions 20 , build-size
+  */= n1.n_nationkey AND n1.n_regionkey /*+   build-size
     @PARAM
     , join-mem
     @PARAM
@@ -39,12 +39,12 @@ FROM  (
      AND  p.p_type = 'ECONOMY ANODIZED STEEL' ) a ,
      (SELECT n2.n_name , s.s_suppkey
      FROM Supplier s ,  Nation2 n2
-     WHERE s.s_nationkey /*+  min-build-partitions 20 , build-size
+     WHERE s.s_nationkey /*+   build-size
   @PARAM
   , join-mem
   @PARAM
    */= n2.n_nationkey ) b
-WHERE b.s_suppkey /*+  min-build-partitions 20 , build-size
+WHERE b.s_suppkey /*+   build-size
      @PARAM
      , join-mem
      @PARAM
