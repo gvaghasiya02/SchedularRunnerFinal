@@ -17,6 +17,8 @@ package config;
 import asterixReadOnlyClient.AsterixClientReadOnlyWorkload;
 import asterixReadOnlyClient.AsterixConcurrentReadOnlyWorkload;
 import asterixUpdateClient.AsterixClientUpdateWorkload;
+import java.io.File;
+import javax.xml.bind.SchemaOutputResolver;
 import client.AbstractReadOnlyClient;
 import client.AbstractUpdateClient;
 import driver.Driver;
@@ -26,6 +28,8 @@ import javax.xml.bind.SchemaOutputResolver;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Map;
+
+import static driver.Driver.BIGFUN_HOME;
 
 public class AsterixClientConfig extends AbstractClientConfig {
 
@@ -42,7 +46,7 @@ public class AsterixClientConfig extends AbstractClientConfig {
         String qIxFile = bigFunHomePath + "/files/" + Constants.Q_IX_FILE_NAME;
         String qGenConfigFile = bigFunHomePath + "/files/" + Constants.Q_GEN_CONFIG_FILE_NAME;
         String workloadFile = Driver.workloadsFolder + Constants.WORKLOAD_FILE_NAME;
-
+        String outputFolder="";
         String statsFile = Constants.STATS_FILE_NAME;
         if (isParamSet(Constants.STATS_FILE,cid)) {
             statsFile = (String) getParamValue(Constants.STATS_FILE,cid);
@@ -118,6 +122,11 @@ public class AsterixClientConfig extends AbstractClientConfig {
             final Path wlPath=Paths.get(bigFunHomePath ,"/workloads/",
                     getParamValue(Constants.WORKLOAD,cid).toString());
             workloadFile = wlPath.toString();
+            outputFolder = BIGFUN_HOME+"files/output/"+getParamValue(Constants.WORKLOAD,cid).toString().split(".txt")[0];
+            File dir = new File(outputFolder+"/avg");
+            if (!dir.exists()){
+                dir.mkdirs();
+            }
         }
 
         boolean qExec = true;
@@ -128,7 +137,7 @@ public class AsterixClientConfig extends AbstractClientConfig {
         boolean dumpResults = false;
         String[] splits = workloadFile.split("/");
         String wl = splits[splits.length -1];
-        String resultsFile = Driver.outputFolder+"/resdump_"+wl;
+        String resultsFile = outputFolder+"/resdump_"+wl;
         int numReaders = 1;
         if (isParamSet(Constants.NUM_CONCURRENT_READERS,cid)) {
             if (getParamValue(Constants.NUM_CONCURRENT_READERS,cid) instanceof  String){
