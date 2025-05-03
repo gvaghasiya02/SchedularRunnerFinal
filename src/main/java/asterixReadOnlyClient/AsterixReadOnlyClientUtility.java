@@ -71,7 +71,7 @@ public class AsterixReadOnlyClientUtility extends AbstractReadOnlyClientUtility 
 
     @Override
     public String executeQuery(int qid, int vid, String qBody) throws Exception {
-//        System.out.println(Thread.currentThread().getName());
+        System.out.println(Thread.currentThread().getName());
        //Driver.clientToRunningQueries.put(Thread.currentThread().getName(), qid+"-"+vid);
         content = null;
         StringBuilder sb =  new StringBuilder();
@@ -88,10 +88,9 @@ public class AsterixReadOnlyClientUtility extends AbstractReadOnlyClientUtility 
             try (Response response = httpclient.newCall(request).execute()){
                 Driver.clientToRunningQueries.remove(Thread.currentThread().getName());
                 long e = System.currentTimeMillis();
-//                System.out.println(request.headers());
+                System.out.println(request.headers());
                 content = response.body().string();
                 //System.out.println(content);
-                System.out.println("PrintedRequestResponse " + Thread.currentThread().getName() +"HEADERS_START " + request.headers() + " HEADERS_END " + " RESPONSE_START " + content + " RESPONSE_END");
                 com.google.gson.JsonObject resJsObject = new JsonParser().parse(content).getAsJsonObject();
                 String elapsedTime_str = resJsObject.get("metrics").getAsJsonObject().get("elapsedTime").getAsString();
                 String executionTime_str = resJsObject.get("metrics").getAsJsonObject().get("executionTime").getAsString();
@@ -119,10 +118,10 @@ public class AsterixReadOnlyClientUtility extends AbstractReadOnlyClientUtility 
 
                 Timestamp endTimeStamp = new Timestamp(System.currentTimeMillis());
                 long rspTime = (e - s);
-                String result = qBody.trim().replace("\n", "").replace("\"", "'");
+
                 sb.append("{\"qidvid\": \"Q(" + qid + "," + vid + ")\", \n" + "\"rt\":" + rspTime + ",\n");
                 sb.append("\"user\":\""+Thread.currentThread().getName()+"\",\n");
-                sb.append("\"query\":\"" + result + "\",\n");
+                sb.append("\"query\":\""+qBody+"\",\n");
                 sb.append("\"start\":\"" + startTimeStamp + "\",\n");
                 sb.append("\"end\":\"" + endTimeStamp + "\",\n");
                 sb.append("\"content\":"+content + "}\n");
