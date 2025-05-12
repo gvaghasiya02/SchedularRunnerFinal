@@ -210,5 +210,6 @@
   "950001": "files/queries/q950001.aql",
   "960000": "files/queries/q960000.aql",
   "960001": "files/queries/q960001.aql",
-  "960002": "files/queries/q960002.aql"
+  "960002": "files/queries/q960002.aql",
+  "960003": "files/queries/q960003.aql"
 }

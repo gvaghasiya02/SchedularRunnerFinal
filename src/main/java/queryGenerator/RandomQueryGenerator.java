@@ -280,6 +280,9 @@ public class RandomQueryGenerator {
             case 960002:
                 nextQ960002(qIx, vIx);
                 break;
+            case 960003:
+                nextQ960003(qIx, vIx);
+                break;
         default:
             next(qIx,vIx);
             break;
@@ -767,6 +770,35 @@ public class RandomQueryGenerator {
         args.add(new StringArgument(ds1+ds1_posix));
         args.add(s);//ds1
         args.add(e);//ds1
+    }
+
+    private void nextQ960003(int qid,int vid){
+        //String memory = (String) qps.getParam(qid,vid).get(0);
+        String ds1 = (String) qps.getParam(qid,vid).get(0);
+        String ds2 = (String) qps.getParam(qid,vid).get(1);
+        Number lowRange = (Number)qps.getParam(qid, vid).get(2);
+        Number highRange = (Number)qps.getParam(qid, vid).get(3);
+        double percentage = generateRandomDouble((double)lowRange,(double)highRange);
+        int memory = (int)Math.ceil(percentage*13*1024)/4; //14GB is size of workspace. 4data partitions
+        String memoryArg = "\""+memory+"MB\"";
+        double recordPercentage = memory*4.0/(44*1024*1.0); //40  GB is size of the dataset
+        long len = (long)(MAX_ID * (double)recordPercentage);
+        LongArgument s = randomLongArg(1,MAX_ID - len);
+        LongArgument e = new LongArgument(s.getValue() + len);
+
+
+        int ds1_posix = 1+rand.nextInt(5);//between [0,6)
+        int ds2_posix = ds1_posix;
+        while(ds2_posix==ds1_posix){
+            ds2_posix=1+rand.nextInt(5);
+        }
+//        args.add(new StringArgument(memoryArg));
+        args.add(new StringArgument(ds1+ds1_posix));
+        args.add(new StringArgument(ds2+ds2_posix));
+        args.add(s);//ds1
+        args.add(e);//ds1
+        args.add(s);//ds2
+        args.add(e);//ds2
     }
     //Utility Methods
     public void setStartDate(DateTimeArgument sd) {
