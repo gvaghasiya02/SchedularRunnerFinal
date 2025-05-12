@@ -118,7 +118,7 @@ public class AsterixReadOnlyClientUtility extends AbstractReadOnlyClientUtility 
 
                 Timestamp endTimeStamp = new Timestamp(System.currentTimeMillis());
                 long rspTime = (e - s);
-                String result = qBody.trim().replace("\n", "").replace("\"", "'");
+                String result = qBody.trim().replace("\n", " ").replace("\"", "'").replace("\t", " ");
                 sb.append("{\"qidvid\": \"Q(" + qid + "," + vid + ")\", \n" + "\"rt\":" + rspTime + ",\n");
                 sb.append("\"user\":\""+Thread.currentThread().getName()+"\",\n");
                 sb.append("\"query\":\"" + result + "\",\n");
